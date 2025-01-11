@@ -1,4 +1,4 @@
-# 💫 About Me:
+# 💫 Sobre:
 💬 Desenvolverdor e Analista de Sistemas<br>⚡ 
 
 
