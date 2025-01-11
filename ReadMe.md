@@ -1,8 +1,8 @@
 # 💫 Sobre:
-💬 Desenvolverdor e Analista de Sistemas<br>⚡ 
+⚡Desenvolverdor e Analista de Sistemas<br>
 
 
-## 🌐 Socials:
+## 🌐 Rede Social :
 [![Discord](https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white)](https://discord.gg/FSx6q22xU8) [![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://facebook.com/tazzeus) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/tazzeus) 
 
 # 💻 Tech Stack:
