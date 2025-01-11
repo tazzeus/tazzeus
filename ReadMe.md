@@ -1,5 +1,5 @@
 # 💫 Sobre:
-⚡Desenvolverdor e Analista de Sistemas<br>
+⚡Desenvolvedor e Analista de Sistemas<br>
 
 
 ## 🌐 Rede Social :
