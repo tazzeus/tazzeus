@@ -15,7 +15,7 @@ Desenvolvedor de Software focado em sistemas, plataformas escaláveis e engenhar
 | :--- | :--- | :--- | :--- |
 | **Sai que horas?** | Plataforma de mobilidade urbana e gestão de frotas rodoviárias em tempo real | Node.js, TypeScript, PostgreSQL/SQLite, Tailwind | `[🔒 Código Proprietário]` |
 | **Co-Trader** | Plataforma de análise quantitativa, triagens de mercado e backtesting estatístico | Python, Pandas, FastAPI, SQLite | `[🔒 Código Proprietário]` |
-| **Bora Treinar** | Plataforma de gestão de treinos e planejamento biométrico de alta performance | React Native, TypeScript, Node.js | `[🔒 Código Proprietário]` |
+| **Bora Treinar** | Plataforma de gestão de treinos de alta performance | React Native, TypeScript, Node.js | `[🔒 Código Proprietário]` |
 
 ---
 
@@ -27,3 +27,7 @@ Desenvolvedor de Software focado em sistemas, plataformas escaláveis e engenhar
 
 ---
 📫 **Contato:** Conecte-se comigo pelo GitHub [@tazzeus](https://github.com/tazzeus)
+                 Conecte-se comigo pelo Instagram [@tazzeus](https://www.instagram.com/tazzeus/)
+                 Conecte-se comigo via email [@tazzeus](tazzeus@gmail.com)
+                 
+                 
