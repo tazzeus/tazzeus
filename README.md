@@ -1,10 +1,29 @@
-### 💼 Projetos em Produção & Portfólio Corporativo
+# Olá, eu sou Tadeu Reinaldo (@tazzeus) 👋
 
-| Projeto | Descrição / Solução | Stack Tecnológica | Status |
+Desenvolvedor de Software focado em sistemas, plataformas escaláveis e engenharia agentic com inteligência artificial.
+
+---
+
+### 🚀 Projeto Open-Source em Destaque
+- 📦 **[gerar-fluxograma](https://www.npmjs.com/package/gerar-fluxograma)** — Compilador CLI oficial no NPM para geração de fluxogramas BPMN interativos e animados em SVG puro com Tailwind CSS, projetado para desenvolvedores e agentes de IA.
+
+---
+
+### 💼 Projetos em Produção (Portfólio Corporativo)
+
+| Projeto | Domínio / Solução | Stack Tecnológica | Status |
 | :--- | :--- | :--- | :--- |
-| **Sai que horas?** | Plataforma de consulta de rotas e horários de transporte em tempo real | Node.js, Tailwind, SQLite, Automação | `[🔒 Código Proprietário]` |
-| **Projeto 2** | Descrição do problema que ele resolve | React, NestJS, Docker, PostgreSQL | `[🔒 Privado / Em Produção]` |
-| **Projeto 3** | Sistema de automação de fluxo de trabalho | Python, FastAPI, Redis, Antigravity | `[🔒 Privado / Contratual]` |
-| **Projeto 4** | Plataforma SaaS de inteligência e dados | TypeScript, AWS, Microservices | `[🔒 Privado]` |
+| **Sai que horas?** | Plataforma de mobilidade urbana e gestão de frotas rodoviárias em tempo real | Node.js, TypeScript, PostgreSQL/SQLite, Tailwind | `[🔒 Código Proprietário]` |
+| **Co-Trader** | Plataforma de análise quantitativa, triagens de mercado e backtesting estatístico | Python, Pandas, FastAPI, SQLite | `[🔒 Código Proprietário]` |
+| **Bora Treinar** | Plataforma de gestão de treinos e planejamento biométrico de alta performance | React Native, TypeScript, Node.js | `[🔒 Código Proprietário]` |
 
-> ℹ️ *Os repositórios acima são mantidos como privados por conterem segredos de negócio e contratos de propriedade intelectual. Para apresentações de arquitetura ou demonstrações técnicas, entre em contato.*
+---
+
+### 🛠️ Tecnologias & Stacks
+- **Linguagens:** TypeScript, JavaScript (Node.js), Python
+- **Frontend & Visualização:** Tailwind CSS, SVG Nativo, HTML5 SPA, React Native
+- **Backend & Dados:** Node.js, FastAPI, SQLite, PostgreSQL, Pandas
+- **DevOps & IA:** NPM Packaging, Antigravity AI, Agentic Workflows, Git / GitHub
+
+---
+📫 **Contato:** Conecte-se comigo pelo GitHub [@tazzeus](https://github.com/tazzeus)
