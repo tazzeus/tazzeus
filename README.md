@@ -27,7 +27,7 @@ Desenvolvedor de Software focado em sistemas, plataformas escaláveis e engenhar
 
 ---
 📫 **Contato:** Conecte-se comigo pelo GitHub [@tazzeus](https://github.com/tazzeus)
-                 Conecte-se comigo pelo Instagram [@tazzeus](https://www.instagram.com/tazzeus/)
-                 Conecte-se comigo via email [@tazzeus](tazzeus@gmail.com)
+                 Conecte-se comigo pelo [Instagram](https://www.instagram.com/tazzeus/)
+                 Conecte-se comigo via [email](tazzeus@gmail.com)
                  
                  
