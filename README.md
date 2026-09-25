@@ -26,6 +26,6 @@ Desenvolvedor de Software focado em sistemas, plataformas escaláveis e engenhar
 - **DevOps & IA:** NPM Packaging, Antigravity AI, Agentic Workflows, Git / GitHub
 
 ---
-📫 **Contato:** Conecte-se comigo pelo GitHub [@tazzeus](https://github.com/tazzeus) | [Instagram](https://www.instagram.com/tazzeus/) | [Email](tazzeus@gmail.com)
+📫 **Contato:** Conecte-se comigo pelo GitHub [@tazzeus](https://github.com/tazzeus) | [Instagram](https://www.instagram.com/tazzeus/) | [Email](https://tazzeus@gmail.com)
                  
                  
