@@ -60,8 +60,27 @@ main {
 
 .subtitulo {
   color: var(--texto-suave);
-  margin: 0 0 32px;
+  margin: 0 0 16px;
   font-size: 1.05rem;
+}
+
+.botao-demo {
+  display: inline-block;
+  background: var(--acento);
+  color: #0d1117;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.botao-demo:hover { filter: brightness(1.08); }
+
+.nota-demo {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  margin: 10px 0 32px;
+  max-width: 520px;
 }
 
 .conteudo h1, .conteudo h2, .conteudo h3 {
