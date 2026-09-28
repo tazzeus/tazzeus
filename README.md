@@ -11,11 +11,11 @@ Desenvolvedor de Software focado em sistemas, plataformas escaláveis e engenhar
 
 ### 💼 Projetos em Produção (Portfólio Corporativo)
 
-| Projeto | Domínio / Solução | Stack Tecnológica | Status |
-| :--- | :--- | :--- | :--- |
-| **Sai que horas?** | Plataforma de mobilidade urbana e gestão de frotas rodoviárias em tempo real | Node.js, TypeScript, PostgreSQL/SQLite, Tailwind | `[🔒 Código Proprietário]` |
-| **Co-Trader** | Plataforma de análise quantitativa, triagens de mercado e backtesting estatístico | Python, Pandas, FastAPI, SQLite | `[🔒 Código Proprietário]` |
-| **Bora Treinar** | Plataforma de gestão de treinos de alta performance | React Native, TypeScript, Node.js | `[🔒 Código Proprietário]` |
+| Projeto | Domínio / Solução | Stack Tecnológica | Status | README |
+| :--- | :--- | :--- | :--- | :--- |
+| **Sai que horas?** | Plataforma de mobilidade urbana e gestão de frotas rodoviárias em tempo real | Node.js, TypeScript, PostgreSQL/SQLite, Tailwind | `[🔒 Código Proprietário]` | [📄 Ver](https://github.com/tazzeus/sai_que_horas/blob/main/README.md) |
+| **Co-Trader** | Plataforma de análise quantitativa, triagens de mercado e backtesting estatístico | Python, Pandas, FastAPI, SQLite | `[🔒 Código Proprietário]` | [📄 Ver](https://github.com/tazzeus/co_trader/blob/DEV/README.md) |
+| **Bora Treinar** | Plataforma de gestão de treinos de alta performance | React Native, TypeScript, Node.js | `[🔒 Código Proprietário]` | [📄 Ver](https://github.com/tazzeus/bora_treinar/blob/main/README.md) |
 
 ---
 
