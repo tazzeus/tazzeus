@@ -1,0 +1,126 @@
+:root {
+  color-scheme: dark;
+  --fundo: #0d1117;
+  --fundo-alt: #161b22;
+  --texto: #e6edf3;
+  --texto-suave: #8b949e;
+  --borda: #30363d;
+  --link: #58a6ff;
+  --acento: #3fb950;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--borda);
+  background: var(--fundo-alt);
+  position: sticky;
+  top: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.voltar {
+  color: var(--texto);
+  text-decoration: none;
+  font-weight: 600;
+}
+.voltar:hover { color: var(--link); }
+
+.badge {
+  font-size: 12px;
+  color: var(--texto-suave);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+.cabecalho h1 {
+  font-size: 2rem;
+  margin: 0 0 6px;
+}
+
+.subtitulo {
+  color: var(--texto-suave);
+  margin: 0 0 32px;
+  font-size: 1.05rem;
+}
+
+.conteudo h1, .conteudo h2, .conteudo h3 {
+  border-bottom: 1px solid var(--borda);
+  padding-bottom: 8px;
+  margin-top: 2em;
+}
+
+.conteudo h1:first-child { margin-top: 0; }
+
+.conteudo a { color: var(--link); }
+
+.conteudo blockquote {
+  margin: 1em 0;
+  padding: 0.2em 1em;
+  border-left: 4px solid var(--borda);
+  color: var(--texto-suave);
+  background: var(--fundo-alt);
+  border-radius: 0 6px 6px 0;
+}
+
+.conteudo code {
+  background: var(--fundo-alt);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.9em;
+}
+
+.conteudo pre {
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 14px;
+  overflow-x: auto;
+}
+.conteudo pre code { background: none; padding: 0; }
+
+.conteudo table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  display: block;
+  overflow-x: auto;
+}
+
+.conteudo th, .conteudo td {
+  border: 1px solid var(--borda);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.conteudo th { background: var(--fundo-alt); }
+
+.conteudo hr {
+  border: none;
+  border-top: 1px solid var(--borda);
+  margin: 2em 0;
+}
+
+.conteudo ul, .conteudo ol {
+  padding-left: 1.4em;
+}

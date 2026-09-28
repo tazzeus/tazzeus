@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sai que horas? — README</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <a href="https://github.com/tazzeus" class="voltar">&larr; tazzeus</a>
+  <span class="badge">Somente leitura &middot; código-fonte privado</span>
+</div>
+<main>
+  <header class="cabecalho">
+    <h1>Sai que horas?</h1>
+    <p class="subtitulo">Agregador de horários de transporte intermunicipal de Sergipe</p>
+  </header>
+  <article class="conteudo">
+    <h1 id="sai-que-horas">Sai que horas?</h1>
+<p><strong>Sai que horas?</strong> é um agregador de horários de transporte intermunicipal de Sergipe: várias empresas<br />
+de transporte expõem seus horários num só portal público, e cada empresa administra os próprios<br />
+dados sem depender de um desenvolvedor a cada mudança de grade. Piloto: <strong>Coopertalse</strong> (dado já<br />
+verificado, carregado a partir de um snapshot herdado). Português do Brasil (produto e código).</p>
+<blockquote>
+<p>🧭 <strong>O que o sistema NÃO faz (ainda):</strong> não existe deploy público — o projeto roda 100% local<br />
+(Postgres em Docker + <code>next dev</code>) até a hospedagem definitiva ser decidida (ver<br />
+<a href="#-estado-atual-e-pendências">Estado atual e pendências</a>). O login Google também não está<br />
+funcional de ponta a ponta: falta só a credencial real do<br />
+<a href="https://console.cloud.google.com/apis/credentials">Google Cloud Console</a>, que só o dono do<br />
+produto pode criar.</p>
+<p>📖 <strong>A fonte de verdade do projeto é a spec, não este README.</strong> Antes de mudar qualquer coisa,<br />
+leia <a href=".specify/memory/constitution.md"><code>.specify/memory/constitution.md</code></a> e<br />
+<a href="specs/001-agregador-multiempresa/"><code>specs/001-agregador-multiempresa/</code></a> (<code>spec.md</code>, <code>plan.md</code>,<br />
+<code>data-model.md</code>, <code>tasks.md</code>). O método é Spec-Driven: spec → plano → tarefas → código, sem<br />
+improviso em cima de ambiguidade.</p>
+</blockquote>
+<hr />
+<h2 id="sumario">📑 Sumário</h2>
+<ul>
+<li><a href="#novidades-recentes">🆕 Novidades Recentes</a></li>
+<li><a href="#arquitetura-tecnologias">🚀 Arquitetura &amp; Tecnologias</a></li>
+<li><a href="#arquitetura-multiempresa-papeis">🏢 Arquitetura Multiempresa (Papéis)</a></li>
+<li><a href="#instalacao-ambiente">📦 Instalação &amp; Ambiente</a></li>
+<li><a href="#comandos-do-dia-a-dia">⚙️ Comandos do Dia a Dia</a></li>
+<li><a href="#motor-de-busca-deterministico-vetor-assistivo">🧮 Motor de Busca Determinístico &amp; Vetor Assistivo</a></li>
+<li><a href="#estrutura-de-diretorios">📂 Estrutura de Diretórios</a></li>
+<li><a href="#principios-de-confiabilidade-constituicao">🛡️ Princípios de Confiabilidade (Constituição)</a></li>
+<li><a href="#estado-atual-e-pendencias">🚦 Estado Atual e Pendências</a></li>
+<li><a href="#licenca">📜 Licença</a></li>
+</ul>
+<hr />
+<h2 id="novidades-recentes">🆕 Novidades Recentes</h2>
+<ul>
+<li><strong>28/09/2026</strong> — <strong>App mobile: correção de crash e header redesenhado</strong>. Corrigido um crash real<br />
+  ao tocar nos filtros de cidade/empresa (worklet do Reanimated/Gesture Handler chamando função JS<br />
+  sem <code>runOnJS</code>, derrubava o app em release). Além disso: link <code>(ver)</code> pro Instagram/postagem em<br />
+  cada card de horário (paridade com o web); tema claro/escuro (segue o sistema, com alternância<br />
+  manual persistida); lista circular de horários (os que já saíram hoje vão pro fim, sob "Já<br />
+  saíram hoje"); botão "Entrar" com modal de login placeholder (Google via Auth.js ainda não<br />
+  chegou no mobile — só na web); ícone adaptativo do Android corrigido (cortava nas bordas do<br />
+  launcher); header redesenhado no estilo de apps de mobilidade (hero compacto com gradiente,<br />
+  painel de filtros flutuante). Build de demonstração pronto pra instalar em<br />
+<a href="demo-app/"><code>demo-app/demo.apk</code></a>.</li>
+<li><strong>24/09/2026</strong> — <strong>Tela pública refinada</strong> ("Sai que horas?"): filtro por empresa, combo com<br />
+  todas as origens, botões das cidades mais buscadas (contador anônimo, sem dado pessoal) e um<br />
+  botão em destaque com a <strong>cidade da localização do usuário</strong> — a posição é lida e comparada<br />
+<em>no aparelho</em> com as coordenadas dos municípios (IBGE); nunca vai ao servidor. Cada card de<br />
+  horário traz tudo no próprio card: horário grande, rota (<code>Itabaiana - Aracaju</code>), <strong>carro</strong><br />
+  (<code>carro 131</code> ou <code>carro reserva</code>), <strong>via</strong>, dias de operação, terminal de chegada e, à direita,<br />
+  a empresa com o link <code>(ver)</code> pro Instagram — ou direto pra postagem dos horários da rota,<br />
+  quando cadastrada.</li>
+<li><strong>24/09/2026</strong> — <strong>Painel mais completo</strong>: o gerente faz CRUD de rotas e horários (inclusive<br />
+  edição do horário); todo horário novo ou editado exige <strong>número do carro ou "carro reserva"</strong>;<br />
+  via (até 3 localidades) e terminal de chegada opcionais; o admin da empresa <strong>bloqueia,<br />
+  inativa, reativa ou exclui gerentes</strong> (o acesso cai na hora); o painel inicial mostra<br />
+<strong>indicadores</strong> — do site inteiro para o super admin, da própria empresa para os demais.</li>
+<li><strong>24/09/2026</strong> — Login de desenvolvimento (só em <code>NODE_ENV=development</code> com<br />
+<code>AUTH_DEV_LOGIN=true</code>) para testar o painel sem credencial do Google.</li>
+<li><strong>24/09/2026</strong> — CI completo no GitHub Actions: Postgres real (<code>pgvector/pgvector:pg16</code>) como<br />
+  serviço, migrations, carga inicial da Coopertalse e a suíte de testes inteira rodando a cada<br />
+  push/PR — nada de mock. Corrigido no processo: faltava <code>packageManager</code> fixado no<br />
+<code>package.json</code> da raiz, o que quebrava o <code>pnpm/action-setup</code> silenciosamente.</li>
+<li><strong>23/09/2026</strong> — <strong>Backlog completo da spec 001 fechado (T001–T060)</strong>: autocompletar de cidade<br />
+  reforçado por banco vetorial (<code>pgvector</code> + embeddings locais via <code>fastembed</code>, sem depender de<br />
+  chave de API — ver <a href="#-motor-de-busca-determinístico--vetor-assistivo">Motor de Busca</a>); app<br />
+  mobile (Expo/React Native) com a mesma busca pública do web, com gestos e animação<br />
+  (Reanimated + Gesture Handler); tema claro/escuro persistido, ícones Lucide e fonte Ubuntu em<br />
+  toda a área pública e no painel; regras de ESLint protegendo as fronteiras de arquitetura entre<br />
+<code>apps/web</code>, <code>apps/mobile</code> e <code>packages/engine</code>.</li>
+<li><strong>23/09/2026</strong> — Fase 2 (multiempresa): login Google-only (Auth.js v5), camada de permissão por<br />
+  papel + empresa, painéis completos (empresas, usuários, rotas e horários) com isolamento entre<br />
+  empresas testado como caso de segurança. No caminho, dois achados sérios corrigidos: o<br />
+  Next.js 16 renomeou <code>middleware.ts</code> para <code>proxy.ts</code> (a proteção do painel silenciosamente não<br />
+  rodava até a correção), e uma tela de edição lia o banco direto sem checar permissão nenhuma.</li>
+<li><strong>23/09/2026</strong> — Fundação: monorepo pnpm criado, motor de busca (<code>packages/engine</code>) herdado sem<br />
+  reescrever a lógica, carga inicial dos <strong>2.762 horários reais</strong> da Coopertalse no Postgres, API<br />
+  pública (<code>/api/snapshot</code>) e tela de busca por cidade de origem.</li>
+</ul>
+<hr />
+<h2 id="arquitetura-tecnologias">🚀 Arquitetura &amp; Tecnologias</h2>
+<p>O projeto é um monorepo <strong>pnpm</strong>, com a regra de negócio de busca vivendo <strong>um único lugar</strong><br />
+(<code>packages/engine</code>, TypeScript puro) e compartilhada por todas as plataformas — nenhuma delas<br />
+reimplementa a busca por conta própria:</p>
+<ol>
+<li>🖥️ <strong><code>apps/web</code></strong> — Next.js 16 (App Router, TypeScript estrito). Serve a página pública de<br />
+   busca <strong>e</strong> o painel administrativo (multiempresa). Com servidor de verdade (não é estático):<br />
+   permissão por papel/empresa e edição de dado sem deploy exigem isso.</li>
+<li>📱 <strong><code>apps/mobile</code></strong> — Expo/React Native. Mesma busca pública do web (<code>packages/engine</code> +<br />
+<code>GET /api/snapshot</code>), sem login — os painéis administrativos ficam só na web por enquanto.</li>
+<li>🗄️ <strong>Postgres + pgvector</strong> (via Prisma) — fonte de verdade dos dados: empresas, usuários,<br />
+   localidades, rotas, horários e os embeddings de localidade.</li>
+<li>🐍 <strong><code>services/ingest</code></strong> (Python 3.14, <code>uv</code>) — só ingestão em lote, nunca serve API nem<br />
+   reimplementa busca: carga inicial do snapshot herdado da Coopertalse, geração dos embeddings<br />
+   de localidade e coordenadas dos municípios (IBGE).</li>
+<li>🔐 <strong>Auth.js v5</strong> — login <strong>só Google</strong>, sem conta com senha própria, para a área privada<br />
+   (super admin / admin de empresa / gerente de empresa).</li>
+</ol>
+<hr />
+<h2 id="arquitetura-multiempresa-papeis">🏢 Arquitetura Multiempresa (Papéis)</h2>
+<p>Uma empresa de transporte nasce <strong>Pendente</strong> no agregador e vira <strong>Ativa</strong> sozinha assim que a<br />
+primeira rota/horário é salvo — sem clique extra de ninguém. Três papéis, cada um só enxergando o<br />
+que lhe cabe (verificado como caso de segurança, não só de produto):</p>
+<table>
+<thead>
+<tr>
+<th>Papel</th>
+<th>Escopo</th>
+<th>Pode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Super administrador</strong></td>
+<td>Todas as empresas</td>
+<td>Cadastrar empresa, mudar status (Ativa/Inativa), ver os indicadores do site</td>
+</tr>
+<tr>
+<td><strong>Admin da empresa</strong></td>
+<td>Uma empresa</td>
+<td>Dados cadastrais (inclusive Instagram), convidar/bloquear/inativar/excluir gerente, rotas e horários</td>
+</tr>
+<tr>
+<td><strong>Gerente da empresa</strong></td>
+<td>Uma empresa</td>
+<td>CRUD de rotas e horários (carro, via, postagem) — nunca dado cadastral nem usuários</td>
+</tr>
+</tbody>
+</table>
+<p>Toda escrita passa por uma camada única (<code>apps/web/src/server/</code>) que valida papel <strong>e</strong> empresa<br />
+antes de tocar o banco — nunca confia só no que a interface esconde. Nenhum código específico de<br />
+uma empresa vive espalhado pelo projeto: é tudo dado, não bifurcação.</p>
+<hr />
+<h2 id="instalacao-ambiente">📦 Instalação &amp; Ambiente</h2>
+<p>Requer Node 20+, <code>pnpm</code>, Docker (Postgres local) e Python 3.14 + <code>uv</code> (só pra ingestão). Tudo que a<br />
+carga inicial precisa (snapshot da Coopertalse, schema, migrations, script de usuários de teste)<br />
+já vem versionado no repositório — não há passo manual fora do git nem arquivo pra copiar de outra<br />
+máquina.</p>
+<pre><code class="language-bash">git clone https://github.com/tazzeus/sai_que_horas.git
+cd sai_que_horas
+git checkout dev   # branch de trabalho — é a branch padrão do repositório
+
+pnpm install       # instala tudo e já gera o Prisma Client (postinstall)
+
+# .env de cada pacote — se a porta 5432 já estiver em uso nesta máquina, troque nos três (e em
+# db/.env use DB_PORT=&lt;porta&gt; em vez de mexer no docker-compose.yml).
+cp apps/web/.env.example apps/web/.env.local
+cp db/.env.example db/.env
+cp services/ingest/.env.example services/ingest/.env
+# gera um AUTH_SECRET novo e cola em apps/web/.env.local
+npx auth secret
+
+cd db &amp;&amp; docker compose up -d &amp;&amp; cd ..              # Postgres local com pgvector
+pnpm --filter @via-certa/db migrate:dev             # aplica o schema
+
+cd services/ingest &amp;&amp; uv sync
+uv run ingest carregar-inicial      # carrega os 2.762 horários reais da Coopertalse
+uv run ingest gerar-embeddings      # gera os embeddings de localidade (autocompletar)
+uv run ingest carregar-coordenadas  # coordenadas dos municípios (IBGE) — botão de localização
+cd ..
+
+pnpm --filter @via-certa/web dev    # sobe em http://localhost:3000
+</code></pre>
+<blockquote>
+<p>🧪 <strong>Testar o painel sem Google:</strong> em <code>apps/web/.env.local</code> ponha <code>AUTH_DEV_LOGIN="true"</code> e rode<br />
+<code>pnpm --filter @via-certa/db seed:dev</code> (cria/atualiza três usuários fixos — <code>super@dev.local</code>,<br />
+<code>admin@dev.local</code>, <code>gerente@dev.local</code>, um de cada papel, o admin/gerente já vinculados à<br />
+Coopertalse). A tela <code>/entrar</code> ganha um campo de e-mail que aceita qualquer um dos três (só em<br />
+desenvolvimento local — em produção esse caminho não existe).</p>
+<p>🚨 <strong>Login Google não funciona sem credencial real.</strong> Crie um "Web application" em<br />
+<a href="https://console.cloud.google.com/apis/credentials">Google Cloud Console</a> (redirect URI<br />
+<code>http://localhost:3000/api/auth/callback/google</code>) e cole em <code>apps/web/.env.local</code><br />
+(<code>AUTH_GOOGLE_ID</code>/<code>AUTH_GOOGLE_SECRET</code>) — ver <code>apps/web/.env.example</code>. Sem isso, a busca pública<br />
+funciona normalmente; só a área <code>/painel</code> fica inacessível.</p>
+</blockquote>
+<hr />
+<h2 id="comandos-do-dia-a-dia">⚙️ Comandos do Dia a Dia</h2>
+<pre><code class="language-bash">pnpm check                                  # lint + tipos + testes de todo o monorepo (espelha o CI)
+pnpm --filter @via-certa/web test           # só os testes do web (Vitest, contra o Postgres local)
+pnpm --filter @via-certa/db studio          # Prisma Studio — inspecionar o banco visualmente
+pnpm --filter @via-certa/db seed:dev        # (re)cria os 3 usuários de teste do login de dev
+
+cd services/ingest
+uv run pytest                               # testes Python (carga inicial + embeddings)
+uv run ingest gerar-embeddings              # reexecutar quando uma localidade nova entrar
+uv run ingest carregar-coordenadas          # reexecutar quando uma cidade nova entrar
+
+cd apps/mobile
+npx expo start --web                        # app mobile no navegador (mesma busca do web)
+</code></pre>
+<blockquote>
+<p>💾 <strong>Levar o banco local de uma máquina pra outra</strong> (cadastro real de empresa/usuário, Instagram,<br />
+rotas/horários editados pelo painel — nada disso é gerado pela carga inicial nem entra no git):<br />
+<code>pnpm --filter @via-certa/db backup</code> grava <code>db/backups/viacerta-&lt;data&gt;.dump</code> (fora do git — é<br />
+dado real, não código); copie esse arquivo pra máquina nova e rode<br />
+<code>pnpm --filter @via-certa/db restore -- &lt;arquivo&gt;</code> (ou sem argumento, pra pegar o mais recente<br />
+em <code>db/backups/</code>) depois de já ter feito <code>docker compose up</code>/<code>migrate:dev</code> lá. <strong>Substitui</strong> o<br />
+conteúdo atual do banco de destino. Não é pré-requisito pro sistema funcionar — a carga inicial +<br />
+<code>seed:dev</code> já deixam tudo utilizável; isso aqui é só pra não perder dado digitado à mão.</p>
+</blockquote>
+<hr />
+<h2 id="motor-de-busca-deterministico-vetor-assistivo">🧮 Motor de Busca Determinístico &amp; Vetor Assistivo</h2>
+<p>A busca nunca inventa nem estima horário — só filtra e ordena o que está no banco, com o rastro<br />
+até a fonte sempre visível (PDF da empresa, post transcrito, ou "informado pela empresa no<br />
+portal"). Três garantias centrais em <code>packages/engine</code>:</p>
+<ul>
+<li><strong><code>agoraEmMaceio</code></strong> — único ponto que toca fuso horário (<code>America/Maceio</code>), independente do<br />
+  fuso do aparelho de quem está buscando.</li>
+<li><strong>Dia efetivo e feriado</strong> — em feriado, a grade vira a de domingo automaticamente, sempre com<br />
+  aviso; a empresa pode sobrescrever isso quando informa a regra própria.</li>
+<li><strong><code>sugerirLocalidades</code></strong> — autocompletar por trigrama (tolera erro de digitação, acento e<br />
+  apelido) <strong>sem depender de banco vetorial nenhum</strong> — funciona sozinho.</li>
+</ul>
+<p>O banco vetorial (<code>pgvector</code> + <code>paraphrase-multilingual-MiniLM-L12-v2</code> rodando local via<br />
+<code>fastembed</code>/ONNX, sem chave de API) só <strong>reforça</strong> esse autocompletar quando a busca por trigrama<br />
+não encontrou nada — nunca decide sozinho o que aparece, e a pontuação do reforço semântico nunca<br />
+ultrapassa a de um match exato determinístico.</p>
+<hr />
+<h2 id="estrutura-de-diretorios">📂 Estrutura de Diretórios</h2>
+<pre><code>apps/
+  web/          Next.js — página pública + painel administrativo
+  mobile/       Expo/React Native — busca pública
+packages/
+  engine/       Motor de busca (TypeScript puro), compartilhado por web e mobile
+db/
+  schema.prisma Modelo de dados; migrations em db/migrations/
+services/
+  ingest/       Python — carga inicial, embeddings e coordenadas (nunca serve API)
+specs/
+  001-agregador-multiempresa/   spec.md · plan.md · data-model.md · tasks.md
+.specify/
+  memory/constitution.md        Princípios do projeto — valem mais que preferência local
+dados/          Snapshot herdado da Coopertalse (insumo só da carga inicial, não é runtime)
+docs/           Documentação e ADRs; heranca/ = modelo e contrato do snapshot original (referência)
+demo-app/       demo.apk — build de release do mobile pronto pra instalar, sem compilar nada
+</code></pre>
+<hr />
+<h2 id="principios-de-confiabilidade-constituicao">🛡️ Princípios de Confiabilidade (Constituição)</h2>
+<p>Regras que não se negociam sem um ADR registrado em <code>docs/adr/</code> (ver<br />
+<a href=".specify/memory/constitution.md"><code>.specify/memory/constitution.md</code></a> pro texto completo):</p>
+<ul>
+<li><strong>A fonte é sagrada</strong> — nenhum horário aparece sem rastro até a origem; nada é estimado.</li>
+<li><strong>Isolamento entre empresas desde o dia 1</strong> — vazamento de dado entre empresas é bug de<br />
+  segurança, testado como tal, não só de produto.</li>
+<li><strong>Papéis de menor privilégio</strong> — toda rota privada verifica papel <strong>e</strong> empresa, nunca só um<br />
+  dos dois.</li>
+<li><strong>Vetor é assistivo, nunca autoridade</strong> — quem decide o resultado da busca é sempre o motor<br />
+  determinístico.</li>
+<li><strong>Spec-driven, sem TDD obrigatório</strong> — spec → plano → tarefas → código; ambiguidade vira<br />
+  pergunta ao dono do produto, nunca suposição no código. Teste automatizado é bem-vindo onde<br />
+  agrega valor, não é pré-requisito de tarefa.</li>
+</ul>
+<hr />
+<h2 id="estado-atual-e-pendencias">🚦 Estado Atual e Pendências</h2>
+<p>✅ <strong>Backlog completo da spec 001 fechado</strong> (busca pública, painéis multiempresa, tema, mobile,<br />
+vetor, CI) e refino da tela pública/painel (T070–T071 e ajustes seguintes) — ver <a href="specs/001-agregador-multiempresa/tasks.md"><code>specs/001-agregador-multiempresa/tasks.md</code></a><br />
+pro histórico detalhado de cada tarefa, achados reais incluídos.</p>
+<p>Em aberto, por decisão explícita do dono do produto (não é dívida técnica esquecida):<br />
+- <strong>Hospedagem definitiva</strong> — Vercel + Postgres na nuvem (Neon) são as candidatas, mas a decisão<br />
+  foi deliberadamente adiada (<code>plan.md</code> §10). Sem isso, o projeto roda só localmente.<br />
+- <strong>Deploy automático (T061)</strong> — depende da decisão acima.<br />
+- <strong>Credencial real do Google OAuth</strong> — só o dono do produto pode criar; sem ela, o login não<br />
+  completa (o resto do fluxo já está testado e pronto).</p>
+<hr />
+<h2 id="licenca">📜 Licença</h2>
+<p>Software proprietário — <strong>todos os direitos reservados</strong>. Ver <a href="./LICENSE"><code>LICENSE</code></a>. Nenhuma parte deste repositório pode ser copiada, redistribuída ou usada para criar obras derivadas sem autorização prévia e por escrito do autor.</p>
+  </article>
+</main>
+</body>
+</html>

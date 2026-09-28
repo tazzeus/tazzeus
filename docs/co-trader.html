@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Co-Trader — README</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <a href="https://github.com/tazzeus" class="voltar">&larr; tazzeus</a>
+  <span class="badge">Somente leitura &middot; código-fonte privado</span>
+</div>
+<main>
+  <header class="cabecalho">
+    <h1>Co-Trader</h1>
+    <p class="subtitulo">Sistema de orquestração e análise para o mercado de Lay Correct Score</p>
+  </header>
+  <article class="conteudo">
+    <h1 id="co-trader-automated-sports-trading-system">Co-Trader (Automated Sports Trading System)</h1>
+<p>O <strong>Co-Trader</strong> é um sistema avançado de orquestração, análise e automação focado no mercado de apostas esportivas (Exchange), especificamente no mercado de <strong>Lay Correct Score</strong>. Ele atua como um assistente autônomo de inteligência artificial, processando listas diárias de partidas, minerando cálculos matemáticos no banco de dados e gerando painéis visuais para auxiliar a tomada de decisão cirúrgica em altíssima velocidade.</p>
+<blockquote>
+<p>⚠️ <strong>Limitações e Expectativas (O que o sistema NÃO faz):</strong> É fundamental compreender a atual proposta arquitetural do projeto. O Co-Trader <strong>não</strong> é um robô de <em>High-Frequency Trading (HFT)</em> que aciona apostas financeiras de forma autônoma e invisível. Ele foi projetado para ser um <strong>Decision Support System (DSS)</strong> de altíssimo nível. Ele opera exclusivamente no formato "Centauro": a Inteligência Artificial calcula a matemática pesada e detecta a assimetria, mas a decisão final e o clique de execução na corretora são responsabilidades <strong>100% do operador humano</strong>.</p>
+<p>🎲 <strong>Aviso de Risco:</strong> Apostas e trade esportivo envolvem risco financeiro real — inclusive quando a entrada é matematicamente "+EV". O CO-TRADER calcula assimetrias históricas de risco/retorno; ele <strong>não</strong> é consultoria de investimento, não garante lucro, e desempenho passado da base histórica não garante o resultado de nenhuma partida individual. Toda decisão de valor, entrada e execução na corretora é de responsabilidade exclusiva do operador humano.</p>
+</blockquote>
+<hr />
+<h2 id="sumario">📑 Sumário</h2>
+<ul>
+<li><a href="#novidades-recentes">🚀 Arquitetura &amp; Tecnologias (SaaS Grade)</a></li>
+<li><a href="#arquitetura-tecnologias-saas-grade">🌐 Arquitetura "Agnostic Kernel" &amp; Portabilidade</a></li>
+<li><a href="#arquitetura-agnostic-kernel-portabilidade">📦 Instalação &amp; Ambiente</a></li>
+<li><a href="#vantagens-tecnologicas-e-comerciais-o-diferencial-competitivo">⚙️ Pipeline Operacional Completo</a></li>
+<li><a href="#instalacao-ambiente">🧮 Motor Matemático: Dutching Multi-Perna &amp; Entrada Isolada</a></li>
+<li><a href="#pipeline-operacional-completo">📂 Estrutura de Diretórios e Segurança</a></li>
+<li><a href="#0-start-da-sessao-boot-do-sistema">🛡️ Protocolos de Segurança e Confiabilidade (InfoSec)</a></li>
+<li><a href="#1-fase-de-triagem-de-risco-pre-lista">⚡ Inteligência Contextual Autônoma</a></li>
+<li><a href="#exemplo-visual-pre-lista">📉 Tokenomics e Viabilidade Comercial</a></li>
+<li><a href="#2-acao-de-live-trading-monitoramento-e-entrada">🆕 Novidades Recentes</a></li>
+<li><a href="#exemplo-visual-ladder-in-play-pre-live">📜 Licença</a></li>
+</ul>
+<hr />
+<h2 id="novidades-recentes">🆕 Novidades Recentes</h2>
+<ul>
+<li><strong>21/09/2026</strong> — <strong>EV por R$1 arriscado</strong> e leitura de divergência no relatório. A Triagem HTML ganhou <strong>campos de odd</strong> (Isolado e Dutching) que calculam o EV na hora, e os cards do Relatório de Análises Diária passaram a mostrar a coluna <strong>EV</strong>; no card da skill <code>analise-prints-ao-vivo</code> entraram também <strong>Chance Red</strong> e <strong>Teto odd</strong> pelo histórico (base + <code>futpythontrader</code>, com o placar parcial derivado dos minutos dos gols) e sinais de <strong>divergência entre a leitura de pressão e o histórico</strong> (selo, cor cinza para amostra baixa e faixa no fim do card) — tudo apenas informativo, sem alterar +EV, melhor entrada, Dutching nem backtest. Também: as colunas "Odd Mercado (pré-lista)" saíram da Triagem, o <code>agendar</code> passou a limpar sozinho os alarmes de dias anteriores (Windows) e o cabeçalho colorido da Triagem agora vem de classes CSS, não de posição. Ver <a href="#-ev-por-r1-arriscado-e-leitura-de-divergência">EV por R$1 arriscado</a>.</li>
+<li><strong>13-14/09/2026</strong> — O motor In-Play estatístico (frequência condicionada por corte de minuto + interpolação linear) deixa de ser o padrão do relatório diário: agora a leitura ao vivo é feita pela skill <strong><code>analise-prints-ao-vivo</code></strong>, que interpreta dois prints juntos (gráfico de pressão da PackBall + ladder de Placar Exato) e devolve a tabela de placares aprovados. O resultado é persistido no HTML do dia via <code>co_trader.py registrar-in-play</code>. O motor estatístico antigo (<code>analisador_in_play.py</code>) continua no projeto só para uso manual/diagnóstico. Junto entrou um <strong>backtest automático</strong> dessa skill: cada placar aprovado é comparado ao placar final (✅/❌) e registrado em <code>logs/backtest_skill_in_play.csv</code>; o comando <code>python co_trader.py backtest-skill</code> gera/atualiza <code>backtests/Backtest_Skill_InPlay.html</code> com a taxa de acerto geral e por nível de +EV. Ver <a href="#-motor-matemático-dutching-multi-perna--entrada-isolada">Motor Matemático</a>.</li>
+<li><strong>12/09/2026</strong> — O relatório passa a separar <strong>Melhor Entrada Isolada</strong> de <strong>Melhor Dutching do card</strong>: duas otimizações matemáticas diferentes (maior edge de uma perna sozinha vs. maior edge de uma combinação travada em responsabilidade 1), agora lado a lado no card em vez de uma frase só que podia parecer contraditória. Ver <a href="#-motor-matemático-dutching-multi-perna--entrada-isolada">Motor Matemático</a>.</li>
+<li><strong>12/09/2026</strong> — Auditoria de integridade encontrou e corrigiu <strong>112 mil jogos (52,6% da base histórica)</strong> com placar final não contabilizado por uma coluna incompleta, recuperados a partir dos gols separados já presentes na própria linha. Ver <a href="#-protocolos-de-segurança-e-confiabilidade-infosec">Integridade de Dados</a>.</li>
+<li><strong>11/09/2026</strong> — O selo de acerto/erro da Triagem passa a colorir o próprio badge de Placar Final (verde = o lay venceu, vermelho = o lay perdeu) em vez de um ícone genérico, avaliando Dutching e Isolado separadamente na mesma linha.</li>
+</ul>
+<hr />
+<h2 id="arquitetura-tecnologias-saas-grade">🚀 ARQUITETURA &amp; TECNOLOGIAS (SaaS Grade)</h2>
+<p>O projeto evoluiu para uma infraestrutura de nível <em>SaaS Corporativo</em>, dividida em 3 camadas de alto desempenho:</p>
+<ol>
+<li>⚡ <strong>Camada de Dados (DuckDB Serverless):</strong> Abandonamos a lentidão tradicional da leitura de planilhas. O núcleo de dados agora utiliza arquitetura colunar OLAP (<strong>DuckDB</strong>). O sistema varre o histórico de centenas de milhares de partidas executando consultas SQL vetorizadas em milissegundos. Resultado: latência quase nula e escalabilidade ilimitada.</li>
+<li>🎨 <strong>Camada de Visualização (Jinja2):</strong> Toda a geração de Dashboards (Relatórios Diários e Triagens) é processada pelo motor de templates <em>Jinja2</em>. A lógica de engenharia (Python) foi isolada do Design, entregando arquivos HTML responsivos (Mobile-ready) baseados em um moderno <em>Design System</em> unificado de Cards.</li>
+<li>🤖 <strong>Camada de Orquestração (IA e SO):</strong> A Inteligência Artificial atua como operadora do sistema, interagindo com scripts modulares que injetam popups de alerta nativos diretos no Sistema Operacional, furando bloqueios de <em>Focus Assist/Não Perturbe</em> para garantir que você não perca nenhuma entrada.</li>
+</ol>
+<hr />
+<h2 id="arquitetura-agnostic-kernel-portabilidade">🌐 ARQUITETURA "AGNOSTIC KERNEL" &amp; PORTABILIDADE</h2>
+<p>Em um movimento estratégico para eliminar qualquer <em>vendor lock-in</em> e maximizar a expansão de mercado, o <strong>CO-TRADER</strong> foi reengenheirado sob a arquitetura de <strong>Kernel Agnóstico</strong>. A inteligência de negócios, o motor matemático e o roteamento de execução foram completamente isolados do <em>Harness</em> (interface) de Inteligência Artificial.</p>
+<h3 id="vantagens-tecnologicas-e-comerciais-o-diferencial-competitivo">🚀 Vantagens Tecnológicas e Comerciais (O Diferencial Competitivo)</h3>
+<ul>
+<li><strong>Agnosticismo de LLM (Universalidade):</strong> Integração <em>plug-and-play</em> total com <strong>Claude Desktop</strong> (via Model Context Protocol - MCP), <strong>Google Antigravity 2.0</strong> e <strong>OpenAI GPT</strong> (via Code Interpreter). O CO-TRADER dita as regras operacionais através do seu orquestrador universal (<code>AGENTS.md</code>), enquanto a IA atua com precisão cirúrgica apenas como piloto do sistema.</li>
+<li><strong>CLI Unificado (<code>co_trader.py</code>):</strong> Um único ponto de entrada elegante que abstrai a vasta complexidade da suíte de scripts internos. A IA e o usuário interagem com apenas uma porta de comando para operar o ecossistema inteiro.</li>
+<li><strong>Agendamento Cross-Platform Nativo:</strong> O motor de alarmes possui auto-detecção de Sistema Operacional (Windows, Linux, macOS). Rompendo a dependência de timers frágeis baseados em sessões de chat, o CO-TRADER injeta tarefas de alerta diretamente no kernel do OS (Windows Task Scheduler, <code>at</code> daemon, <code>osascript</code>). O resultado? Alarmes disparando no milissegundo exato da janela de oportunidade, mesmo se a aba da IA for fechada ou o computador perder conexão à internet.</li>
+<li><strong>Market Fit Máximo:</strong> Ao pulverizar as barreiras de plataforma e sistema operacional, o CO-TRADER expande seu TAM (Total Addressable Market) para abranger 100% dos traders que utilizam tecnologia, oferecendo uma experiência corporativa uniforme, agnóstica e altamente resiliente.</li>
+</ul>
+<hr />
+<h2 id="instalacao-ambiente">📦 INSTALAÇÃO &amp; AMBIENTE</h2>
+<blockquote>
+<p>📖 <strong>Acabou de clonar este projeto?</strong> Abra <a href="./docs/MANUAL.html"><code>docs/MANUAL.html</code></a> (duplo-clique<br />
+nele, ou rode <code>scripts/abrir_manual.ps1</code> no Windows / <code>bash scripts/abrir_manual.sh</code> no<br />
+macOS/Linux) — é o manual de instalação e utilização, com passo a passo separado entre<br />
+"deixar o projeto funcionando" e "usar no dia a dia", escrito para qualquer nível técnico.</p>
+</blockquote>
+<p>Para clonar o agente CO-TRADER em qualquer máquina (Reprodutibilidade Garantida):</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+<blockquote>
+<p>🚨 <strong>Atenção — Passo manual obrigatório (banco de dados histórico):</strong> logo após o <code>git clone</code>, a pasta<br />
+<code>database/</code> vem <strong>vazia</strong> de propósito (só o <code>.gitkeep</code> é versionado — ver<br />
+<code>database/README.md</code>). O arquivo <code>database/historico.duckdb</code> é o <strong>coração do projeto</strong><br />
+(600k+ jogos que alimentam todos os cálculos) e <strong>não é enviado pelo Git</strong> por ser pesado<br />
+demais. Sem colocá-lo manualmente ali (copiando de um backup, ou reconstruindo via<br />
+<code>python src/setup_duckdb.py</code> a partir dos CSVs de origem), <strong>o CO-TRADER simplesmente não<br />
+funciona</strong> — os comandos rodam, mas não há dado nenhum para cruzar. Passo a passo completo<br />
+em <a href="./docs/MANUAL.html#instalacao"><code>docs/MANUAL.html</code></a> (Passo 4) e em <code>database/README.md</code>.</p>
+<p>📌 <strong>Nota — Ambiente e Permissões:</strong> Este projeto foi idealizado e construído nativamente no <strong><a href="https://storage.googleapis.com/antigravity-public/antigravity-hub/2.12.2-6298742303883264/windows-x64/Antigravity-x64.exe">Antigravity IDE (Windows x64)</a></strong>. </p>
+<p>⚡ <strong>Dica de Ouro (Turbo Mode ativado):</strong> Para que o ecossistema atinja a fluidez máxima e opere 100% em background, é <strong>fundamental</strong> conceder as permissões automáticas na sua ferramenta (<em>Auto-Approve Tool Calls / Trust Workspace</em>). Isso transforma o assistente em um agente verdadeiramente autônomo.</p>
+</blockquote>
+<hr />
+<h2 id="pipeline-operacional-completo">⚙️ PIPELINE OPERACIONAL COMPLETO</h2>
+<p>O passo a passo para operar a máquina como um Trader Profissional, orquestrando tudo via chat.</p>
+<h3 id="0-start-da-sessao-boot-do-sistema">0. Start da Sessão (Boot do Sistema)</h3>
+<p>Abra o chat e digite: </p>
+<blockquote>
+<p>🗣️ <em>"Iniciar análises de partidas"</em></p>
+</blockquote>
+<p><strong>Ação:</strong> O Agente aciona o protocolo de <em>Smart Recovery</em>. Ele varre o diretório e, caso encontre uma lista já processada no dia, reagenda automaticamente os alarmes pendentes.</p>
+<h3 id="1-fase-de-triagem-de-risco-pre-lista">1. Fase de Triagem de Risco (Pré-Lista)</h3>
+<p>Insira seu arquivo <code>.csv</code> extraído na pasta <code>pre_lista/</code> (fluxo invisível) ou, se preferir o brilho nos olhos das demonstrações comerciais, envie um print da lista no chat:</p>
+<blockquote>
+<p>🗣️ <em>"Gere a triagem de hoje"</em></p>
+</blockquote>
+<p><strong>Ação:</strong> O sistema absorve os dados, cruza com a base histórica do DuckDB, e cospe a Triagem final num elegante painel HTML de alta densidade. Em seguida, agenda um timer para <strong>15 minutos antes</strong> de cada jogo classificado como 🟢 Entrar ou 🟡 Live.</p>
+<h4 id="exemplo-visual-pre-lista">🔎 Exemplo Visual (Pré-Lista)</h4>
+<p><strong>1. Imagem de Entrada (O que você envia):</strong><br />
+<em>(Screenshot de um site de resultados com a grade de jogos e odds básicas)</em></p>
+<p><strong>2. Dados Capturados (Como o Agente transcreve):</strong></p>
+<pre><code class="language-markdown">| País | Liga | Horário | Casa | Fora | Odds 1 | Odds 2 | 1.5+ | 2.5+ | BTTS |
+|---|---|---|---|---|---|---|---|---|---|
+| TUR | 1. Lig | 11:00 | İstanbulspor | Iğdır FK | 3.08 | 2.09 | 1.24 | 1.8 | 1.64 |
+| ITA | Serie A | 13:30 | Cagliari | Lecce | 2.09 | 3.88 | 1.4 | 2.27 | 1.93 |
+</code></pre>
+<p><strong>3. Artefato Gerado (A Triagem que você recebe de volta):</strong><br />
+<em>(Print real de uma triagem gerada pelo próprio CO-TRADER — Dutching e Isolado lado a lado, com Chance de Red e Teto de odd já calculados contra a base histórica)</em></p>
+<h3 id="2-acao-de-live-trading-monitoramento-e-entrada">2. Ação de Live Trading (Monitoramento e Entrada)</h3>
+<p>Quando o alarme tocar, vá até a corretora. O procedimento depende do momento da partida:</p>
+<ul>
+<li><strong>Pré-live (bola ainda não rolou):</strong> tire um <em>print</em> da Escada de Odds (Ladder) do mercado Correct Score e envie no chat.</li>
+<li><strong>In-play (jogo rolando):</strong> envie <strong>dois prints juntos</strong> — o gráfico de pressão da PackBall <strong>e</strong> a ladder de Placar Exato. A skill <code>analise-prints-ao-vivo</code> só roda com os dois; faltando um deles, o Agente avisa e pede o que está faltando em vez de arriscar uma leitura incompleta.</li>
+</ul>
+<blockquote>
+<p>🗣️ <em>"Analise esse print da partida"</em></p>
+</blockquote>
+<p><strong>Ação:</strong><br />
+- <strong>Pré-live:</strong> leitura visual via OCR → Roteador Matemático (Teto e Valor Esperado, frequência histórica pura) → Card renderizado no Dashboard HTML diário.<br />
+- <strong>In-play:</strong> leitura qualitativa de pressão pela skill → tabela de placares aprovados (filtrados por odd/liquidez/EV) → persistida no mesmo Dashboard via <code>co_trader.py registrar-in-play</code>, com backtest automático de acerto/erro contra o placar final (ver <a href="#-tokenomics-e-viabilidade-comercial-telemetria-real-de-produção">Auto-Auditoria</a> e a seção de Novidades).</p>
+<h4 id="exemplo-visual-ladder-in-play-pre-live">🔎 Exemplo Visual (Ladder In-Play / Pré-Live)</h4>
+<p><strong>1. Imagem de Entrada (O que você envia):</strong><br />
+<em>(Screenshot da "Escada" de odds da Betfair, Orbit ou Betdaq)</em></p>
+<p><strong>2. Dados Capturados (Como o Agente transcreve):</strong></p>
+<pre><code class="language-markdown"># Detalhes da Partida e Mercado: Placar Exato
+**Partida:** Cagliari vs Lecce  
+**Tempo:** Pré-live (13:30)  
+**Valor correspondido:** R$ 439k  
+
+| Seleção (Placar) | A Favor 3 | A Favor 2 | A Favor 1 (Principal) | Contra 1 (Principal) | Contra 2 | Contra 3 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| 0 - 0 | 9.6 | 9.8 | 10.0 | 10.5 | 11.0 | 11.5 |
+| 0 - 1 | 11.0 | 11.5 | 12.0 | 12.5 | 13.0 | 13.5 |
+| 0 - 2 | 25 | 26 | 27 | 28 | 29 | 30 |
+</code></pre>
+<p><strong>3. Artefato Gerado (O Card que entra no Dashboard do dia):</strong><br />
+Prints reais extraídos do relatório de 13-09-2026 — cada roteamento (<code>Tempo:</code>) gera um card visualmente diferente:</p>
+<p><em>Pré-live (motor de frequência histórica pura — Napoli x Bologna):</em></p>
+<p><em>In-play (leitura qualitativa da skill <code>analise-prints-ao-vivo</code> — CA Huracán x Racing Club, já com selo ✅/❌ de acerto do backtest depois do fechamento do dia):</em></p>
+<h3 id="3-fim-de-expediente-consolidacao-e-backup">3. Fim de Expediente (Consolidação e Backup)</h3>
+<p>Terminou as operações do dia?</p>
+<blockquote>
+<p>🗣️ <em>"Dia encerrado"</em></p>
+</blockquote>
+<p><strong>Ação:</strong> O Agente comita todo o seu trabalho do dia no Git e empurra para a nuvem. Seu ambiente estará blindado, versionado e pronto para o dia seguinte. Ele também confere o placar final de cada partida (triagem e relatório), o que alimenta o <strong>backtest da skill in-play</strong>: cada placar aprovado por <code>analise-prints-ao-vivo</code> é comparado ao resultado real e some no chat como uma tabela de acerto por nível de +EV. Como último passo, ele se auto-audita: soma o consumo de tokens de todas as sessões registradas no dia e devolve no chat <strong>"Consumo diário: X tokens (~R$ X,00)"</strong> — veja como isso funciona em <a href="#-auto-auditoria-relatório-de-consumo-diário-verificável">Auto-Auditoria: Relatório de Consumo Diário Verificável</a>. O histórico completo do backtest pode ser pedido a qualquer momento ("mostra o backtest da skill" → <code>python co_trader.py backtest-skill</code>), que gera/atualiza <code>backtests/Backtest_Skill_InPlay.html</code> a partir de <code>logs/backtest_skill_in_play.csv</code>.</p>
+<hr />
+<h2 id="motor-matematico-dutching-multi-perna-entrada-isolada">🧮 MOTOR MATEMÁTICO: DUTCHING MULTI-PERNA &amp; ENTRADA ISOLADA</h2>
+<p>O CO-TRADER não entrega uma dica solta — ele resolve duas perguntas matemáticas diferentes a cada card, e mostra as duas respostas lado a lado.</p>
+<ul>
+<li><strong>Roteamento automático:</strong> o campo <code>Tempo:</code> da partida decide sozinho o caminho — <code>Pré-live</code> aciona o motor de frequência histórica pura (Teto de odd cruzado com a base DuckDB). Para qualquer minuto &gt; 0 (jogo rolando), o padrão desde 13/09/2026 deixou de ser um cálculo estatístico automático: a leitura vira <strong>qualitativa</strong>, feita pela skill <code>analise-prints-ao-vivo</code> a partir de dois prints (gráfico de pressão da PackBall + ladder de Placar Exato), que devolve a tabela de placares aprovados já filtrada por odd/liquidez/EV. O motor estatístico In-Play original (frequência condicionada por corte de minuto — probabilidade empírica condicionada ao placar parcial nos cortes de 15/30/45/60/75, interpolada linearmente entre eles) continua no projeto (<code>analisador_in_play.py</code>), mas só para uso manual/diagnóstico — não é mais chamado automaticamente no relatório diário. O operador nunca escolhe manualmente; o sistema lê o contexto da partida e decide.</li>
+<li><strong>A fórmula por trás da "Odd Teto":</strong> nada de caixa-preta. <code>Odd Teto = comissão + (1 − comissão) / probabilidade_histórica</code>. É a odd mais alta que ainda deixa o lay matematicamente seguro (EV ≥ 0) depois de descontar a comissão da Exchange sobre o lucro líquido — qualquer odd de mercado igual ou abaixo desse teto é sinalizada como +EV.</li>
+<li><strong>Guarda de amostra mínima:</strong> se o cruzamento histórico (H2H + mandante em casa + visitante fora) devolver menos de 15 jogos, o sistema se recusa a sugerir qualquer entrada — a recomendação vira explicitamente "não operar", em vez de arriscar capital real sobre dado insuficiente.</li>
+<li><strong>Melhor Entrada Isolada:</strong> dentre os placares com valor matemático, o card destaca (🏆) os dois de maior edge individual (Teto/Odd − 1) — a melhor aposta se você fosse laytar só um placar.</li>
+<li><strong>Melhor Dutching do card:</strong> em paralelo, o sistema roda uma busca exaustiva por todas as combinações de 2 a 4 placares laytados juntos (responsabilidade travada em 1) e retorna a combinação de maior edge conjunto. Como o edge de uma combinação depende da probabilidade somada e da odd combinada (1 / Σ 1/odd), o combo vencedor <strong>nem sempre é o mesmo</strong> das duas melhores entradas isoladas — e o card mostra as duas respostas separadamente, sem forçar uma a bater com a outra.</li>
+</ul>
+<h3 id="ev-por-r1-arriscado-e-leitura-de-divergencia">📐 EV por R$1 arriscado e Leitura de Divergência</h3>
+<p>Além do Teto de odd, agora o operador vê <strong>quanto o lay vale em porcentagem</strong>, medido por <strong>R$1 de responsabilidade</strong> (o que se perde se o placar acontecer, <code>stake × (odd − 1)</code>):</p>
+<pre><code>EV = (1 − p) · (1 − comissão) / (odd − 1) − p        comissão = 6,5%
+</code></pre>
+<p><code>p</code> é a <strong>Chance Red</strong> (probabilidade histórica de o placar acontecer). O EV zera exatamente no Teto: <strong>odd abaixo do teto = EV positivo, acima = negativo</strong>. No Dutching vale a mesma conta, com a <strong>odd combinada</strong> <code>1 / Σ(1/odd)</code> e a chance de red somada. Implementação única em <code>motor_comum.ev_por_responsabilidade</code>.</p>
+<h4 id="1-triagem-interativa-digite-a-odd-veja-o-ev">1. Triagem interativa: digite a odd, veja o EV</h4>
+<p>Cada linha da Triagem HTML tem, dentro da célula de Teto, um campo de odd para o <strong>Isolado</strong> e dois para o <strong>Dutching</strong> (um por placar). O cálculo roda no próprio navegador — funciona offline, aceita vírgula ou ponto, e o navegador lembra o que foi digitado.</p>
+<ul>
+<li><strong>Verde</strong> = EV positivo (odd abaixo do teto); <strong>vermelho</strong> = EV negativo.</li>
+<li>No Dutching aparece também a <strong>odd combinada</strong> logo abaixo do EV.</li>
+<li>Linhas sem base histórica (<code>N/A</code>, amostra insuficiente) não recebem campos: sem <code>p</code> confiável, o EV não faria sentido.</li>
+<li>É só informação: não muda "Entrar / Ver live / Pular".</li>
+</ul>
+<h4 id="2-cards-do-relatorio-ev-chance-red-e-teto-lado-a-lado">2. Cards do relatório: EV, Chance Red e Teto lado a lado</h4>
+<p>Nos cards <strong>pré-live e in-play</strong> a coluna <strong>EV</strong> sai automática (com a Prob. de RED e a Odd Mercado da própria linha). No card da skill <strong><code>analise-prints-ao-vivo</code></strong> (leitura de pressão ao vivo), as colunas <strong>Chance Red</strong>, <strong>Teto odd</strong> e <strong>EV</strong> vêm <strong>só do histórico</strong>, condicionado ao placar e ao minuto atuais. Para times que só existem no <code>futpythontrader</code> (ex.: Serie C italiana), o placar parcial em cada corte de minuto é derivado dos minutos dos gols. Amostra menor que 15 jogos vira <code>N/A</code>.</p>
+<h4 id="3-quando-a-pressao-e-o-historico-discordam">3. Quando a pressão e o histórico discordam</h4>
+<p>A <strong>Leitura (pressão)</strong> — o nível Alto/Moderado/Baixo da skill — é uma avaliação <strong>qualitativa</strong> do gráfico; o <strong>EV</strong> é uma conta pura do histórico, que <strong>não enxerga a pressão ao vivo</strong>. Quando os dois se contradizem, o card avisa em vez de deixar o conflito escondido:</p>
+<table>
+<thead>
+<tr>
+<th>Sinal no card</th>
+<th>O que significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>EV em cinza + "amostra baixa (N jogos)"</strong></td>
+<td>Menos de 30 jogos no histórico: sinal fraco, só contexto — não é veredito</td>
+</tr>
+<tr>
+<td><strong>⚠️ histórico discorda</strong> (sob o EV)</td>
+<td>A leitura de pressão aprovou o placar, mas só pelo histórico o lay está acima do teto (EV negativo)</td>
+</tr>
+<tr>
+<td><strong>Faixa laranja no fim do card</strong></td>
+<td>Lista todos os placares em conflito, com EV e tamanho da amostra</td>
+</tr>
+</tbody>
+</table>
+<p>No exemplo, o <strong>0-1</strong> foi aprovado como "Alto" pela pressão (o Desenzano quase não finalizava), mas o histórico de 17 jogos dá EV de −10,1% — então o card mostra o selo, o cinza de amostra baixa e a faixa de divergência. <strong>Melhor entrada, Dutching e a classificação da leitura não mudam</strong>: o aviso só entrega o contexto para o operador decidir o tamanho da entrada, ou se entra.</p>
+<blockquote>
+<p>ℹ️ Todos esses campos são <strong>apenas informativos</strong>: nenhum deles entra no cálculo de +EV, na melhor entrada, no Dutching nem no backtest da skill (<code>data-ev</code> permanece intacto).</p>
+</blockquote>
+<hr />
+<h2 id="estrutura-de-diretorios-e-seguranca">📂 ESTRUTURA DE DIRETÓRIOS E SEGURANÇA</h2>
+<ul>
+<li><code>/database/</code>: Banco de dados OLAP colunar protegido (arquivos pesados bloqueados via <code>.gitignore</code>).</li>
+<li><code>/src/templates/</code>: Arquivos limpos do <em>Design System</em> (HTML/CSS) alimentados pelo Jinja2.</li>
+<li><code>/src/logger.py</code>: Observabilidade ativa (caixa preta de erros e processos).</li>
+<li><code>/logs/</code>: Arquivos diários de log da operação blindados para não poluir o repositório.</li>
+<li><code>/triagens/</code> e <code>/analises_diarias/</code>: Produtos gerados (seus relatórios responsivos diários).</li>
+<li><code>/backtests/</code>: Relatório HTML acumulado de acerto/erro da skill <code>analise-prints-ao-vivo</code> (<code>Backtest_Skill_InPlay.html</code>), gerado por <code>python co_trader.py backtest-skill</code> a partir de <code>logs/backtest_skill_in_play.csv</code>.</li>
+<li><code>/backups/</code>: Diretório contendo o ciclo dos 3 últimos backups compactados (ZIP) do banco de dados (bloqueados no Git para otimização).</li>
+<li><code>/docs/</code>: Manuais e relatórios em HTML do projeto, incluindo <code>docs/MANUAL.html</code> (instalação e utilização).</li>
+<li><code>/scripts/</code>: Scripts utilitários avulsos (abrir manual, build de produção, sync git) — não fazem parte do pipeline principal chamado por <code>co_trader.py</code>.</li>
+</ul>
+<hr />
+<h2 id="protocolos-de-seguranca-e-confiabilidade-infosec">🛡️ PROTOCOLOS DE SEGURANÇA E CONFIABILIDADE (INFOSEC)</h2>
+<p>O Co-Trader possui defesas ativas implementadas contra as principais vulnerabilidades de software corporativo:<br />
+- <strong>Prevenção contra Supply Chain Attacks:</strong> Todas as bibliotecas em <code>requirements.txt</code> estão estritamente congeladas ("pinadas"). Isso garante blindagem contra injeção de código ou quebras geradas por atualizações de terceiros.<br />
+- <strong>Defesa contra XSS (Template Injection):</strong> O motor de renderização (Jinja2) opera com <code>autoescape=True</code>, higienizando as strings e bloqueando 100% o risco de execução de scripts maliciosos injetados via HTML.<br />
+- <strong>Recuperação de Desastres (Disaster Recovery):</strong> O sistema conta com uma rotina nativa (<code>python src/backup.py</code>) que compacta automaticamente o banco DuckDB e o empacota na pasta <code>/backups/</code>. Um CronJob mensal alerta o operador para subir o arquivo para a nuvem. O script faz autolimpeza, mantendo sempre apenas os 3 backups mais recentes para economizar espaço em disco.<br />
+- <strong>Integridade de Dados (Auto-Auditoria da Base Histórica):</strong> a base é validada, não só confiada. Em 12/09/2026, uma varredura encontrou 112.121 jogos (52,6% da tabela <code>historico</code>) com o placar final ausente numa coluna específica (<code>resultado_ft</code>) mesmo já tendo os gols separados (<code>homegoalcount</code>/<code>awaygoalcount</code>) na mesma linha — um gap silencioso que inflava artificialmente a Odd Teto calculada em qualquer confronto que caísse nesse buraco. O backfill recuperou 111.999 dessas linhas (validado a 100% contra as linhas já íntegras antes de aplicar) e a rotina de importação (<code>importar_base.py</code>) foi corrigida para não reabrir esse gap em cargas futuras.</p>
+<hr />
+<h2 id="inteligencia-contextual-autonoma-modificadores-de-tensao">⚡ INTELIGÊNCIA CONTEXTUAL AUTÔNOMA (Modificadores de Tensão)</h2>
+<p>Modelos matemáticos puramente históricos possuem uma falha fatal: <strong>eles são cegos para o comportamento humano.</strong> Se um time perdeu a partida de ida por 2x0 em uma Copa, o jogo de volta não seguirá a média histórica. O time assumirá uma postura agressiva (<em>Must Win</em>), destruindo as probabilidades normais de um empate (0-0) e inflando a chance de placares elásticos.</p>
+<p>O <strong>CO-TRADER</strong> possui uma camada de orquestração revolucionária que intercepta esse viés:</p>
+<ol>
+<li><strong>Scout Autônomo Invisível:</strong> Quando o usuário solicita a análise de uma partida, a IA silenciosamente realiza uma varredura na web para identificar o <strong>status do campeonato</strong> (É amistoso? Jogo de volta de Copa? Luta contra o rebaixamento?).</li>
+<li><strong>Injeção de Viés Matemático:</strong> O Agente injeta o parâmetro de contexto no código, e o motor Python aplica os <strong>Tension Multipliers (Modificadores de Tensão)</strong> em cima do banco de dados frio.</li>
+<li><strong>Ajuste Cirúrgico:</strong> Se o contexto é <em>Must Win</em>, o risco de vitória do time desesperado é inflado artificialmente em até <strong>30%</strong>, e as chances de empates mortos despencam. A <code>Odd Teto</code> matemática cai drasticamente para proteger o Trader de <em>lays</em> perigosos.</li>
+</ol>
+<p>O usuário não precisa digitar absolutamente nenhuma configuração extra. O sistema lê o mercado, descobre a tensão emocional da partida e entrega o cálculo ajustado à realidade em milissegundos.</p>
+<hr />
+<h2 id="tokenomics-e-viabilidade-comercial-telemetria-real-de-producao">📉 TOKENOMICS E VIABILIDADE COMERCIAL (TELEMETRIA REAL DE PRODUÇÃO)</h2>
+<p>Todo projeto de automação com IA promete "custo quase zero" em slide de vendas. O CO-TRADER foi além: instrumentamos a própria sessão de produção, extraímos o log token a token e medimos o custo real — não a estimativa de brochura. O resultado confirma a tese e revela onde o dinheiro realmente circula.</p>
+<h3 id="onde-o-custo-realmente-mora">🧠 Onde o Custo Realmente Mora</h3>
+<p>A parte pesada continua blindada: <strong>100% do cruzamento estatístico (600 mil jogos, DuckDB, Cálculo de Teto e Dutching) roda local, na CPU do usuário, a Custo R$ 0,00.</strong> A IA nunca lê o banco de dados — apenas recebe o veredito final em 5 linhas.</p>
+<p>O custo real de operação mora em outro lugar: no <strong>"aluguel de contexto"</strong>. Toda vez que a IA responde, ela reprocessa o histórico inteiro da conversa (instruções do sistema + skills + tudo que já foi dito no dia). Um cache de 1 hora reduz drasticamente esse custo — mas expira nos intervalos longos entre um jogo e outro, e aí a fatura sobe.</p>
+<h3 id="estudo-de-caso-real-sessao-de-producao-triagem-de-09092026">🧮 Estudo de Caso Real (Sessão de Produção — Triagem de 09/09/2026)</h3>
+<p>Medição direta do log da sessão que gerou a triagem do dia (46 interações: leitura da pré-lista, cruzamento com a base histórica, montagem da tabela Dutching, agendamento de alarmes):</p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Volume</th>
+<th>Custo (Sonnet 5 API-equivalente)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt fixo do sistema (1x por sessão)</td>
+<td>92.678 tokens</td>
+<td>US$ 0,37</td>
+</tr>
+<tr>
+<td>Releitura de contexto (cache reads, 46 turnos)</td>
+<td>5,5M tokens</td>
+<td>US$ 1,10</td>
+</tr>
+<tr>
+<td>Conteúdo novo gerado no fluxo (cache writes)</td>
+<td>300k tokens</td>
+<td>US$ 1,20</td>
+</tr>
+<tr>
+<td>Resposta da IA (output)</td>
+<td>49k tokens</td>
+<td>US$ 0,49</td>
+</tr>
+<tr>
+<td><strong>CUSTO REAL — Gerar a Triagem do Dia</strong></td>
+<td></td>
+<td><strong>US$ 2,80 (≈ R$ 14,30)</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tabela-comparativa-sessao-unica-vs-sessao-nova-por-analise">⚖️ Tabela Comparativa: Sessão Única vs. Sessão Nova por Análise</h3>
+<p>O maior lance de engenharia não está em delegar o cálculo — está em decidir <strong>quando abrir um chat novo e quando reaproveitar o mesmo</strong>. Simulamos um dia completo (triagem + 9 análises In-Play com sugestão "Entrar" + fechamento do dia) nas duas estratégias:</p>
+<table>
+<thead>
+<tr>
+<th>Evento</th>
+<th>Jogos</th>
+<th>Sessão única (sem limpar)</th>
+<th>Sessão nova por partida</th>
+<th>Estratégia vencedora</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Triagem do dia</td>
+<td>—</td>
+<td>US$ 2,80</td>
+<td>US$ 2,80</td>
+<td>Igual (fluxo único)</td>
+</tr>
+<tr>
+<td>Alarme 1 (1 jogo, cache quente)</td>
+<td>1</td>
+<td>US$ 0,07</td>
+<td>US$ 0,47</td>
+<td>🔁 Mesma sessão</td>
+</tr>
+<tr>
+<td>Alarme 2 (2 jogos agrupados, cache frio)</td>
+<td>2</td>
+<td>US$ 0,69</td>
+<td>US$ 0,94</td>
+<td>🔁 Mesma sessão</td>
+</tr>
+<tr>
+<td>Alarme 3 (1 jogo isolado, cache frio)</td>
+<td>1</td>
+<td>US$ 0,72</td>
+<td>US$ 0,47</td>
+<td>🆕 Sessão nova</td>
+</tr>
+<tr>
+<td>Alarme 4 (4 jogos agrupados, cache quente)</td>
+<td>4</td>
+<td>US$ 0,21</td>
+<td>US$ 1,88</td>
+<td>🔁 Mesma sessão</td>
+</tr>
+<tr>
+<td>Alarme 5 (1 jogo isolado, cache frio)</td>
+<td>1</td>
+<td>US$ 0,88</td>
+<td>US$ 0,47</td>
+<td>🆕 Sessão nova</td>
+</tr>
+<tr>
+<td>Fechamento do dia</td>
+<td>—</td>
+<td>US$ 0,98</td>
+<td>US$ 0,52</td>
+<td>🆕 Sessão nova</td>
+</tr>
+<tr>
+<td><strong>TOTAL DO DIA (9 jogos)</strong></td>
+<td>9</td>
+<td><strong>US$ 6,35</strong></td>
+<td>US$ 7,55</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>TOTAL COM PROTOCOLO SELETIVO</strong></td>
+<td>9</td>
+<td></td>
+<td><strong>US$ 5,10</strong></td>
+<td>✅ Melhor de todos</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão de engenharia:</strong> nem manter tudo na mesma sessão, nem abrir uma sessão nova a cada análise é a estratégia ótima isolada. A resposta é híbrida — e o CO-TRADER agora decide isso sozinho, por alarme.</p>
+<h3 id="boa-pratica-recomendada-protocolo-de-rotulagem-inteligente">🏆 Boa Prática Recomendada: Protocolo de Rotulagem Inteligente (🆕 / 🔁)</h3>
+<p>Todo alarme gerado pelo Workflow já nasce com um rótulo de economia de tokens em destaque, calculado automaticamente no momento do agendamento:</p>
+<ul>
+<li><strong>2 ou mais jogos no mesmo horário → 🔁 MESMO CHAT DA ÚLTIMA ANÁLISE!!!!</strong> Agrupar sempre compensa: o custo de reler o contexto acumulado é dividido entre os jogos do bloco.</li>
+<li><strong>1 jogo isolado, gap &gt; 60 min desde o último alarme → 🆕 ABRIR EM NOVO CHAT!!!</strong> O cache de 1 hora já expirou de qualquer forma; abrir sessão nova evita reescrever, a preço cheio, o histórico do dia inteiro.</li>
+<li><strong>1 jogo isolado, gap ≤ 60 min → 🔁 MESMO CHAT DA ÚLTIMA ANÁLISE!!!!</strong> O cache ainda está quente; reaproveitar sai mais barato que pagar o prompt fixo de novo.</li>
+</ul>
+<p>O operador não precisa fazer nenhuma conta: basta seguir o rótulo que chega junto com o alerta de 15 minutos. É engenharia de FinOps aplicada a trading esportivo — economia real, sem esforço manual, documentada e versionada para funcionar em qualquer máquina.</p>
+<h3 id="resultado-comercial-atualizado">💰 Resultado Comercial Atualizado</h3>
+<table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Custo / dia</th>
+<th>Custo / mês (22 dias úteis)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sem estratégia de sessão (uso ingênuo)</td>
+<td>US$ 6,35 (≈ R$ 32,40)</td>
+<td>US$ 140 (≈ R$ 714)</td>
+</tr>
+<tr>
+<td><strong>Com Protocolo de Rotulagem Inteligente</strong></td>
+<td><strong>US$ 5,10 (≈ R$ 26,00)</strong></td>
+<td><strong>US$ 112 (≈ R$ 572)</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>Dica — O Resultado Comercial:</strong> Mesmo no cenário mais conservador, medido com telemetria real e não com projeção otimista, o CO-TRADER entrega um Analista Quantitativo Institucional operando um dia inteiro — triagem, leitura de ladder via OCR e fechamento com atualização de placares — pelo custo de um lanche. Com o Protocolo de Rotulagem Inteligente ativo, esse custo cai mais <strong>~20%</strong>, tornando a operação diária trivialmente viável para uso pessoal e escalável para oferta comercial a múltiplos alunos/operadores.</p>
+</blockquote>
+<hr />
+<h3 id="auto-auditoria-relatorio-de-consumo-diario-verificavel">🔍 Auto-Auditoria: Relatório de Consumo Diário Verificável</h3>
+<p>Toda a Tokenomics acima nasceu de uma medição manual, feita uma vez, sobre uma sessão específica. O CO-TRADER agora automatiza essa auditoria: em vez de uma tabela estática de referência, cada dia de operação gera o próprio número, medido na hora, direto do motor de billing — não estimado.</p>
+<p><strong>Como funciona (WORKFLOW 5 — Registrar consumo de tokens):</strong></p>
+<ol>
+<li><strong>Auto-leitura do transcript:</strong> ao final de cada análise de partida (Workflow 3), ou quando o operador disser <em>"Fechar sessão"</em>, o Agente lê o próprio histórico de execução daquela conversa — sem depender de nenhuma estimativa externa.</li>
+<li><strong>Deduplicação e soma real:</strong> as mensagens são deduplicadas por ID e os tokens de entrada, cache (leitura e escrita) e saída são somados com o multiplicador de custo real de cada tipo.</li>
+<li><strong>Precificação ao vivo:</strong> o custo em USD é calculado pelo preço oficial vigente do modelo (consultado, nunca hardcoded) e convertido para R$ pela cotação do dia.</li>
+<li><strong>Log auditável:</strong> cada sessão registrada grava uma linha em <code>logs/consumo_tokens.csv</code> — data, hora, tokens por categoria e custo em USD/BRL.</li>
+<li><strong>Consolidação do dia:</strong> no fechamento ("Dia encerrado" — Workflow 4), o Agente soma todas as linhas do CSV com a data de hoje e devolve, sem rodeios, no chat:</li>
+</ol>
+<blockquote>
+<p><strong>"Consumo diário: X tokens (~R$ X,00)"</strong></p>
+</blockquote>
+<p><strong>Por que isso importa:</strong> o operador deixa de depender de uma projeção de README para saber quanto o dia custou. O número que chega no chat é medido, sessão por sessão, na própria operação daquele dia específico — a mesma transparência de telemetria usada no estudo de caso acima, agora rodando automaticamente todo santo dia.</p>
+<blockquote>
+<p>📌 <strong>Nota — Limite conhecido:</strong> o auto-registro só funciona em sessões com acesso ao próprio histórico de execução (Cowork / Claude Code). No chat clássico do Claude Desktop operando só com MCP filesystem/shell, esse passo é pulado — e a sessão que "escapar" por esse caminho não entra na soma do dia. <code>logs/consumo_tokens.csv</code> é sempre a fonte de verdade caso o número final pareça baixo.</p>
+</blockquote>
+<hr />
+<h2 id="licenca">📜 Licença</h2>
+<p>Software proprietário — <strong>todos os direitos reservados</strong>. Ver <a href="./LICENSE"><code>LICENSE</code></a>. Nenhuma parte deste repositório pode ser copiada, redistribuída ou usada para criar obras derivadas sem autorização prévia e por escrito do autor.</p>
+  </article>
+</main>
+</body>
+</html>

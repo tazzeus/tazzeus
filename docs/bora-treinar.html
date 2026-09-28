@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bora Treinar — README</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <a href="https://github.com/tazzeus" class="voltar">&larr; tazzeus</a>
+  <span class="badge">Somente leitura &middot; código-fonte privado</span>
+</div>
+<main>
+  <header class="cabecalho">
+    <h1>Bora Treinar</h1>
+    <p class="subtitulo">App de agendamento de treinos para artes marciais</p>
+  </header>
+  <article class="conteudo">
+    <h1 id="bora-treinar">Bora Treinar</h1>
+<p><strong>Publique o treino. Compartilhe o link. Encha o tatame.</strong></p>
+<p>O Bora Treinar é o app de agendamento de treinos feito para quem vive de artes marciais. O Professor publica os treinos<br />
+em segundos, manda <strong>um único link</strong> no grupo de WhatsApp e os Atletas confirmam presença com dois toques, <strong>sem baixar<br />
+app, sem criar conta e sem senha</strong>. A vaga é ocupada na hora, a lista de presença se monta sozinha e o Professor para de<br />
+contar gente no papel e de responder "tem vaga?" em mensagem privada.</p>
+<p>Judô, jiu-jitsu, muay thai, boxe, taekwondo, karatê, capoeira. Se tem tatame, tem Bora Treinar.</p>
+<blockquote>
+<p><strong>Estado do projeto.</strong> O app está funcionando de ponta a ponta com dados de exemplo. O que depende de servidor (login,<br />
+e-mail, push, verificação do número) está listado em <a href="#em-breve">Em breve</a>.</p>
+</blockquote>
+<hr />
+<h2 id="sumario">Sumário</h2>
+<ul>
+<li><a href="#novidades-recentes">Novidades Recentes</a></li>
+<li><a href="#em-breve">Em breve</a></li>
+<li><a href="#como-funciona">Como funciona</a></li>
+<li><a href="#quem-usa">Quem usa</a></li>
+<li><a href="#o-que-o-sistema-faz">O que o sistema faz</a></li>
+<li><a href="#area-publica-do-atleta">Área pública do Atleta</a></li>
+<li><a href="#lista-de-espera">Lista de espera</a></li>
+<li><a href="#area-do-professor">Área do Professor</a></li>
+<li><a href="#lembretes">Lembretes</a></li>
+<li><a href="#dashboard-do-professor">Dashboard do Professor</a></li>
+<li><a href="#perfil-do-professor">Perfil do Professor</a></li>
+<li><a href="#acesso-e-licenca">Acesso e licença</a></li>
+<li><a href="#privacidade-e-lgpd">Privacidade e LGPD</a></li>
+<li><a href="#diferenciais">Diferenciais</a></li>
+<li><a href="#stack">Stack</a></li>
+<li><a href="#qualidade-e-forma-de-trabalho">Qualidade e forma de trabalho</a></li>
+<li><a href="#rodando-o-projeto">Rodando o projeto</a></li>
+<li><a href="#documentacao">Documentação</a></li>
+<li><a href="#licenca">Licença</a></li>
+</ul>
+<hr />
+<h2 id="novidades-recentes">Novidades Recentes</h2>
+<p><strong>Setembro de 2026</strong></p>
+<ul>
+<li><strong>Lista de espera.</strong> Treino cheio deixou de ser beco sem saída: o Atleta entra na fila, o Professor vê quem espera no<br />
+  botão "Lista de Espera" do card e chama o primeiro pelo WhatsApp quando abre vaga.</li>
+<li><strong>Lembretes pelo WhatsApp.</strong> Os treinos das próximas 24 horas aparecem no topo da Área do Professor, com a mensagem<br />
+  pronta para cada Atleta. Novo: o botão <strong>"Lembrar todos"</strong> manda o lembrete para quem ainda não recebeu, de uma vez.</li>
+<li><strong>Pagamento de cada Atleta.</strong> O Professor anota quando o Atleta pagou e vê quem está em dia, quem vence em breve e quem<br />
+  está em atraso, com filtro "Em atraso" e lembrete de pagamento. A mensalidade continua sendo combinada fora do app.</li>
+<li><strong>Bloqueio por débito.</strong> Bloquear quem está em atraso ficou a um toque, com o motivo já sugerido. O Atleta não vê o<br />
+  motivo, só uma mensagem genérica.</li>
+<li><strong>Privacidade e LGPD.</strong> Consentimento registrado (com o responsável legal para menores de 18 anos), Política de<br />
+  Privacidade, Termos de Uso e o atalho "Meus dados" para pedir acesso ou exclusão.</li>
+<li><strong>Nome nunca revelado por número.</strong> Quem digita o WhatsApp de outra pessoa não descobre nada sobre ela.</li>
+<li><strong>Área pública mais limpa.</strong> O filtro de cidade saiu da página do Atleta, e a cidade aparece no próprio card do treino.</li>
+<li><strong>Campos com limite de tamanho</strong> em todos os formulários, para manter os dados organizados e seguros.</li>
+</ul>
+<hr />
+<h2 id="em-breve">Em breve</h2>
+<p>O que já está desenhado e depende do servidor (Supabase):</p>
+<ul>
+<li><strong>Login com a conta Google</strong> e <strong>convite por e-mail</strong> para o primeiro acesso do Professor.</li>
+<li><strong>Verificação do número do Atleta</strong> por código, para ninguém confirmar em nome de outra pessoa.</li>
+<li><strong>Avisos e lembretes automáticos</strong> por WhatsApp e push, sem o Professor precisar tocar em cada um.</li>
+<li><strong>Prévia do link no WhatsApp</strong> com a imagem do card do treino.</li>
+<li><strong>Instalação como app</strong> direto do navegador (PWA).</li>
+<li><strong>Dados na nuvem</strong>, com permissões por Professor, retenção e registro de acesso.</li>
+</ul>
+<hr />
+<h2 id="como-funciona">Como funciona</h2>
+<ol>
+<li><strong>O Professor cria o treino.</strong> Dia, hora, local, cidade, número de vagas e uma observação ("levem luvas"). Se o<br />
+   treino se repete toda semana, ele marca os dias e o app cria todos de uma vez.</li>
+<li><strong>Compartilha no WhatsApp.</strong> Um toque em "Compartilhar", e o link do Professor vai para o grupo com a mensagem do<br />
+   treino pronta.</li>
+<li><strong>O Atleta confirma.</strong> Abre o link, escolhe o treino, informa nome e WhatsApp, aceita a política de privacidade e<br />
+   pronto: está na lista e a vaga é dele. Treino cheio? Entra na lista de espera.</li>
+<li><strong>O Professor acompanha.</strong> Vê quem vem, lembra os Atletas pelo WhatsApp, chama quem espera quando abre vaga, finaliza o<br />
+   treino com uma foto e acompanha os números e os pagamentos do mês.</li>
+</ol>
+<p>Sem fila de aprovação, sem planilha e sem "me vê uma vaga aí".</p>
+<hr />
+<h2 id="quem-usa">Quem usa</h2>
+<table>
+<thead>
+<tr>
+<th>Perfil</th>
+<th>Como acessa</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Professor</strong></td>
+<td>App no celular ou no navegador</td>
+<td>Publica e gerencia treinos, acompanha os Atletas, os pagamentos e os números do mês</td>
+</tr>
+<tr>
+<td><strong>Atleta</strong></td>
+<td>Só o link do Professor, sem login</td>
+<td>Vê os treinos, confirma presença e entra na lista de espera</td>
+</tr>
+</tbody>
+</table>
+<p>O mesmo Atleta é reconhecido em todos os Professores, sem que um veja os dados do outro.</p>
+<hr />
+<h2 id="o-que-o-sistema-faz">O que o sistema faz</h2>
+<h3 id="area-publica-do-atleta">Área pública do Atleta</h3>
+<p>A vitrine de cada Professor. Um link fixo, fácil de lembrar, que vale para sempre e mostra só os treinos que ainda vão<br />
+acontecer, separados por modalidade.</p>
+<ul>
+<li><strong>Cards claros:</strong> data, hora, equipe, local e cidade de cada treino no próprio card, vagas restantes e o botão de confirmar.</li>
+<li><strong>Confirmação em segundos:</strong> nome e WhatsApp, sem cadastro e sem senha.</li>
+<li><strong>Lista de confirmados</strong> com check verde, para todo mundo ver quem vai. Só aparece o primeiro nome e a inicial do<br />
+  sobrenome.</li>
+<li><strong>Selos que falam sozinhos:</strong> vagas disponíveis, treino cheio, encerrado, cancelado (com o motivo) e treino particular.</li>
+<li><strong>Link por treino:</strong> o link compartilhado no grupo abre direto o treino certo.</li>
+<li><strong>Consentimento claro:</strong> o Atleta diz se é maior de 18 anos ou responsável por um menor e aceita a política antes de<br />
+  confirmar.</li>
+<li><strong>Rodapé transparente:</strong> Política de Privacidade, Termos de Uso e o atalho "Meus dados".</li>
+</ul>
+<h3 id="lista-de-espera">Lista de espera</h3>
+<p>Treino cheio deixou de ser beco sem saída.</p>
+<ul>
+<li><strong>O Atleta entra na fila</strong> com o mesmo formulário e vê só quantas pessoas esperam, nunca quem são.</li>
+<li><strong>O Professor vê quem espera</strong> no botão "Lista de Espera" do card, que só aparece quando há alguém na fila.</li>
+<li><strong>Abriu vaga? O Professor é avisado</strong> de quem chamar e, com um toque, abre a conversa com o primeiro da fila já com a<br />
+  mensagem pronta.</li>
+<li><strong>Ninguém fura fila em silêncio:</strong> a fila respeita a ordem de chegada, e o Atleta pode sair dela quando quiser.</li>
+</ul>
+<h3 id="area-do-professor">Área do Professor</h3>
+<p>O centro de comando. Todos os treinos da semana num só lugar, do jeito que o Professor pensa: o que vem aí, o que já<br />
+aconteceu e o que precisa ser finalizado.</p>
+<ul>
+<li><strong>Criar treino em um minuto:</strong> treino de um dia só ou <strong>semanal</strong>, com os dias da semana escolhidos.</li>
+<li><strong>Treino particular:</strong> individual, em dupla ou em grupo, com os atletas informados pelo Professor.</li>
+<li><strong>Duplicar:</strong> repete um treino com um toque, ou <strong>o mês inteiro</strong> de uma vez, com revisão antes de criar.</li>
+<li><strong>Compartilhar no WhatsApp:</strong> escolha o grupo cadastrado ou mande para quem quiser. A mensagem já vai pronta, com o<br />
+  link do treino.</li>
+<li><strong>Lista de presença:</strong> confirmações na hora, com opção de adicionar ou remover Atletas na mão.</li>
+<li><strong>Ciclo completo do treino:</strong> ativo, encerrado e finalizado. Ao finalizar, o Professor adiciona a foto do treino e ele<br />
+  vai para o histórico, organizado por mês.</li>
+<li><strong>Cancelamento com justificativa:</strong> o card mostra o aviso na Área pública e o Professor compartilha de novo para o<br />
+  grupo ficar sabendo.</li>
+<li><strong>Filtro por cidade</strong> para quem dá treino em mais de um lugar.</li>
+<li><strong>Várias modalidades e equipes:</strong> cada treino leva a sua, e a Área pública organiza tudo por modalidade.</li>
+</ul>
+<h3 id="lembretes">Lembretes</h3>
+<p>O Atleta não tem app, então o lembrete vai onde ele já está: no WhatsApp.</p>
+<ul>
+<li><strong>Treinos das próximas 24 horas</strong> aparecem no topo da Área do Professor, com o botão "Lembrar atletas".</li>
+<li><strong>Um toque por Atleta</strong> abre a conversa dele com a mensagem pronta (dia, hora, local e link) e marca quem já foi<br />
+  lembrado.</li>
+<li><strong>Lembrar todos de uma vez:</strong> um botão abre a conversa de todos que ainda não foram lembrados, para o lembrete sair em<br />
+  lote.</li>
+<li><strong>Lembrete de pagamento</strong> no dashboard, cordial e só na conversa privada.</li>
+</ul>
+<h3 id="dashboard-do-professor">Dashboard do Professor</h3>
+<p>Os números de quem treina com você, sem planilha, e a situação de cada pagamento.</p>
+<ul>
+<li><strong>Indicadores por mês:</strong> total de Atletas, treinos, presenças e Atletas ativos no período.</li>
+<li><strong>Lista de Atletas</strong> com graduação, contato, presenças no mês e no total, e a data do último treino.</li>
+<li><strong>Pagamento de cada Atleta:</strong> em dia, vence em breve ou em atraso, com o último pagamento e o próximo. A mensalidade<br />
+  continua sendo combinada entre vocês, fora do app: aqui o Professor só anota quando o Atleta pagou.</li>
+<li><strong>Busca e filtros</strong>, inclusive "Em atraso", para achar quem precisa de atenção rapidamente.</li>
+<li><strong>Bloqueio na sua mão:</strong> o Professor pode bloquear um Atleta nos treinos dele, por exemplo por débito. A vaga é<br />
+  liberada e o Atleta não consegue mais marcar presença. Ele só vê uma mensagem genérica, sem o motivo. Desbloquear é um<br />
+  toque.</li>
+<li><strong>Cadastro do WhatsApp</strong> de quem foi adicionado só pelo nome, para o app passar a reconhecer a pessoa.</li>
+</ul>
+<h3 id="perfil-do-professor">Perfil do Professor</h3>
+<ul>
+<li><strong>Foto, nome, modalidades e graduação</strong> (uma ou várias, com uma modalidade padrão).</li>
+<li><strong>Equipes ou empresas</strong> para quem dá treino em mais de um lugar.</li>
+<li><strong>Grupos de WhatsApp</strong> cadastrados uma vez e escolhidos na hora de compartilhar.</li>
+<li><strong>Tema claro, escuro ou automático.</strong></li>
+<li><strong>Situação da licença</strong> e os avisos importantes, sempre à vista.</li>
+</ul>
+<h3 id="acesso-e-licenca">Acesso e licença</h3>
+<ul>
+<li><strong>Teste grátis</strong> com todas as funcionalidades, para o Professor experimentar antes de assinar, e <strong>planos flexíveis</strong><br />
+  para continuar.</li>
+<li><strong>Aviso de vencimento</strong> dentro do app, para ninguém ser pego de surpresa, e acesso bloqueado quando a licença acaba.</li>
+<li><strong>Só entra quem é convidado</strong>, com login pela conta Google (veja <a href="#em-breve">Em breve</a>).</li>
+</ul>
+<hr />
+<h2 id="privacidade-e-lgpd">Privacidade e LGPD</h2>
+<p>O Bora Treinar guarda pouco e protege o que guarda: <strong>nome e WhatsApp</strong>, e nada mais do Atleta.</p>
+<ul>
+<li><strong>Consentimento registrado:</strong> quem aceitou, quando e qual versão da política. Para menores de 18 anos, o aceite é do<br />
+  responsável legal.</li>
+<li><strong>O WhatsApp nunca aparece para o público</strong>, e a lista mostra só o primeiro nome com a inicial do sobrenome.</li>
+<li><strong>O app não entrega o nome ligado a um número:</strong> quem digita o WhatsApp de outra pessoa não descobre nada.</li>
+<li><strong>Informação de pagamento fora da vista</strong> do Atleta e do público.</li>
+<li><strong>Recusas genéricas:</strong> quem é impedido de marcar presença recebe uma mensagem que não revela o motivo.</li>
+<li><strong>Direitos do titular:</strong> o atalho "Meus dados" na Área pública registra o pedido de acesso ou de exclusão, respondido em<br />
+  até 15 dias. Atendida a exclusão, o cadastro é apagado e as presenças passadas ficam sem nome, só como número.</li>
+<li><strong>Sem publicidade, sem venda de dados, sem perfil de comportamento.</strong></li>
+<li><strong>Páginas abertas a qualquer pessoa:</strong> Política de Privacidade e Termos de Uso, com o contato do Encarregado.</li>
+<li><strong>Responsabilidade do Professor:</strong> ele confirma que tem autorização do Atleta (ou do responsável) antes de registrar<br />
+  os dados dele à mão.</li>
+</ul>
+<hr />
+<h2 id="diferenciais">Diferenciais</h2>
+<ul>
+<li><strong>O Atleta não precisa de nada.</strong> Sem app para baixar, sem conta e sem senha. O link do WhatsApp é a porta de entrada,<br />
+  então a adesão acontece onde o grupo já conversa.</li>
+<li><strong>Feito para artes marciais, não para "academia genérica".</strong> Modalidade, graduação, treino particular e a rotina do<br />
+  tatame fazem parte do produto desde o primeiro dia.</li>
+<li><strong>Vaga na hora.</strong> Confirmou, ocupou. Sem aprovação, sem vai e volta.</li>
+<li><strong>Treino cheio não perde ninguém.</strong> A lista de espera transforma a desistência de um em vaga para outro.</li>
+<li><strong>O lembrete chega no WhatsApp do Atleta</strong>, onde ele já está, sem app novo.</li>
+<li><strong>Um Atleta, vários Professores.</strong> A pessoa é reconhecida pelo WhatsApp em todos os mestres com quem treina, sem expor<br />
+  dados de um Professor ao outro.</li>
+<li><strong>Rotina do mês em um toque.</strong> Duplicar o mês anterior transforma horas de digitação em segundos.</li>
+<li><strong>Controle de quem paga, sem virar cobrança.</strong> O Professor vê quem está em dia e bloqueia quem está em débito, e o<br />
+  dinheiro continua no acordo entre vocês.</li>
+<li><strong>Uma base de código, todas as telas.</strong> iPhone, Android e web com a mesma experiência.</li>
+<li><strong>Privacidade pensada desde o início,</strong> com consentimento, menores de idade e direitos do titular já no fluxo.</li>
+</ul>
+<hr />
+<h2 id="stack">Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>Tecnologia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App (iOS, Android e web)</td>
+<td><a href="https://expo.dev">Expo</a>, React Native e React, com react-native-web</td>
+</tr>
+<tr>
+<td>Navegação</td>
+<td>Expo Router (rotas por arquivo)</td>
+</tr>
+<tr>
+<td>Linguagem</td>
+<td>TypeScript em modo estrito</td>
+</tr>
+<tr>
+<td>Interface</td>
+<td>Componentes próprios, ícones Lucide, fonte Ubuntu e tema claro e escuro</td>
+</tr>
+<tr>
+<td>Animações e gestos</td>
+<td>Reanimated e Gesture Handler</td>
+</tr>
+<tr>
+<td>Backend (em breve)</td>
+<td><a href="https://supabase.com">Supabase</a>: PostgreSQL, Row Level Security, Auth com Google, Storage e Edge Functions</td>
+</tr>
+<tr>
+<td>Notificações (em breve)</td>
+<td>E-mail transacional e push pelo serviço do Expo</td>
+</tr>
+<tr>
+<td>Testes</td>
+<td>Vitest e Testing Library</td>
+</tr>
+<tr>
+<td>Qualidade</td>
+<td>ESLint com regras que protegem a arquitetura, e TypeScript estrito</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Arquitetura:</strong> Clean Architecture em camadas (<code>app → components → hooks → data → domain</code>), com a regra de dependência<br />
+verificada automaticamente pelo lint. A regra de negócio vive isolada, sem depender de tela nem de framework.</p>
+<hr />
+<h2 id="qualidade-e-forma-de-trabalho">Qualidade e forma de trabalho</h2>
+<ul>
+<li><strong>Spec-Driven Development:</strong> cada funcionalidade nasce de uma especificação escrita, que é a fonte de verdade do que o<br />
+  app faz.</li>
+<li><strong>TDD:</strong> o teste vem antes do código, e a suíte roda sobre as regras, os dados e as telas.</li>
+<li><strong>Decisões registradas:</strong> as escolhas difíceis de reverter ficam documentadas em ADRs.</li>
+<li><strong>Vocabulário único:</strong> o time inteiro fala a mesma língua do domínio, em português.</li>
+</ul>
+<hr />
+<h2 id="rodando-o-projeto">Rodando o projeto</h2>
+<p>Pré-requisito: <a href="https://nodejs.org">Node.js</a> instalado.</p>
+<pre><code class="language-bash">npm install
+npm run web      # navegador
+npm run android  # Android
+npm run ios      # iOS (requer macOS ou Expo Go)
+</code></pre>
+<p>Antes de subir uma mudança:</p>
+<pre><code class="language-bash">npm test           # testes
+npx tsc --noEmit   # tipos
+npm run lint       # lint, incluindo a regra de dependência entre as camadas
+</code></pre>
+<hr />
+<h2 id="documentacao">Documentação</h2>
+<table>
+<thead>
+<tr>
+<th>Onde</th>
+<th>O quê</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="docs/specs/README.md"><code>docs/specs/</code></a></td>
+<td>O que o app faz: uma especificação por funcionalidade</td>
+</tr>
+<tr>
+<td><a href="docs/arquitetura.md"><code>docs/arquitetura.md</code></a></td>
+<td>Camadas, mapa de pastas e convenções</td>
+</tr>
+<tr>
+<td><a href="docs/adr/"><code>docs/adr/</code></a></td>
+<td>Decisões de arquitetura</td>
+</tr>
+<tr>
+<td><a href="CONTEXT.md"><code>CONTEXT.md</code></a></td>
+<td>Vocabulário do domínio</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="licenca">Licença</h2>
+<p><strong>Software proprietário. Todos os direitos reservados.</strong></p>
+<p>Copyright © 2026 TadeuReinaldo (<a href="https://github.com/tazzeus">@tazzeus</a>)</p>
+<p>O Bora Treinar é um produto comercial. O código, a marca, o design e a documentação deste repositório não podem ser<br />
+copiados, modificados, redistribuídos, sublicenciados nem usados para oferecer serviço a terceiros sem autorização<br />
+prévia e por escrito do titular. O uso do app por Professores é concedido por licença, nos termos combinados com o<br />
+titular. O texto completo está em <a href="LICENSE"><code>LICENSE</code></a>. Para pedir autorização ou falar de licenciamento, fale<br />
+com o titular pelo GitHub: <a href="https://github.com/tazzeus">@tazzeus</a>.</p>
+  </article>
+</main>
+</body>
+</html>
