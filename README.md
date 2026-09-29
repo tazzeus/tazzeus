@@ -1,4 +1,4 @@
-# Olá, eu sou Tadeu Reinaldo (@tazzeus) 👋
+# Tadeu Reinaldo (@tazzeus) 👋
 
 Desenvolvedor de Software focado em sistemas, plataformas escaláveis e engenharia agentic com inteligência artificial.
 
