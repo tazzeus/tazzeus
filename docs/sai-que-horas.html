@@ -15,50 +15,79 @@
   <header class="cabecalho">
     <h1>Sai que horas?</h1>
     <p class="subtitulo">Agregador de horários de transporte intermunicipal de Sergipe</p>
-    <a href="sai-que-horas-demo.apk" class="botao-demo" download>
-      📲 Baixar o app demo (Android · .apk)
+    <a href="https://sai-que-horas.vercel.app" class="botao-demo" target="_blank" rel="noopener noreferrer">
+      🌐 Abrir o site no ar
     </a>
     <p class="nota-demo">
-      Build de demonstração, funciona offline com dados de exemplo. O Android pode avisar sobre
-      "instalar de fontes desconhecidas" — é esperado pra um APK fora da Play Store.
+      Funciona no navegador e pode ser instalado como app no Android e no iPhone — veja
+      <a href="#-instalar-como-app-pwa">como instalar</a>.
     </p>
   </header>
   <article class="conteudo">
-    <h1 id="sai-que-horas">Sai que horas?</h1>
+<h1 id="sai-que-horas">Sai que horas?</h1>
 <p><strong>Sai que horas?</strong> é um agregador de horários de transporte intermunicipal de Sergipe: várias empresas<br />
 de transporte expõem seus horários num só portal público, e cada empresa administra os próprios<br />
-dados sem depender de um desenvolvedor a cada mudança de grade. Piloto: <strong>Coopertalse</strong> (dado já<br />
-verificado, carregado a partir de um snapshot herdado). Português do Brasil (produto e código).</p>
+dados sem depender de um desenvolvedor a cada mudança de grade. Empresas no ar: <strong>Coopertalse</strong><br />
+(snapshot herdado, 2.762 horários) e <strong>Coagreste</strong> (584 horários, a partir do site oficial da<br />
+empresa). Português do Brasil (produto e código).</p>
 <blockquote>
-<p>🧭 <strong>O que o sistema NÃO faz (ainda):</strong> não existe deploy público — o projeto roda 100% local<br />
-(Postgres em Docker + <code>next dev</code>) até a hospedagem definitiva ser decidida (ver<br />
-<a href="#-estado-atual-e-pendências">Estado atual e pendências</a>). O login Google também não está<br />
-funcional de ponta a ponta: falta só a credencial real do<br />
-<a href="https://console.cloud.google.com/apis/credentials">Google Cloud Console</a>, que só o dono do<br />
-produto pode criar.</p>
+<p>🌐 <strong>No ar:</strong> <a href="https://sai-que-horas.vercel.app" target="_blank" rel="noopener noreferrer">https://sai-que-horas.vercel.app</a> — web + painel no Vercel, banco Postgres/pgvector<br />
+na Neon, login Google ativo, instalável como PWA (<a href="#-instalar-como-app-pwa">como instalar no Android e no iPhone</a>). O app<br />
+nativo (Expo) ainda não foi publicado — ver <a href="#-estado-atual-e-pendências">Estado atual e pendências</a>.</p>
 <p>📖 <strong>A fonte de verdade do projeto é a spec, não este README.</strong> Antes de mudar qualquer coisa,<br />
-leia <a href=".specify/memory/constitution.md"><code>.specify/memory/constitution.md</code></a> e<br />
-<a href="specs/001-agregador-multiempresa/"><code>specs/001-agregador-multiempresa/</code></a> (<code>spec.md</code>, <code>plan.md</code>,<br />
+leia <code>.specify/memory/constitution.md</code> e<br />
+<code>specs/001-agregador-multiempresa/</code> (<code>spec.md</code>, <code>plan.md</code>,<br />
 <code>data-model.md</code>, <code>tasks.md</code>). O método é Spec-Driven: spec → plano → tarefas → código, sem<br />
 improviso em cima de ambiguidade.</p>
 </blockquote>
 <hr />
-<h2 id="sumario">📑 Sumário</h2>
+<h2 id="-sumário">📑 Sumário</h2>
 <ul>
-<li><a href="#novidades-recentes">🆕 Novidades Recentes</a></li>
-<li><a href="#arquitetura-tecnologias">🚀 Arquitetura &amp; Tecnologias</a></li>
-<li><a href="#arquitetura-multiempresa-papeis">🏢 Arquitetura Multiempresa (Papéis)</a></li>
-<li><a href="#instalacao-ambiente">📦 Instalação &amp; Ambiente</a></li>
-<li><a href="#comandos-do-dia-a-dia">⚙️ Comandos do Dia a Dia</a></li>
-<li><a href="#motor-de-busca-deterministico-vetor-assistivo">🧮 Motor de Busca Determinístico &amp; Vetor Assistivo</a></li>
-<li><a href="#estrutura-de-diretorios">📂 Estrutura de Diretórios</a></li>
-<li><a href="#principios-de-confiabilidade-constituicao">🛡️ Princípios de Confiabilidade (Constituição)</a></li>
-<li><a href="#estado-atual-e-pendencias">🚦 Estado Atual e Pendências</a></li>
-<li><a href="#licenca">📜 Licença</a></li>
+<li><a href="#-novidades-recentes">🆕 Novidades Recentes</a></li>
+<li><a href="#-arquitetura--tecnologias">🚀 Arquitetura &amp; Tecnologias</a></li>
+<li><a href="#-arquitetura-multiempresa-papéis">🏢 Arquitetura Multiempresa (Papéis)</a></li>
+<li><a href="#-instalar-como-app-pwa">📲 Instalar como app (PWA)</a></li>
+<li><a href="#-instalação--ambiente">📦 Instalação &amp; Ambiente</a></li>
+<li><a href="#-motor-de-busca-determinístico--vetor-assistivo">🧮 Motor de Busca Determinístico &amp; Vetor Assistivo</a></li>
+<li><a href="#-estrutura-de-diretórios">📂 Estrutura de Diretórios</a></li>
+<li><a href="#️-princípios-de-confiabilidade-constituição">🛡️ Princípios de Confiabilidade (Constituição)</a></li>
+<li><a href="#-estado-atual-e-pendências">🚦 Estado Atual e Pendências</a></li>
+<li><a href="#-licença">📜 Licença</a></li>
 </ul>
 <hr />
-<h2 id="novidades-recentes">🆕 Novidades Recentes</h2>
+<h2 id="-novidades-recentes">🆕 Novidades Recentes</h2>
 <ul>
+<li><strong>02/10/2026</strong> — <strong>Filtro de destino e rodapé de contato na tela pública</strong>. Em cidades hub<br />
+  (Aracaju tem 62 destinos) ficou difícil achar uma rota, então entrou o campo opcional <strong>"Para<br />
+  onde você vai?"</strong>: um combobox de digitar com sugestões (acessível, com setas/Enter/Esc e botão<br />
+  de limpar) que oferece só as cidades alcançáveis a partir da origem e da empresa filtrada,<br />
+  tolerando acento e erro de digitação (mesmo motor <code>sugerirLocalidades</code> do autocompletar, sem<br />
+  chamada ao servidor). Com destino escolhido, a lista usa o motor de busca com destino e <strong>inclui<br />
+  as rotas que só passam pela cidade (via)</strong>, marcadas com "passa por <cidade>"; trocar a origem<br />
+  limpa o filtro. No fim da lista, um <strong>rodapé discreto</strong> ("Desenvolvido por …") com ícones de<br />
+  WhatsApp (mensagem inicial pronta) e Instagram do desenvolvedor.</li>
+<li><strong>02/10/2026</strong> — <strong>Tela pública sem repetição de horário e com o "(ver)" por rota</strong>. Em cidades<br />
+  hub (Aracaju, Itabaiana) o mesmo horário se repetia em vários cards; agora há <strong>um card por<br />
+  horário</strong>, com todos os destinos que saem naquele minuto dentro dele (cada um com carro, via,<br />
+  dias, chegada e empresa próprios). Os cards são distribuídos pela <strong>coluna mais baixa</strong> no<br />
+  momento (estilo masonry, 1/2/3 colunas conforme a largura), sem buracos no layout e mantendo a<br />
+  ordem cronológica; "Já saíram hoje" continua sendo uma seção à parte. O link <strong>"(ver)"</strong> agora<br />
+  leva à postagem do Instagram com os horários <strong>daquela rota</strong> — dado versionado em<br />
+<code>dados/&lt;empresa&gt;-postagens.json</code> (Coopertalse: 49 rotas, Coagreste: 36) e reaplicado em qualquer<br />
+  banco por <code>uv run ingest carregar-postagens &lt;empresa&gt;</code>. Links recebidos de cidades que ainda não<br />
+  têm rota ficam guardados em <code>dados/coopertalse-postagens-pendentes.json</code>. Também entraram: a<br />
+<strong>nova identidade visual</strong> (ícone, splash com mapa, cabeçalho em degradê turquesa — também na<br />
+  abertura do PWA instalado), o <strong>login Google no app mobile</strong> (OAuth + PKCE via navegador do<br />
+  sistema) e o endurecimento de segurança das rotas públicas (cache, limite, CSP, validação no<br />
+  servidor).</li>
+<li><strong>01/10/2026</strong> — <strong>Sistema no ar (Vercel + Neon) e PWA</strong>. Hospedagem decidida: <code>apps/web</code> no Vercel<br />
+  (deploy automático a cada push na <code>main</code>), Postgres com pgvector na Neon, login Google em<br />
+  produção. A Coagreste (40 rotas, 584 partidas, com a fonte rastreada ao site oficial) entrou no<br />
+  banco de produção. PWA instalável (manifest, ícones, service worker que prioriza a rede) e a<br />
+  localização é pedida ao abrir o app (web e mobile; a autorização fica gravada pelo navegador/SO).<br />
+  O app mobile lê a API de <code>EXPO_PUBLIC_API_URL</code> (apontando pro Vercel no <code>eas.json</code>). O projeto<br />
+  passou de pnpm 12 (<code>.exe</code> nativo, bloqueado por Device Guard no Windows) para <strong>pnpm 10.34.6</strong>,<br />
+  JS puro. O <code>demo.apk</code> foi removido por estar desatualizado.</li>
 <li><strong>28/09/2026</strong> — <strong>App mobile: correção de crash e header redesenhado</strong>. Corrigido um crash real<br />
   ao tocar nos filtros de cidade/empresa (worklet do Reanimated/Gesture Handler chamando função JS<br />
   sem <code>runOnJS</code>, derrubava o app em release). Além disso: link <code>(ver)</code> pro Instagram/postagem em<br />
@@ -67,8 +96,7 @@ improviso em cima de ambiguidade.</p>
   saíram hoje"); botão "Entrar" com modal de login placeholder (Google via Auth.js ainda não<br />
   chegou no mobile — só na web); ícone adaptativo do Android corrigido (cortava nas bordas do<br />
   launcher); header redesenhado no estilo de apps de mobilidade (hero compacto com gradiente,<br />
-  painel de filtros flutuante). Build de demonstração pronto pra instalar em<br />
-<a href="demo-app/"><code>demo-app/demo.apk</code></a>.</li>
+  painel de filtros flutuante). Como gerar o APK de demonstração: <code>demo-app/</code>.</li>
 <li><strong>24/09/2026</strong> — <strong>Tela pública refinada</strong> ("Sai que horas?"): filtro por empresa, combo com<br />
   todas as origens, botões das cidades mais buscadas (contador anônimo, sem dado pessoal) e um<br />
   botão em destaque com a <strong>cidade da localização do usuário</strong> — a posição é lida e comparada<br />
@@ -105,7 +133,7 @@ improviso em cima de ambiguidade.</p>
   pública (<code>/api/snapshot</code>) e tela de busca por cidade de origem.</li>
 </ul>
 <hr />
-<h2 id="arquitetura-tecnologias">🚀 Arquitetura &amp; Tecnologias</h2>
+<h2 id="-arquitetura--tecnologias">🚀 Arquitetura &amp; Tecnologias</h2>
 <p>O projeto é um monorepo <strong>pnpm</strong>, com a regra de negócio de busca vivendo <strong>um único lugar</strong><br />
 (<code>packages/engine</code>, TypeScript puro) e compartilhada por todas as plataformas — nenhuma delas<br />
 reimplementa a busca por conta própria:</p>
@@ -114,17 +142,19 @@ reimplementa a busca por conta própria:</p>
    busca <strong>e</strong> o painel administrativo (multiempresa). Com servidor de verdade (não é estático):<br />
    permissão por papel/empresa e edição de dado sem deploy exigem isso.</li>
 <li>📱 <strong><code>apps/mobile</code></strong> — Expo/React Native. Mesma busca pública do web (<code>packages/engine</code> +<br />
-<code>GET /api/snapshot</code>), sem login — os painéis administrativos ficam só na web por enquanto.</li>
+<code>GET /api/snapshot</code>), com login Google (OAuth + PKCE pelo navegador do sistema) — os painéis<br />
+   administrativos ficam só na web por enquanto.</li>
 <li>🗄️ <strong>Postgres + pgvector</strong> (via Prisma) — fonte de verdade dos dados: empresas, usuários,<br />
    localidades, rotas, horários e os embeddings de localidade.</li>
 <li>🐍 <strong><code>services/ingest</code></strong> (Python 3.14, <code>uv</code>) — só ingestão em lote, nunca serve API nem<br />
-   reimplementa busca: carga inicial do snapshot herdado da Coopertalse, geração dos embeddings<br />
-   de localidade e coordenadas dos municípios (IBGE).</li>
+   reimplementa busca: carga inicial do snapshot herdado da Coopertalse, horários da Coagreste,<br />
+   links das postagens do Instagram por rota, geração dos embeddings de localidade e coordenadas<br />
+   dos municípios (IBGE).</li>
 <li>🔐 <strong>Auth.js v5</strong> — login <strong>só Google</strong>, sem conta com senha própria, para a área privada<br />
    (super admin / admin de empresa / gerente de empresa).</li>
 </ol>
 <hr />
-<h2 id="arquitetura-multiempresa-papeis">🏢 Arquitetura Multiempresa (Papéis)</h2>
+<h2 id="-arquitetura-multiempresa-papéis">🏢 Arquitetura Multiempresa (Papéis)</h2>
 <p>Uma empresa de transporte nasce <strong>Pendente</strong> no agregador e vira <strong>Ativa</strong> sozinha assim que a<br />
 primeira rota/horário é salvo — sem clique extra de ninguém. Três papéis, cada um só enxergando o<br />
 que lhe cabe (verificado como caso de segurança, não só de produto):</p>
@@ -158,8 +188,39 @@ que lhe cabe (verificado como caso de segurança, não só de produto):</p>
 antes de tocar o banco — nunca confia só no que a interface esconde. Nenhum código específico de<br />
 uma empresa vive espalhado pelo projeto: é tudo dado, não bifurcação.</p>
 <hr />
-<h2 id="instalacao-ambiente">📦 Instalação &amp; Ambiente</h2>
-<p>Requer Node 20+, <code>pnpm</code>, Docker (Postgres local) e Python 3.14 + <code>uv</code> (só pra ingestão). Tudo que a<br />
+<h2 id="-instalar-como-app-pwa">📲 Instalar como app (PWA)</h2>
+<p>O site funciona como app instalado: abre em tela cheia, com ícone próprio e splash, e <strong>não passa<br />
+pela loja</strong> (Play Store/App Store). Em <a href="https://sai-que-horas.vercel.app" target="_blank" rel="noopener noreferrer">https://sai-que-horas.vercel.app</a>:</p>
+<h3 id="android-chrome">Android (Chrome)</h3>
+<ol>
+<li>Abra o site no <strong>Chrome</strong>.</li>
+<li>Toque no menu <strong>⋮</strong> (canto superior direito) → <strong>Instalar app</strong> (em alguns aparelhos aparece<br />
+   como <strong>Adicionar à tela inicial</strong>). Se o Chrome mostrar o aviso "Instalar Sai que horas?",<br />
+   pode tocar direto nele.</li>
+<li>Confirme em <strong>Instalar</strong>. O ícone aparece na tela inicial e na gaveta de apps.</li>
+</ol>
+<h3 id="iphone--ipad-safari">iPhone / iPad (Safari)</h3>
+<p>No iOS não há aviso de instalação — é manual, e <strong>precisa ser pelo Safari</strong>:</p>
+<ol>
+<li>Abra o site no <strong>Safari</strong>.</li>
+<li>Toque no botão <strong>Compartilhar</strong> (quadrado com seta pra cima, na barra inferior).</li>
+<li>Role a lista e toque em <strong>Adicionar à Tela de Início</strong>.</li>
+<li>Confirme o nome e toque em <strong>Adicionar</strong>. O ícone aparece na tela inicial.</li>
+</ol>
+<h3 id="dicas">Dicas</h3>
+<ul>
+<li>Ao abrir o app, ele pede a <strong>localização</strong> para sugerir a sua cidade de origem; a posição é<br />
+  comparada só no aparelho e nunca vai ao servidor. A escolha fica gravada no navegador/sistema.</li>
+<li>As atualizações chegam sozinhas: o app prioriza a rede, então abrir com internet já traz os<br />
+  horários novos. Sem internet, ele mostra o que estiver em cache.</li>
+<li>Para desinstalar, é como qualquer app: pressione e segure o ícone e remova (no iPhone,<br />
+<strong>Remover app</strong>).</li>
+<li>Instalar não exige o app nativo (Expo), que ainda não foi publicado.</li>
+</ul>
+<hr />
+<h2 id="-instalação--ambiente">📦 Instalação &amp; Ambiente</h2>
+<p>Requer Node 20+, <code>pnpm</code> 10 (versão fixada em <code>packageManager</code>; é JS puro — o pnpm 12 é um <code>.exe</code><br />
+nativo que o Windows com Device Guard/App Control pode bloquear), Docker (Postgres local) e Python 3.14 + <code>uv</code> (só pra ingestão). Tudo que a<br />
 carga inicial precisa (snapshot da Coopertalse, schema, migrations, script de usuários de teste)<br />
 já vem versionado no repositório — não há passo manual fora do git nem arquivo pra copiar de outra<br />
 máquina.</p>
@@ -182,6 +243,9 @@ pnpm --filter @via-certa/db migrate:dev             # aplica o schema
 
 cd services/ingest &amp;&amp; uv sync
 uv run ingest carregar-inicial      # carrega os 2.762 horários reais da Coopertalse
+uv run ingest carregar-coagreste    # carrega os 584 horários da Coagreste (dados/coagreste-horarios.json)
+uv run ingest carregar-postagens coopertalse   # link do &quot;(ver)&quot; por rota (dados/coopertalse-postagens.json)
+uv run ingest carregar-postagens coagreste     # idem para a Coagreste
 uv run ingest gerar-embeddings      # gera os embeddings de localidade (autocompletar)
 uv run ingest carregar-coordenadas  # coordenadas dos municípios (IBGE) — botão de localização
 cd ..
@@ -194,28 +258,13 @@ pnpm --filter @via-certa/web dev    # sobe em http://localhost:3000
 <code>admin@dev.local</code>, <code>gerente@dev.local</code>, um de cada papel, o admin/gerente já vinculados à<br />
 Coopertalse). A tela <code>/entrar</code> ganha um campo de e-mail que aceita qualquer um dos três (só em<br />
 desenvolvimento local — em produção esse caminho não existe).</p>
-<p>🚨 <strong>Login Google não funciona sem credencial real.</strong> Crie um "Web application" em<br />
-<a href="https://console.cloud.google.com/apis/credentials">Google Cloud Console</a> (redirect URI<br />
+<p>🔑 <strong>Login Google em desenvolvimento:</strong> crie um "Web application" em<br />
+<a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener noreferrer">Google Cloud Console</a> (redirect URI<br />
 <code>http://localhost:3000/api/auth/callback/google</code>) e cole em <code>apps/web/.env.local</code><br />
-(<code>AUTH_GOOGLE_ID</code>/<code>AUTH_GOOGLE_SECRET</code>) — ver <code>apps/web/.env.example</code>. Sem isso, a busca pública<br />
-funciona normalmente; só a área <code>/painel</code> fica inacessível.</p>
-</blockquote>
-<hr />
-<h2 id="comandos-do-dia-a-dia">⚙️ Comandos do Dia a Dia</h2>
-<pre><code class="language-bash">pnpm check                                  # lint + tipos + testes de todo o monorepo (espelha o CI)
-pnpm --filter @via-certa/web test           # só os testes do web (Vitest, contra o Postgres local)
-pnpm --filter @via-certa/db studio          # Prisma Studio — inspecionar o banco visualmente
-pnpm --filter @via-certa/db seed:dev        # (re)cria os 3 usuários de teste do login de dev
-
-cd services/ingest
-uv run pytest                               # testes Python (carga inicial + embeddings)
-uv run ingest gerar-embeddings              # reexecutar quando uma localidade nova entrar
-uv run ingest carregar-coordenadas          # reexecutar quando uma cidade nova entrar
-
-cd apps/mobile
-npx expo start --web                        # app mobile no navegador (mesma busca do web)
-</code></pre>
-<blockquote>
+(<code>AUTH_GOOGLE_ID</code>/<code>AUTH_GOOGLE_SECRET</code>) — ver <code>apps/web/.env.example</code>. Em produção a credencial<br />
+fica nas variáveis de ambiente do Vercel, com o redirect <code>https://&lt;domínio&gt;/api/auth/callback/google</code>.<br />
+O primeiro super admin de um banco novo é inserido à mão em <code>Usuario</code> (<code>papel = 'SUPER_ADMIN'</code>,<br />
+<code>empresaId</code> nulo); os demais usuários o painel cadastra.</p>
 <p>💾 <strong>Levar o banco local de uma máquina pra outra</strong> (cadastro real de empresa/usuário, Instagram,<br />
 rotas/horários editados pelo painel — nada disso é gerado pela carga inicial nem entra no git):<br />
 <code>pnpm --filter @via-certa/db backup</code> grava <code>db/backups/viacerta-&lt;data&gt;.dump</code> (fora do git — é<br />
@@ -226,7 +275,7 @@ conteúdo atual do banco de destino. Não é pré-requisito pro sistema funciona
 <code>seed:dev</code> já deixam tudo utilizável; isso aqui é só pra não perder dado digitado à mão.</p>
 </blockquote>
 <hr />
-<h2 id="motor-de-busca-deterministico-vetor-assistivo">🧮 Motor de Busca Determinístico &amp; Vetor Assistivo</h2>
+<h2 id="-motor-de-busca-determinístico--vetor-assistivo">🧮 Motor de Busca Determinístico &amp; Vetor Assistivo</h2>
 <p>A busca nunca inventa nem estima horário — só filtra e ordena o que está no banco, com o rastro<br />
 até a fonte sempre visível (PDF da empresa, post transcrito, ou "informado pela empresa no<br />
 portal"). Três garantias centrais em <code>packages/engine</code>:</p>
@@ -243,28 +292,35 @@ portal"). Três garantias centrais em <code>packages/engine</code>:</p>
 não encontrou nada — nunca decide sozinho o que aparece, e a pontuação do reforço semântico nunca<br />
 ultrapassa a de um match exato determinístico.</p>
 <hr />
-<h2 id="estrutura-de-diretorios">📂 Estrutura de Diretórios</h2>
+<h2 id="-estrutura-de-diretórios">📂 Estrutura de Diretórios</h2>
 <pre><code>apps/
   web/          Next.js — página pública + painel administrativo
-  mobile/       Expo/React Native — busca pública
+  mobile/       Expo/React Native — busca pública e login Google
 packages/
   engine/       Motor de busca (TypeScript puro), compartilhado por web e mobile
 db/
   schema.prisma Modelo de dados; migrations em db/migrations/
 services/
-  ingest/       Python — carga inicial, embeddings e coordenadas (nunca serve API)
+  ingest/       Python — cargas (Coopertalse, Coagreste, postagens), embeddings e coordenadas
+                (nunca serve API)
 specs/
   001-agregador-multiempresa/   spec.md · plan.md · data-model.md · tasks.md
 .specify/
   memory/constitution.md        Princípios do projeto — valem mais que preferência local
-dados/          Snapshot herdado da Coopertalse (insumo só da carga inicial, não é runtime)
-docs/           Documentação e ADRs; heranca/ = modelo e contrato do snapshot original (referência)
-demo-app/       demo.apk — build de release do mobile pronto pra instalar, sem compilar nada
+dados/          Snapshot da Coopertalse, horários da Coagreste e links das postagens do Instagram
+                por rota (&lt;empresa&gt;-postagens.json) — insumos das cargas, não são runtime
+docs/           heranca/ = modelo e contrato do snapshot original (referência); marca/ = imagens de
+                referência da identidade visual. ADRs entram em docs/adr/ quando houver o primeiro ADR.
+horarios_coagreste/  Imagens dos posts do Instagram da Coagreste (fonte secundária; a primária é o
+                site oficial — ver dados/coagreste-horarios.json)
+scripts/        gerar-marca.cjs — gera ícones, splash e cabeçalhos a partir de docs/marca/
+.github/        Workflow de CI (Postgres real + migrations + testes)
+demo-app/       Como gerar o APK de release do mobile (o .apk em si não é versionado)
 </code></pre>
 <hr />
-<h2 id="principios-de-confiabilidade-constituicao">🛡️ Princípios de Confiabilidade (Constituição)</h2>
+<h2 id="️-princípios-de-confiabilidade-constituição">🛡️ Princípios de Confiabilidade (Constituição)</h2>
 <p>Regras que não se negociam sem um ADR registrado em <code>docs/adr/</code> (ver<br />
-<a href=".specify/memory/constitution.md"><code>.specify/memory/constitution.md</code></a> pro texto completo):</p>
+<code>.specify/memory/constitution.md</code> pro texto completo):</p>
 <ul>
 <li><strong>A fonte é sagrada</strong> — nenhum horário aparece sem rastro até a origem; nada é estimado.</li>
 <li><strong>Isolamento entre empresas desde o dia 1</strong> — vazamento de dado entre empresas é bug de<br />
@@ -278,19 +334,27 @@ demo-app/       demo.apk — build de release do mobile pronto pra instalar, sem
   agrega valor, não é pré-requisito de tarefa.</li>
 </ul>
 <hr />
-<h2 id="estado-atual-e-pendencias">🚦 Estado Atual e Pendências</h2>
+<h2 id="-estado-atual-e-pendências">🚦 Estado Atual e Pendências</h2>
 <p>✅ <strong>Backlog completo da spec 001 fechado</strong> (busca pública, painéis multiempresa, tema, mobile,<br />
-vetor, CI) e refino da tela pública/painel (T070–T071 e ajustes seguintes) — ver <a href="specs/001-agregador-multiempresa/tasks.md"><code>specs/001-agregador-multiempresa/tasks.md</code></a><br />
+vetor, CI) e refino da tela pública/painel (T070–T071 e ajustes seguintes) — ver <code>specs/001-agregador-multiempresa/tasks.md</code><br />
 pro histórico detalhado de cada tarefa, achados reais incluídos.</p>
-<p>Em aberto, por decisão explícita do dono do produto (não é dívida técnica esquecida):<br />
-- <strong>Hospedagem definitiva</strong> — Vercel + Postgres na nuvem (Neon) são as candidatas, mas a decisão<br />
-  foi deliberadamente adiada (<code>plan.md</code> §10). Sem isso, o projeto roda só localmente.<br />
-- <strong>Deploy automático (T061)</strong> — depende da decisão acima.<br />
-- <strong>Credencial real do Google OAuth</strong> — só o dono do produto pode criar; sem ela, o login não<br />
-  completa (o resto do fluxo já está testado e pronto).</p>
+<p>✅ <strong>Em produção:</strong> hospedagem (Vercel + Neon), login Google, PWA, Coopertalse e Coagreste.</p>
+<p>Em aberto:<br />
+- <strong>App nativo (Expo)</strong> — configurado (<code>apps/mobile/eas.json</code>, API via <code>EXPO_PUBLIC_API_URL</code>), mas o<br />
+  APK novo ainda não foi gerado nem publicado (T062). Rodar <code>eas build</code> <strong>dentro de <code>apps/mobile</code></strong>.<br />
+- <strong>Painel no mobile</strong> — o login Google do app já existe (OAuth + PKCE), mas o painel<br />
+  administrativo continua exclusivo da web.<br />
+- <strong>Deploy via GitHub Actions (T061)</strong> — o Vercel já publica a cada push na <code>main</code>; o <code>deploy.yml</code><br />
+  próprio só se justifica se for preciso rodar migrations automaticamente no deploy.<br />
+- <strong>Dados que o painel altera não vêm da ingestão</strong> — Instagram da empresa e edições feitas no<br />
+  painel vivem só no banco; a ingestão sozinha não os recria. (Os links das postagens por rota<br />
+  são a exceção: moram no git e a carga os reaplica.)<br />
+- <strong>Links de postagem sem rota</strong> — 23 cidades da Coopertalse com link já recebido, mas sem rota no<br />
+  banco, em <code>dados/coopertalse-postagens-pendentes.json</code>; e 5 rotas sem link (Moita Bonita e<br />
+  Nossa Senhora Aparecida no Coagreste, Pontal/Carro 147 na Coopertalse).</p>
 <hr />
-<h2 id="licenca">📜 Licença</h2>
-<p>Software proprietário — <strong>todos os direitos reservados</strong>. Ver <a href="./LICENSE"><code>LICENSE</code></a>. Nenhuma parte deste repositório pode ser copiada, redistribuída ou usada para criar obras derivadas sem autorização prévia e por escrito do autor.</p>
+<h2 id="-licença">📜 Licença</h2>
+<p>Software proprietário — <strong>todos os direitos reservados</strong>. Ver <code>LICENSE</code>. Nenhuma parte deste repositório pode ser copiada, redistribuída ou usada para criar obras derivadas sem autorização prévia e por escrito do autor.</p>
   </article>
 </main>
 </body>
