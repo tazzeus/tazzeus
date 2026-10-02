@@ -57,18 +57,27 @@ improviso em cima de ambiguidade.</p>
 <hr />
 <h2 id="-novidades-recentes">🆕 Novidades Recentes</h2>
 <ul>
-<li><strong>02/10/2026</strong> — <strong>Comprar passagem, "(Instagram)" e novo cabeçalho com mapa</strong>.</li>
-<li><strong>"(Comprar passagem)"</strong> em <strong>todo card da Coopertalse</strong> (inclusive os que já saíram), logo<br />
-    abaixo do "(Instagram)". O site de vendas só tem agências em <strong>Aracaju</strong> (Rodoviária Nova e<br />
+<li><strong>02/10/2026</strong> — <strong>Cards mais claros: dias em faixa, carro abaixo da rota e frase centralizada</strong>.<br />
+  Em "Dias", em vez de listar dia a dia, o card mostra a <strong>faixa</strong>: "Todos os dias", "SEG à SÁB",<br />
+  "SEG à SEX" — um dia só aparece como "DOM à DOM", e dias soltos ficam separados ("SEG, QUA à<br />
+  SEX"); lógica e testes em <code>apps/web/src/lib/dias.ts</code>. O <strong>número do carro</strong> vai para uma linha<br />
+  própria logo abaixo da rota (sem parênteses). A frase "Escolha a cidade de origem…" fica<br />
+<strong>centralizada</strong> em telas a partir de 900 px e alinhada à esquerda, na margem dos cartões, em<br />
+  celular e tablet. Só no site; o app mobile (Expo) não mudou.</li>
+<li><strong>02/10/2026</strong> — <strong>Comprar passagem, link do Instagram no nome da empresa e novo cabeçalho com mapa</strong>.</li>
+<li><strong>"Comprar passagem"</strong> (com o ícone de passagem à direita) em <strong>todo card da Coopertalse</strong><br />
+    (inclusive os que já saíram), logo abaixo do nome da empresa. O site de vendas só tem agências em <strong>Aracaju</strong> (Rodoviária Nova e<br />
     Velha): nas saídas de lá o link já leva <strong>origem, agência e destino</strong> preenchidos<br />
     (<code>?origem=ARACAJU&amp;codAgencia=&lt;1|2&gt;&amp;destino=&lt;CIDADE&gt;</code>, com a grafia do site para cidades como<br />
     Glória → "N.S. GLORIA"); nas demais abre o site sem preenchimento. A <strong>data não dá para<br />
     preencher</strong>: o site sempre abre em "hoje" e a busca exige sessão (POST), então quem compra<br />
     escolhe a data lá — ver <a href="#-estado-atual-e-pendências">Estado atual e pendências</a>. A Coagreste<br />
     não vende online e não tem o link. Lógica e testes em <code>apps/web/src/lib/passagem.ts</code>.</li>
-<li>O link do Instagram dos cards passou de "(ver)" a <strong>"(Instagram)"</strong> (site e app mobile), com a<br />
-    dica ao passar o mouse: "Ver a postagem do horário no Instagram" (ou "Ver o perfil da<br />
-    <empresa> no Instagram" nas rotas que ainda não têm postagem própria).</li>
+<li><strong>O nome da empresa, em verde, é o link do Instagram</strong>, com o ícone do Instagram à direita —<br />
+    um único link para a postagem do horário (ou para o perfil, nas rotas que ainda não têm<br />
+    postagem própria), com a dica ao passar o mouse: "Ver a postagem do horário no Instagram" (ou<br />
+    "Ver o perfil da <empresa> no Instagram"). Antes era o texto "(ver)", depois "(Instagram)"; o<br />
+    app mobile (Expo) ainda mostra "(Instagram)" em texto.</li>
 <li><strong>Tempo estimado a pé e de carro</strong> ao lado da distância até a origem ("🚶 ~30 min 🚗 ~4 min").<br />
     É estimativa a partir da distância em linha reta (+30% de curva; 5 km/h a pé, 40 km/h de<br />
     carro), calculada no aparelho — a posição não vai a nenhum serviço de rotas. A pé só aparece<br />
@@ -276,7 +285,7 @@ pnpm --filter @via-certa/db migrate:dev             # aplica o schema
 cd services/ingest &amp;&amp; uv sync
 uv run ingest carregar-inicial      # carrega os 2.762 horários reais da Coopertalse
 uv run ingest carregar-coagreste    # carrega os 584 horários da Coagreste (dados/coagreste-horarios.json)
-uv run ingest carregar-postagens coopertalse   # link do &quot;(Instagram)&quot; por rota (dados/coopertalse-postagens.json)
+uv run ingest carregar-postagens coopertalse   # link do Instagram por rota (dados/coopertalse-postagens.json)
 uv run ingest carregar-postagens coagreste     # idem para a Coagreste
 uv run ingest gerar-embeddings      # gera os embeddings de localidade (autocompletar)
 uv run ingest carregar-coordenadas  # coordenadas dos municípios (IBGE) — botão de localização
