@@ -57,6 +57,29 @@ improviso em cima de ambiguidade.</p>
 <hr />
 <h2 id="-novidades-recentes">🆕 Novidades Recentes</h2>
 <ul>
+<li><strong>02/10/2026</strong> — <strong>Comprar passagem, "(Instagram)" e novo cabeçalho com mapa</strong>.</li>
+<li><strong>"(Comprar passagem)"</strong> em <strong>todo card da Coopertalse</strong> (inclusive os que já saíram), logo<br />
+    abaixo do "(Instagram)". O site de vendas só tem agências em <strong>Aracaju</strong> (Rodoviária Nova e<br />
+    Velha): nas saídas de lá o link já leva <strong>origem, agência e destino</strong> preenchidos<br />
+    (<code>?origem=ARACAJU&amp;codAgencia=&lt;1|2&gt;&amp;destino=&lt;CIDADE&gt;</code>, com a grafia do site para cidades como<br />
+    Glória → "N.S. GLORIA"); nas demais abre o site sem preenchimento. A <strong>data não dá para<br />
+    preencher</strong>: o site sempre abre em "hoje" e a busca exige sessão (POST), então quem compra<br />
+    escolhe a data lá — ver <a href="#-estado-atual-e-pendências">Estado atual e pendências</a>. A Coagreste<br />
+    não vende online e não tem o link. Lógica e testes em <code>apps/web/src/lib/passagem.ts</code>.</li>
+<li>O link do Instagram dos cards passou de "(ver)" a <strong>"(Instagram)"</strong> (site e app mobile), com a<br />
+    dica ao passar o mouse: "Ver a postagem do horário no Instagram" (ou "Ver o perfil da<br />
+    <empresa> no Instagram" nas rotas que ainda não têm postagem própria).</li>
+<li><strong>Tempo estimado a pé e de carro</strong> ao lado da distância até a origem ("🚶 ~30 min 🚗 ~4 min").<br />
+    É estimativa a partir da distância em linha reta (+30% de curva; 5 km/h a pé, 40 km/h de<br />
+    carro), calculada no aparelho — a posição não vai a nenhum serviço de rotas. A pé só aparece<br />
+    até 1 h.</li>
+<li><strong>Cabeçalho</strong> mais alto (5,5 → 7 rem) com <strong>uma única imagem de fundo: um mapa de rodovias no<br />
+    estilo do Google Maps</strong> (terra bege, vias e rodovias, parques, mar) com as cidades de Sergipe<br />
+    pinadas, nos temas claro e escuro, e o título agora é <strong>"Sai Que Horas?"</strong>. Os pins ficam só<br />
+<strong>depois do nome</strong> (uma neblina cobre a região do nome). São três composições escolhidas pela<br />
+    largura da tela — largo (≥ 1200 px, 6 pins), médio (≤ 1199 px) e móvel (≤ 520 px, onde só cabem<br />
+    Itabaiana e Aracaju entre o nome e os botões) — todas geradas por <code>scripts/gerar-marca.cjs</code>. O<br />
+    mapa é esquemático (latitude achatada para caber na faixa). O cabeçalho do app Expo não mudou.</li>
 <li><strong>02/10/2026</strong> — <strong>Resumo da lista: próximo carro e distância</strong>. Abaixo do título das partidas<br />
   entrou uma faixa com dois avisos. <strong>"O próximo carro sai em 3 min (18:20)"</strong> atualiza sozinho a<br />
   cada 30 s, respeita o filtro de destino ("…para Lagarto…") e vira "sai amanhã às HH:MM" quando<br />
@@ -253,7 +276,7 @@ pnpm --filter @via-certa/db migrate:dev             # aplica o schema
 cd services/ingest &amp;&amp; uv sync
 uv run ingest carregar-inicial      # carrega os 2.762 horários reais da Coopertalse
 uv run ingest carregar-coagreste    # carrega os 584 horários da Coagreste (dados/coagreste-horarios.json)
-uv run ingest carregar-postagens coopertalse   # link do &quot;(ver)&quot; por rota (dados/coopertalse-postagens.json)
+uv run ingest carregar-postagens coopertalse   # link do &quot;(Instagram)&quot; por rota (dados/coopertalse-postagens.json)
 uv run ingest carregar-postagens coagreste     # idem para a Coagreste
 uv run ingest gerar-embeddings      # gera os embeddings de localidade (autocompletar)
 uv run ingest carregar-coordenadas  # coordenadas dos municípios (IBGE) — botão de localização
@@ -358,6 +381,9 @@ pro histórico detalhado de cada tarefa, achados reais incluídos.</p>
 - <strong>Dados que o painel altera não vêm da ingestão</strong> — Instagram da empresa e edições feitas no<br />
   painel vivem só no banco; a ingestão sozinha não os recria. (Os links das postagens por rota<br />
   são a exceção: moram no git e a carga os reaplica.)<br />
+- <strong>Data na compra de passagem</strong> — o site de vendas da Coopertalse (sistema da AutoRod) não aceita a<br />
+  data pela URL e só vende saídas de Aracaju. Para preencher a data seria preciso um parâmetro de<br />
+  URL novo do lado deles; para as demais cidades, outro canal de venda.<br />
 - <strong>Links de postagem sem rota</strong> — 23 cidades da Coopertalse com link já recebido, mas sem rota no<br />
   banco, em <code>dados/coopertalse-postagens-pendentes.json</code>; e 5 rotas sem link (Moita Bonita e<br />
   Nossa Senhora Aparecida no Coagreste, Pontal/Carro 147 na Coopertalse).</p>
