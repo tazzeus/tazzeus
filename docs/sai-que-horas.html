@@ -33,7 +33,9 @@ empresa). Português do Brasil (produto e código).</p>
 <blockquote>
 <p>🌐 <strong>No ar:</strong> <a href="https://sai-que-horas.vercel.app" target="_blank" rel="noopener noreferrer">https://sai-que-horas.vercel.app</a> — web + painel no Vercel, banco Postgres/pgvector<br />
 na Neon, login Google ativo, instalável como PWA (<a href="#-instalar-como-app-pwa">como instalar no Android e no iPhone</a>). O app<br />
-nativo (Expo) ainda não foi publicado — ver <a href="#-estado-atual-e-pendências">Estado atual e pendências</a>.</p>
+nativo (Expo) ainda não foi publicado — ver <a href="#-estado-atual-e-pend%C3%AAncias">Estado atual e pendências</a>.</p>
+</blockquote>
+<blockquote>
 <p>📖 <strong>A fonte de verdade do projeto é a spec, não este README.</strong> Antes de mudar qualquer coisa,<br />
 leia <code>.specify/memory/constitution.md</code> e<br />
 <code>specs/001-agregador-multiempresa/</code> (<code>spec.md</code>, <code>plan.md</code>,<br />
@@ -45,142 +47,24 @@ improviso em cima de ambiguidade.</p>
 <ul>
 <li><a href="#-novidades-recentes">🆕 Novidades Recentes</a></li>
 <li><a href="#-arquitetura--tecnologias">🚀 Arquitetura &amp; Tecnologias</a></li>
-<li><a href="#-arquitetura-multiempresa-papéis">🏢 Arquitetura Multiempresa (Papéis)</a></li>
+<li><a href="#-arquitetura-multiempresa-pap%C3%A9is">🏢 Arquitetura Multiempresa (Papéis)</a></li>
 <li><a href="#-instalar-como-app-pwa">📲 Instalar como app (PWA)</a></li>
-<li><a href="#-instalação--ambiente">📦 Instalação &amp; Ambiente</a></li>
-<li><a href="#-motor-de-busca-determinístico--vetor-assistivo">🧮 Motor de Busca Determinístico &amp; Vetor Assistivo</a></li>
-<li><a href="#-estrutura-de-diretórios">📂 Estrutura de Diretórios</a></li>
-<li><a href="#️-princípios-de-confiabilidade-constituição">🛡️ Princípios de Confiabilidade (Constituição)</a></li>
-<li><a href="#-estado-atual-e-pendências">🚦 Estado Atual e Pendências</a></li>
-<li><a href="#-licença">📜 Licença</a></li>
+<li><a href="#-instala%C3%A7%C3%A3o--ambiente">📦 Instalação &amp; Ambiente</a></li>
+<li><a href="#-motor-de-busca-determin%C3%ADstico--vetor-assistivo">🧮 Motor de Busca Determinístico &amp; Vetor Assistivo</a></li>
+<li><a href="#-estrutura-de-diret%C3%B3rios">📂 Estrutura de Diretórios</a></li>
+<li><a href="#%EF%B8%8F-princ%C3%ADpios-de-confiabilidade-constitui%C3%A7%C3%A3o">🛡️ Princípios de Confiabilidade (Constituição)</a></li>
+<li><a href="#-estado-atual-e-pend%C3%AAncias">🚦 Estado Atual e Pendências</a></li>
+<li><a href="#-licen%C3%A7a">📜 Licença</a></li>
 </ul>
 <hr />
 <h2 id="-novidades-recentes">🆕 Novidades Recentes</h2>
 <ul>
-<li><strong>02/10/2026</strong> — <strong>"Sai em X min" em cada card e aviso sobre atrasos</strong>. Embaixo do horário de<br />
-<strong>cada</strong> saída futura aparece "Sai em 10 min", "Sai em 1h 30 min" ou <strong>"Sai agora"</strong> (em verde) —<br />
-  antes só o "próximo carro" do topo tinha a contagem. Atualiza sozinho a cada 30 s; na lista de<br />
-  amanhã a conta atravessa a meia-noite ("Sai em 8h 10 min"); as saídas que já foram embora ficam<br />
-  sem o texto. Acima da lista entrou um <strong>aviso discreto</strong>: os horários são os cadastrados pelas<br />
-  empresas e os carros podem atrasar por trânsito, clima ou outros imprevistos — em caso de<br />
-  dúvida, confirmar com a empresa. A distância até a origem e os tempos estimados a pé e de carro<br />
-  continuam como estavam. Só no site; o app mobile (Expo) não mudou.</li>
-<li><strong>02/10/2026</strong> — <strong>Cards mais claros: dias em faixa, carro abaixo da rota e frase centralizada</strong>.<br />
-  Em "Dias", em vez de listar dia a dia, o card mostra a <strong>faixa</strong>: "Todos os dias", "SEG à SÁB",<br />
-  "SEG à SEX" — um dia só aparece como "DOM à DOM", e dias soltos ficam separados ("SEG, QUA à<br />
-  SEX"); lógica e testes em <code>apps/web/src/lib/dias.ts</code>. O <strong>número do carro</strong> vai para uma linha<br />
-  própria logo abaixo da rota (sem parênteses). A frase "Escolha a cidade de origem…" fica<br />
-<strong>centralizada</strong> em telas a partir de 900 px e alinhada à esquerda, na margem dos cartões, em<br />
-  celular e tablet. Só no site; o app mobile (Expo) não mudou.</li>
-<li><strong>02/10/2026</strong> — <strong>Comprar passagem, link do Instagram no nome da empresa e novo cabeçalho com mapa</strong>.</li>
-<li><strong>"Comprar passagem"</strong> (com o ícone de passagem à direita) em <strong>todo card da Coopertalse</strong><br />
-    (inclusive os que já saíram), logo abaixo do nome da empresa. O site de vendas só tem agências em <strong>Aracaju</strong> (Rodoviária Nova e<br />
-    Velha): nas saídas de lá o link já leva <strong>origem, agência e destino</strong> preenchidos<br />
-    (<code>?origem=ARACAJU&amp;codAgencia=&lt;1|2&gt;&amp;destino=&lt;CIDADE&gt;</code>, com a grafia do site para cidades como<br />
-    Glória → "N.S. GLORIA"); nas demais abre o site sem preenchimento. A <strong>data não dá para<br />
-    preencher</strong>: o site sempre abre em "hoje" e a busca exige sessão (POST), então quem compra<br />
-    escolhe a data lá — ver <a href="#-estado-atual-e-pendências">Estado atual e pendências</a>. A Coagreste<br />
-    não vende online e não tem o link. Lógica e testes em <code>apps/web/src/lib/passagem.ts</code>.</li>
-<li><strong>O nome da empresa, em verde, é o link do Instagram</strong>, com o ícone do Instagram à direita —<br />
-    um único link para a postagem do horário (ou para o perfil, nas rotas que ainda não têm<br />
-    postagem própria), com a dica ao passar o mouse: "Ver a postagem do horário no Instagram" (ou<br />
-    "Ver o perfil da <empresa> no Instagram"). Antes era o texto "(ver)", depois "(Instagram)"; o<br />
-    app mobile (Expo) ainda mostra "(Instagram)" em texto.</li>
-<li><strong>Tempo estimado a pé e de carro</strong> ao lado da distância até a origem ("🚶 ~30 min 🚗 ~4 min").<br />
-    É estimativa a partir da distância em linha reta (+30% de curva; 5 km/h a pé, 40 km/h de<br />
-    carro), calculada no aparelho — a posição não vai a nenhum serviço de rotas. A pé só aparece<br />
-    até 1 h.</li>
-<li><strong>Cabeçalho</strong> mais alto (5,5 → 7 rem) com <strong>uma única imagem de fundo: um mapa de rodovias no<br />
-    estilo do Google Maps</strong> (terra bege, vias e rodovias, parques, mar) com as cidades de Sergipe<br />
-    pinadas, nos temas claro e escuro, e o título agora é <strong>"Sai Que Horas?"</strong>. Os pins ficam só<br />
-<strong>depois do nome</strong> (uma neblina cobre a região do nome). São três composições escolhidas pela<br />
-    largura da tela — largo (≥ 1200 px, 6 pins), médio (≤ 1199 px) e móvel (≤ 520 px, onde só cabem<br />
-    Itabaiana e Aracaju entre o nome e os botões) — todas geradas por <code>scripts/gerar-marca.cjs</code>. O<br />
-    mapa é esquemático (latitude achatada para caber na faixa). O cabeçalho do app Expo não mudou.</li>
-<li><strong>02/10/2026</strong> — <strong>Resumo da lista: próximo carro e distância</strong>. Abaixo do título das partidas<br />
-  entrou uma faixa com dois avisos. <strong>"O próximo carro sai em 3 min (18:20)"</strong> atualiza sozinho a<br />
-  cada 30 s, respeita o filtro de destino ("…para Lagarto…") e vira "sai amanhã às HH:MM" quando<br />
-  não há mais saídas hoje. <strong>"Você está a 1,9 km do centro de Aracaju"</strong> só aparece quando há<br />
-  localização e a origem escolhida está a <strong>até 50 km</strong> de você (em metros, de 10 em 10, abaixo de<br />
-  1 km). A posição fica só em memória no aparelho — nunca vai ao servidor. As coordenadas<br />
-  disponíveis são as do centro de cada município (IBGE), por isso o texto diz "centro de" e não<br />
-  "local de embarque"; para isso seria preciso cadastrar a coordenada das paradas. Só web/PWA —<br />
-  o app mobile (Expo) ainda não tem essa faixa.</li>
-<li><strong>02/10/2026</strong> — <strong>Filtro de destino e rodapé de contato na tela pública</strong>. Em cidades hub<br />
-  (Aracaju tem 62 destinos) ficou difícil achar uma rota, então entrou o campo opcional <strong>"Para<br />
-  onde você vai?"</strong>: um combobox de digitar com sugestões (acessível, com setas/Enter/Esc e botão<br />
-  de limpar) que oferece só as cidades alcançáveis a partir da origem e da empresa filtrada,<br />
-  tolerando acento e erro de digitação (mesmo motor <code>sugerirLocalidades</code> do autocompletar, sem<br />
-  chamada ao servidor). Com destino escolhido, a lista usa o motor de busca com destino e <strong>inclui<br />
-  as rotas que só passam pela cidade (via)</strong>, marcadas com "passa por <cidade>"; trocar a origem<br />
-  limpa o filtro. No fim da lista, um <strong>rodapé discreto</strong> ("Desenvolvido por …") com ícones de<br />
-  WhatsApp (mensagem inicial pronta) e Instagram do desenvolvedor.</li>
-<li><strong>02/10/2026</strong> — <strong>Tela pública sem repetição de horário e com o "(ver)" por rota</strong>. Em cidades<br />
-  hub (Aracaju, Itabaiana) o mesmo horário se repetia em vários cards; agora há <strong>um card por<br />
-  horário</strong>, com todos os destinos que saem naquele minuto dentro dele (cada um com carro, via,<br />
-  dias, chegada e empresa próprios). Os cards são distribuídos pela <strong>coluna mais baixa</strong> no<br />
-  momento (estilo masonry, 1/2/3 colunas conforme a largura), sem buracos no layout e mantendo a<br />
-  ordem cronológica; "Já saíram hoje" continua sendo uma seção à parte. O link <strong>"(ver)"</strong> agora<br />
-  leva à postagem do Instagram com os horários <strong>daquela rota</strong> — dado versionado em<br />
-<code>dados/&lt;empresa&gt;-postagens.json</code> (Coopertalse: 49 rotas, Coagreste: 36) e reaplicado em qualquer<br />
-  banco por <code>uv run ingest carregar-postagens &lt;empresa&gt;</code>. Links recebidos de cidades que ainda não<br />
-  têm rota ficam guardados em <code>dados/coopertalse-postagens-pendentes.json</code>. Também entraram: a<br />
-<strong>nova identidade visual</strong> (ícone, splash com mapa, cabeçalho em degradê turquesa — também na<br />
-  abertura do PWA instalado), o <strong>login Google no app mobile</strong> (OAuth + PKCE via navegador do<br />
-  sistema) e o endurecimento de segurança das rotas públicas (cache, limite, CSP, validação no<br />
-  servidor).</li>
-<li><strong>01/10/2026</strong> — <strong>Sistema no ar (Vercel + Neon) e PWA</strong>. Hospedagem decidida: <code>apps/web</code> no Vercel<br />
-  (deploy automático a cada push na <code>main</code>), Postgres com pgvector na Neon, login Google em<br />
-  produção. A Coagreste (40 rotas, 584 partidas, com a fonte rastreada ao site oficial) entrou no<br />
-  banco de produção. PWA instalável (manifest, ícones, service worker que prioriza a rede) e a<br />
-  localização é pedida ao abrir o app (web e mobile; a autorização fica gravada pelo navegador/SO).<br />
-  O app mobile lê a API de <code>EXPO_PUBLIC_API_URL</code> (apontando pro Vercel no <code>eas.json</code>). O projeto<br />
-  passou de pnpm 12 (<code>.exe</code> nativo, bloqueado por Device Guard no Windows) para <strong>pnpm 10.34.6</strong>,<br />
-  JS puro. O <code>demo.apk</code> foi removido por estar desatualizado.</li>
-<li><strong>28/09/2026</strong> — <strong>App mobile: correção de crash e header redesenhado</strong>. Corrigido um crash real<br />
-  ao tocar nos filtros de cidade/empresa (worklet do Reanimated/Gesture Handler chamando função JS<br />
-  sem <code>runOnJS</code>, derrubava o app em release). Além disso: link <code>(ver)</code> pro Instagram/postagem em<br />
-  cada card de horário (paridade com o web); tema claro/escuro (segue o sistema, com alternância<br />
-  manual persistida); lista circular de horários (os que já saíram hoje vão pro fim, sob "Já<br />
-  saíram hoje"); botão "Entrar" com modal de login placeholder (Google via Auth.js ainda não<br />
-  chegou no mobile — só na web); ícone adaptativo do Android corrigido (cortava nas bordas do<br />
-  launcher); header redesenhado no estilo de apps de mobilidade (hero compacto com gradiente,<br />
-  painel de filtros flutuante). Como gerar o APK de demonstração: <code>demo-app/</code>.</li>
-<li><strong>24/09/2026</strong> — <strong>Tela pública refinada</strong> ("Sai que horas?"): filtro por empresa, combo com<br />
-  todas as origens, botões das cidades mais buscadas (contador anônimo, sem dado pessoal) e um<br />
-  botão em destaque com a <strong>cidade da localização do usuário</strong> — a posição é lida e comparada<br />
-<em>no aparelho</em> com as coordenadas dos municípios (IBGE); nunca vai ao servidor. Cada card de<br />
-  horário traz tudo no próprio card: horário grande, rota (<code>Itabaiana - Aracaju</code>), <strong>carro</strong><br />
-  (<code>carro 131</code> ou <code>carro reserva</code>), <strong>via</strong>, dias de operação, terminal de chegada e, à direita,<br />
-  a empresa com o link <code>(ver)</code> pro Instagram — ou direto pra postagem dos horários da rota,<br />
-  quando cadastrada.</li>
-<li><strong>24/09/2026</strong> — <strong>Painel mais completo</strong>: o gerente faz CRUD de rotas e horários (inclusive<br />
-  edição do horário); todo horário novo ou editado exige <strong>número do carro ou "carro reserva"</strong>;<br />
-  via (até 3 localidades) e terminal de chegada opcionais; o admin da empresa <strong>bloqueia,<br />
-  inativa, reativa ou exclui gerentes</strong> (o acesso cai na hora); o painel inicial mostra<br />
-<strong>indicadores</strong> — do site inteiro para o super admin, da própria empresa para os demais.</li>
-<li><strong>24/09/2026</strong> — Login de desenvolvimento (só em <code>NODE_ENV=development</code> com<br />
-<code>AUTH_DEV_LOGIN=true</code>) para testar o painel sem credencial do Google.</li>
-<li><strong>24/09/2026</strong> — CI completo no GitHub Actions: Postgres real (<code>pgvector/pgvector:pg16</code>) como<br />
-  serviço, migrations, carga inicial da Coopertalse e a suíte de testes inteira rodando a cada<br />
-  push/PR — nada de mock. Corrigido no processo: faltava <code>packageManager</code> fixado no<br />
-<code>package.json</code> da raiz, o que quebrava o <code>pnpm/action-setup</code> silenciosamente.</li>
-<li><strong>23/09/2026</strong> — <strong>Backlog completo da spec 001 fechado (T001–T060)</strong>: autocompletar de cidade<br />
-  reforçado por banco vetorial (<code>pgvector</code> + embeddings locais via <code>fastembed</code>, sem depender de<br />
-  chave de API — ver <a href="#-motor-de-busca-determinístico--vetor-assistivo">Motor de Busca</a>); app<br />
-  mobile (Expo/React Native) com a mesma busca pública do web, com gestos e animação<br />
-  (Reanimated + Gesture Handler); tema claro/escuro persistido, ícones Lucide e fonte Ubuntu em<br />
-  toda a área pública e no painel; regras de ESLint protegendo as fronteiras de arquitetura entre<br />
-<code>apps/web</code>, <code>apps/mobile</code> e <code>packages/engine</code>.</li>
-<li><strong>23/09/2026</strong> — Fase 2 (multiempresa): login Google-only (Auth.js v5), camada de permissão por<br />
-  papel + empresa, painéis completos (empresas, usuários, rotas e horários) com isolamento entre<br />
-  empresas testado como caso de segurança. No caminho, dois achados sérios corrigidos: o<br />
-  Next.js 16 renomeou <code>middleware.ts</code> para <code>proxy.ts</code> (a proteção do painel silenciosamente não<br />
-  rodava até a correção), e uma tela de edição lia o banco direto sem checar permissão nenhuma.</li>
-<li><strong>23/09/2026</strong> — Fundação: monorepo pnpm criado, motor de busca (<code>packages/engine</code>) herdado sem<br />
-  reescrever a lógica, carga inicial dos <strong>2.762 horários reais</strong> da Coopertalse no Postgres, API<br />
-  pública (<code>/api/snapshot</code>) e tela de busca por cidade de origem.</li>
+<li><strong>07/10/2026</strong> — <strong>Avisos de saída por notificação push, e celular mais prático</strong>. Cada card ganhou um sininho para ser avisado por notificação do sistema antes da saída (no horário, 10, 15 ou 30 min), mesmo com o app fechado. No celular, a página abre na lista de partidas, com seta flutuante para voltar ao topo, e cards com 4 ou mais cidades ficam em uma coluna. <a href="sai-que-horas-novidades.html#07102026--avisos-de-sa%C3%ADda-por-notifica%C3%A7%C3%A3o-push-e-celular-mais-pr%C3%A1tico">Detalhes</a></li>
+<li><strong>02/10/2026</strong> — <strong>"Sai em X min" em cada card e aviso sobre atrasos</strong>. Cada saída mostra "Sai em 10 min" (ou "Sai agora", em verde), atualizado a cada 30 s, e acima da lista há um aviso de que os horários são os das empresas e os carros podem atrasar. <a href="sai-que-horas-novidades.html#02102026--sai-em-x-min-em-cada-card-e-aviso-sobre-atrasos">Detalhes</a></li>
+<li><strong>02/10/2026</strong> — <strong>Cards mais claros: dias em faixa, carro abaixo da rota e frase centralizada</strong>. Os dias aparecem em faixa ("Todos os dias", "SEG à SÁB"), o número do carro vai para uma linha própria abaixo da rota e a frase de boas-vindas fica centralizada em telas largas. <a href="sai-que-horas-novidades.html#02102026--cards-mais-claros-dias-em-faixa-carro-abaixo-da-rota-e-frase-centralizada">Detalhes</a></li>
+<li><strong>02/10/2026</strong> — <strong>Comprar passagem, link do Instagram no nome da empresa e novo cabeçalho com mapa</strong>. Os cards da Coopertalse ganharam "Comprar passagem" (em Aracaju, já com origem, agência e destino preenchidos), o nome da empresa leva ao Instagram e o cabeçalho ganhou um mapa estilizado de Sergipe. <a href="sai-que-horas-novidades.html#02102026--comprar-passagem-link-do-instagram-no-nome-da-empresa-e-novo-cabe%C3%A7alho-com-mapa">Detalhes</a></li>
 </ul>
+<p>👉 <strong><a href="sai-que-horas-novidades.html">Novidades anteriores</a></strong> — histórico completo de 23/09 a 02/10/2026.</p>
 <hr />
 <h2 id="-arquitetura--tecnologias">🚀 Arquitetura &amp; Tecnologias</h2>
 <p>O projeto é um monorepo <strong>pnpm</strong>, com a regra de negócio de busca vivendo <strong>um único lugar</strong><br />
@@ -188,19 +72,19 @@ improviso em cima de ambiguidade.</p>
 reimplementa a busca por conta própria:</p>
 <ol>
 <li>🖥️ <strong><code>apps/web</code></strong> — Next.js 16 (App Router, TypeScript estrito). Serve a página pública de<br />
-   busca <strong>e</strong> o painel administrativo (multiempresa). Com servidor de verdade (não é estático):<br />
-   permissão por papel/empresa e edição de dado sem deploy exigem isso.</li>
+busca <strong>e</strong> o painel administrativo (multiempresa). Com servidor de verdade (não é estático):<br />
+permissão por papel/empresa e edição de dado sem deploy exigem isso.</li>
 <li>📱 <strong><code>apps/mobile</code></strong> — Expo/React Native. Mesma busca pública do web (<code>packages/engine</code> +<br />
 <code>GET /api/snapshot</code>), com login Google (OAuth + PKCE pelo navegador do sistema) — os painéis<br />
-   administrativos ficam só na web por enquanto.</li>
+administrativos ficam só na web por enquanto.</li>
 <li>🗄️ <strong>Postgres + pgvector</strong> (via Prisma) — fonte de verdade dos dados: empresas, usuários,<br />
-   localidades, rotas, horários e os embeddings de localidade.</li>
+localidades, rotas, horários e os embeddings de localidade.</li>
 <li>🐍 <strong><code>services/ingest</code></strong> (Python 3.14, <code>uv</code>) — só ingestão em lote, nunca serve API nem<br />
-   reimplementa busca: carga inicial do snapshot herdado da Coopertalse, horários da Coagreste,<br />
-   links das postagens do Instagram por rota, geração dos embeddings de localidade e coordenadas<br />
-   dos municípios (IBGE).</li>
+reimplementa busca: carga inicial do snapshot herdado da Coopertalse, horários da Coagreste,<br />
+links das postagens do Instagram por rota, geração dos embeddings de localidade e coordenadas<br />
+dos municípios (IBGE).</li>
 <li>🔐 <strong>Auth.js v5</strong> — login <strong>só Google</strong>, sem conta com senha própria, para a área privada<br />
-   (super admin / admin de empresa / gerente de empresa).</li>
+(super admin / admin de empresa / gerente de empresa).</li>
 </ol>
 <hr />
 <h2 id="-arquitetura-multiempresa-papéis">🏢 Arquitetura Multiempresa (Papéis)</h2>
@@ -244,8 +128,8 @@ pela loja</strong> (Play Store/App Store). Em <a href="https://sai-que-horas.ver
 <ol>
 <li>Abra o site no <strong>Chrome</strong>.</li>
 <li>Toque no menu <strong>⋮</strong> (canto superior direito) → <strong>Instalar app</strong> (em alguns aparelhos aparece<br />
-   como <strong>Adicionar à tela inicial</strong>). Se o Chrome mostrar o aviso "Instalar Sai que horas?",<br />
-   pode tocar direto nele.</li>
+como <strong>Adicionar à tela inicial</strong>). Se o Chrome mostrar o aviso "Instalar Sai que horas?",<br />
+pode tocar direto nele.</li>
 <li>Confirme em <strong>Instalar</strong>. O ícone aparece na tela inicial e na gaveta de apps.</li>
 </ol>
 <h3 id="iphone--ipad-safari">iPhone / iPad (Safari)</h3>
@@ -259,12 +143,21 @@ pela loja</strong> (Play Store/App Store). Em <a href="https://sai-que-horas.ver
 <h3 id="dicas">Dicas</h3>
 <ul>
 <li>Ao abrir o app, ele pede a <strong>localização</strong> para sugerir a sua cidade de origem; a posição é<br />
-  comparada só no aparelho e nunca vai ao servidor. A escolha fica gravada no navegador/sistema.</li>
+comparada só no aparelho e nunca vai ao servidor. A escolha fica gravada no navegador/sistema.</li>
 <li>As atualizações chegam sozinhas: o app prioriza a rede, então abrir com internet já traz os<br />
-  horários novos. Sem internet, ele mostra o que estiver em cache.</li>
+horários novos. Sem internet, ele mostra o que estiver em cache.</li>
 <li>Para desinstalar, é como qualquer app: pressione e segure o ícone e remova (no iPhone,<br />
 <strong>Remover app</strong>).</li>
 <li>Instalar não exige o app nativo (Expo), que ainda não foi publicado.</li>
+</ul>
+<h3 id="-avisos-de-saída-notificação-push">🔔 Avisos de saída (notificação push)</h3>
+<p>Cada card de horário tem um <strong>sininho</strong>: a pessoa escolhe a cidade (quando o card junta várias),<br />
+quanto antes avisar (no horário, 10, 15 ou 30 min) e se vale só hoje/amanhã ou todos os dias. A<br />
+notificação chega pelo sistema, mesmo com o app fechado. No iPhone só funciona com o site instalado<br />
+na Tela de Início. Depois de ativado, o sininho fica azul e o card mostra "Aviso às HH:MM".</p>
+<ul>
+<li><strong>Privacidade:</strong> o servidor guarda só a assinatura push do navegador e a escolha — sem conta, sem localização. "Só hoje" some depois de enviado; assinatura<br />
+expirada apaga os avisos do aparelho.</li>
 </ul>
 <hr />
 <h2 id="-instalação--ambiente">📦 Instalação &amp; Ambiente</h2>
@@ -299,14 +192,15 @@ uv run ingest gerar-embeddings      # gera os embeddings de localidade (autocomp
 uv run ingest carregar-coordenadas  # coordenadas dos municípios (IBGE) — botão de localização
 cd ..
 
-pnpm --filter @via-certa/web dev    # sobe em http://localhost:3000
-</code></pre>
+pnpm --filter @via-certa/web dev    # sobe em http://localhost:3000</code></pre>
 <blockquote>
 <p>🧪 <strong>Testar o painel sem Google:</strong> em <code>apps/web/.env.local</code> ponha <code>AUTH_DEV_LOGIN="true"</code> e rode<br />
 <code>pnpm --filter @via-certa/db seed:dev</code> (cria/atualiza três usuários fixos — <code>super@dev.local</code>,<br />
 <code>admin@dev.local</code>, <code>gerente@dev.local</code>, um de cada papel, o admin/gerente já vinculados à<br />
 Coopertalse). A tela <code>/entrar</code> ganha um campo de e-mail que aceita qualquer um dos três (só em<br />
 desenvolvimento local — em produção esse caminho não existe).</p>
+</blockquote>
+<blockquote>
 <p>🔑 <strong>Login Google em desenvolvimento:</strong> crie um "Web application" em<br />
 <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener noreferrer">Google Cloud Console</a> (redirect URI<br />
 <code>http://localhost:3000/api/auth/callback/google</code>) e cole em <code>apps/web/.env.local</code><br />
@@ -314,6 +208,8 @@ desenvolvimento local — em produção esse caminho não existe).</p>
 fica nas variáveis de ambiente do Vercel, com o redirect <code>https://&lt;domínio&gt;/api/auth/callback/google</code>.<br />
 O primeiro super admin de um banco novo é inserido à mão em <code>Usuario</code> (<code>papel = 'SUPER_ADMIN'</code>,<br />
 <code>empresaId</code> nulo); os demais usuários o painel cadastra.</p>
+</blockquote>
+<blockquote>
 <p>💾 <strong>Levar o banco local de uma máquina pra outra</strong> (cadastro real de empresa/usuário, Instagram,<br />
 rotas/horários editados pelo painel — nada disso é gerado pela carga inicial nem entra no git):<br />
 <code>pnpm --filter @via-certa/db backup</code> grava <code>db/backups/viacerta-&lt;data&gt;.dump</code> (fora do git — é<br />
@@ -330,11 +226,11 @@ até a fonte sempre visível (PDF da empresa, post transcrito, ou "informado pel
 portal"). Três garantias centrais em <code>packages/engine</code>:</p>
 <ul>
 <li><strong><code>agoraEmMaceio</code></strong> — único ponto que toca fuso horário (<code>America/Maceio</code>), independente do<br />
-  fuso do aparelho de quem está buscando.</li>
+fuso do aparelho de quem está buscando.</li>
 <li><strong>Dia efetivo e feriado</strong> — em feriado, a grade vira a de domingo automaticamente, sempre com<br />
-  aviso; a empresa pode sobrescrever isso quando informa a regra própria.</li>
+aviso; a empresa pode sobrescrever isso quando informa a regra própria.</li>
 <li><strong><code>sugerirLocalidades</code></strong> — autocompletar por trigrama (tolera erro de digitação, acento e<br />
-  apelido) <strong>sem depender de banco vetorial nenhum</strong> — funciona sozinho.</li>
+apelido) <strong>sem depender de banco vetorial nenhum</strong> — funciona sozinho.</li>
 </ul>
 <p>O banco vetorial (<code>pgvector</code> + <code>paraphrase-multilingual-MiniLM-L12-v2</code> rodando local via<br />
 <code>fastembed</code>/ONNX, sem chave de API) só <strong>reforça</strong> esse autocompletar quando a busca por trigrama<br />
@@ -373,14 +269,14 @@ demo-app/       Como gerar o APK de release do mobile (o .apk em si não é vers
 <ul>
 <li><strong>A fonte é sagrada</strong> — nenhum horário aparece sem rastro até a origem; nada é estimado.</li>
 <li><strong>Isolamento entre empresas desde o dia 1</strong> — vazamento de dado entre empresas é bug de<br />
-  segurança, testado como tal, não só de produto.</li>
+segurança, testado como tal, não só de produto.</li>
 <li><strong>Papéis de menor privilégio</strong> — toda rota privada verifica papel <strong>e</strong> empresa, nunca só um<br />
-  dos dois.</li>
+dos dois.</li>
 <li><strong>Vetor é assistivo, nunca autoridade</strong> — quem decide o resultado da busca é sempre o motor<br />
-  determinístico.</li>
+determinístico.</li>
 <li><strong>Spec-driven, sem TDD obrigatório</strong> — spec → plano → tarefas → código; ambiguidade vira<br />
-  pergunta ao dono do produto, nunca suposição no código. Teste automatizado é bem-vindo onde<br />
-  agrega valor, não é pré-requisito de tarefa.</li>
+pergunta ao dono do produto, nunca suposição no código. Teste automatizado é bem-vindo onde<br />
+agrega valor, não é pré-requisito de tarefa.</li>
 </ul>
 <hr />
 <h2 id="-estado-atual-e-pendências">🚦 Estado Atual e Pendências</h2>
@@ -388,26 +284,27 @@ demo-app/       Como gerar o APK de release do mobile (o .apk em si não é vers
 vetor, CI) e refino da tela pública/painel (T070–T071 e ajustes seguintes) — ver <code>specs/001-agregador-multiempresa/tasks.md</code><br />
 pro histórico detalhado de cada tarefa, achados reais incluídos.</p>
 <p>✅ <strong>Em produção:</strong> hospedagem (Vercel + Neon), login Google, PWA, Coopertalse e Coagreste.</p>
-<p>Em aberto:<br />
-- <strong>App nativo (Expo)</strong> — configurado (<code>apps/mobile/eas.json</code>, API via <code>EXPO_PUBLIC_API_URL</code>), mas o<br />
-  APK novo ainda não foi gerado nem publicado (T062). Rodar <code>eas build</code> <strong>dentro de <code>apps/mobile</code></strong>.<br />
-- <strong>Painel no mobile</strong> — o login Google do app já existe (OAuth + PKCE), mas o painel<br />
-  administrativo continua exclusivo da web.<br />
-- <strong>Deploy via GitHub Actions (T061)</strong> — o Vercel já publica a cada push na <code>main</code>; o <code>deploy.yml</code><br />
-  próprio só se justifica se for preciso rodar migrations automaticamente no deploy.<br />
-- <strong>Dados que o painel altera não vêm da ingestão</strong> — Instagram da empresa e edições feitas no<br />
-  painel vivem só no banco; a ingestão sozinha não os recria. (Os links das postagens por rota<br />
-  são a exceção: moram no git e a carga os reaplica.)<br />
-- <strong>Data na compra de passagem</strong> — o site de vendas da Coopertalse (sistema da AutoRod) não aceita a<br />
-  data pela URL e só vende saídas de Aracaju. Para preencher a data seria preciso um parâmetro de<br />
-  URL novo do lado deles; para as demais cidades, outro canal de venda.<br />
-- <strong>Links de postagem sem rota</strong> — 23 cidades da Coopertalse com link já recebido, mas sem rota no<br />
-  banco, em <code>dados/coopertalse-postagens-pendentes.json</code>; e 5 rotas sem link (Moita Bonita e<br />
-  Nossa Senhora Aparecida no Coagreste, Pontal/Carro 147 na Coopertalse).</p>
+<p>Em aberto:</p>
+<ul>
+<li><strong>App nativo (Expo)</strong> — configurado (<code>apps/mobile/eas.json</code>, API via <code>EXPO_PUBLIC_API_URL</code>), mas o<br />
+APK novo ainda não foi gerado nem publicado (T062). Rodar <code>eas build</code> <strong>dentro de <code>apps/mobile</code></strong>.</li>
+<li><strong>Painel no mobile</strong> — o login Google do app já existe (OAuth + PKCE), mas o painel<br />
+administrativo continua exclusivo da web.</li>
+<li><strong>Deploy via GitHub Actions (T061)</strong> — o Vercel já publica a cada push na <code>main</code>; o <code>deploy.yml</code><br />
+próprio só se justifica se for preciso rodar migrations automaticamente no deploy.</li>
+<li><strong>Dados que o painel altera não vêm da ingestão</strong> — Instagram da empresa e edições feitas no<br />
+painel vivem só no banco; a ingestão sozinha não os recria. (Os links das postagens por rota<br />
+são a exceção: moram no git e a carga os reaplica.)</li>
+<li><strong>Data na compra de passagem</strong> — o site de vendas da Coopertalse (sistema da AutoRod) não aceita a<br />
+data pela URL e só vende saídas de Aracaju. Para preencher a data seria preciso um parâmetro de<br />
+URL novo do lado deles; para as demais cidades, outro canal de venda.</li>
+<li><strong>Links de postagem sem rota</strong> — 23 cidades da Coopertalse com link já recebido, mas sem rota no<br />
+banco, em <code>dados/coopertalse-postagens-pendentes.json</code>; e 5 rotas sem link (Moita Bonita e<br />
+Nossa Senhora Aparecida no Coagreste, Pontal/Carro 147 na Coopertalse).</li>
+</ul>
 <hr />
 <h2 id="-licença">📜 Licença</h2>
-<p>Software proprietário — <strong>todos os direitos reservados</strong>. Ver <code>LICENSE</code>. Nenhuma parte deste repositório pode ser copiada, redistribuída ou usada para criar obras derivadas sem autorização prévia e por escrito do autor.</p>
-  </article>
+<p>Software proprietário — <strong>todos os direitos reservados</strong>. Ver <code>LICENSE</code>. Nenhuma parte deste repositório pode ser copiada, redistribuída ou usada para criar obras derivadas sem autorização prévia e por escrito do autor.</p>  </article>
 </main>
 </body>
 </html>
