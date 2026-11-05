@@ -7,19 +7,25 @@ Desenvolvedor de Software focado em sistemas, plataformas escaláveis e engenhar
 ### 🚀 Projeto Open-Source em Destaque
 - 📦 **[gerar-fluxograma](https://www.npmjs.com/package/gerar-fluxograma)** — Compilador CLI oficial no NPM para geração de fluxogramas BPMN interativos e animados em SVG puro com Tailwind CSS, projetado para desenvolvedores e agentes de IA.
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/gerar-fluxograma">
+    <img src="docs/screenshots/gerar-fluxograma.png" width="700" alt="Demonstração do Compilador BPMN - gerar-fluxograma">
+  </a>
+</p>
+
 ---
 
 ### 💼 Projetos em Produção (Portfólio Corporativo)
 
-| Projeto | Domínio / Solução | Stack Tecnológica | Status | README |
-| :--- | :--- | :--- | :--- | :--- |
-| **VIG-LAN** | Sistema autônomo de monitoramento e inventário contínuo de rede local (estilo Nagios/Zabbix) operando 24/7 sem privilégios admin via Win32 API, com mapa topológico interativo (React Flow), fingerprinting de dispositivos, central de intrusos e firewall integrado | Python 3.12, FastAPI, SQLite, React, TypeScript, React Flow, Vite, Win32 API (`iphlpapi`), WinSW | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/vig-lan.html) |
-| **Sai que horas?** | Agregador de horários de transporte intermunicipal de Sergipe, com painel para cada empresa administrar a própria grade | Next.js, TypeScript, PostgreSQL (pgvector), Expo/React Native, Python | [🌐 No ar](https://sai-que-horas.vercel.app) · `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/sai-que-horas.html) |
-| **Co-Trader** | Plataforma de análise quantitativa, triagens de mercado e backtesting estatístico | Python, Pandas, FastAPI, SQLite | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/co-trader.html) |
-| **Bora Treinar** | Plataforma de gestão de treinos de alta performance | React Native, TypeScript, Node.js | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/bora-treinar.html) |
-| **Casa 3D** | Modelagem arquitetônica interativa 3D de residência a partir de planta baixa, com tour em primeira pessoa (walkthrough com detecção de colisões), interações dinâmicas de esquadrias e bundle autônomo em arquivo único | Three.js, WebGL, JavaScript (ES Modules), HTML5 Canvas, Node.js | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/casa-3d.html) |
-| **Estilingue** | Plataforma didática interativa de tiro esportivo (*slingshot*) com 16 sessões, 53 animações (40 cenas 3D interativas em WebGL com órbita e fallback em Canvas), suporte bilíngue (PT-BR/EN) e execução offline em arquivo único | Three.js, WebGL, Canvas API, JavaScript (Vanilla ES Modules), HTML5, CSS3, SDD | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/estilingue.html) |
-| **Otimizar TV Box** | Launcher nativo para Android TV (Kotlin) e suíte de otimização de performance via ADB (tuning de kernel/RAM sem root) para Smart Box com hardware restrito, eliminando travamentos e latência do controle remoto | Android TV, Kotlin, Android SDK, Gradle, ADB, Shell Script / PowerShell, Open-Meteo API | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/otimizar-tv-box.html) |
+| Projeto | Demonstração | Domínio / Solução | Stack Tecnológica | Status | README |
+| :--- | :---: | :--- | :--- | :--- | :--- |
+| **VIG-LAN** | <a href="https://tazzeus.github.io/tazzeus/vig-lan.html"><img src="docs/screenshots/vig-lan.png" width="220" alt="Tela do VIG-LAN"></a> | Sistema autônomo de monitoramento e inventário contínuo de rede local (estilo Nagios/Zabbix) operando 24/7 sem privilégios admin via Win32 API, com mapa topológico interativo (React Flow), fingerprinting de dispositivos, central de intrusos e firewall integrado | Python 3.12, FastAPI, SQLite, React, TypeScript, React Flow, Vite, Win32 API (`iphlpapi`), WinSW | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/vig-lan.html) |
+| **Sai que horas?** | <a href="https://tazzeus.github.io/tazzeus/sai-que-horas.html"><img src="docs/screenshots/sai-que-horas.png" width="220" alt="Tela do Sai que horas?"></a> | Agregador de horários de transporte intermunicipal de Sergipe, com painel para cada empresa administrar a própria grade | Next.js, TypeScript, PostgreSQL (pgvector), Expo/React Native, Python | [🌐 No ar](https://sai-que-horas.vercel.app) · `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/sai-que-horas.html) |
+| **Co-Trader** | <a href="https://tazzeus.github.io/tazzeus/co-trader.html"><img src="docs/screenshots/co-trader.png" width="220" alt="Tela do Co-Trader"></a> | Plataforma de análise quantitativa, triagens de mercado e backtesting estatístico | Python, Pandas, FastAPI, SQLite | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/co-trader.html) |
+| **Bora Treinar** | <a href="https://tazzeus.github.io/tazzeus/bora-treinar.html"><img src="docs/screenshots/bora-treinar.png" width="220" alt="Telas do Bora Treinar"></a> | Plataforma de gestão de treinos de alta performance | React Native, TypeScript, Node.js | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/bora-treinar.html) |
+| **Casa 3D** | <a href="https://tazzeus.github.io/tazzeus/casa-3d.html"><img src="docs/screenshots/casa-3d.png" width="220" alt="Tela do Casa 3D"></a> | Modelagem arquitetônica interativa 3D de residência a partir de planta baixa, com tour em primeira pessoa (walkthrough com detecção de colisões), interações dinâmicas de esquadrias e bundle autônomo em arquivo único | Three.js, WebGL, JavaScript (ES Modules), HTML5 Canvas, Node.js | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/casa-3d.html) |
+| **Estilingue** | <a href="https://tazzeus.github.io/tazzeus/estilingue.html"><img src="docs/screenshots/estilingue.png" width="220" alt="Tela do Estilingue Esportivo"></a> | Plataforma didática interativa de tiro esportivo (*slingshot*) com 16 sessões, 53 animações (40 cenas 3D interativas em WebGL com órbita e fallback em Canvas), suporte bilíngue (PT-BR/EN) e execução offline em arquivo único | Three.js, WebGL, Canvas API, JavaScript (Vanilla ES Modules), HTML5, CSS3, SDD | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/estilingue.html) |
+| **Otimizar TV Box** | <a href="https://tazzeus.github.io/tazzeus/otimizar-tv-box.html"><img src="docs/screenshots/otimizar-tv-box.png" width="220" alt="Tela do Otimizar TV Box"></a> | Launcher nativo para Android TV (Kotlin) e suíte de otimização de performance via ADB (tuning de kernel/RAM sem root) para Smart Box com hardware restrito, eliminando travamentos e latência do controle remoto | Android TV, Kotlin, Android SDK, Gradle, ADB, Shell Script / PowerShell, Open-Meteo API | `[🔒 Código Proprietário]` | [📄 Ver](https://tazzeus.github.io/tazzeus/otimizar-tv-box.html) |
 
 ---
 
