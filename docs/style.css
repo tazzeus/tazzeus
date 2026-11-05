@@ -143,3 +143,101 @@ main {
 .conteudo ul, .conteudo ol {
   padding-left: 1.4em;
 }
+/* Vitrine Visual & Galeria de Telas dos Projetos */
+.vitrine {
+  margin: 2em 0 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.vitrine-destaque {
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.vitrine-destaque:hover {
+  border-color: #58a6ff;
+  transform: translateY(-2px);
+}
+
+.vitrine-destaque img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid var(--borda);
+}
+
+.vitrine-info {
+  padding: 16px 20px;
+}
+
+.vitrine-info h4 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+  color: #58a6ff;
+}
+
+.vitrine-info p {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.vitrine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+  margin: 0;
+}
+
+.vitrine-card {
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.vitrine-card:hover {
+  border-color: #58a6ff;
+  transform: translateY(-2px);
+}
+
+.vitrine-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid var(--borda);
+}
+
+.vitrine-card .vitrine-info {
+  padding: 14px 16px;
+  flex: 1;
+}
+
+.vitrine-card .vitrine-info h4 {
+  font-size: 1rem;
+}
+
+.vitrine-tag {
+  display: inline-block;
+  background: rgba(88, 166, 255, 0.12);
+  color: #58a6ff;
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}

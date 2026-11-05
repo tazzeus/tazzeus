@@ -7,12 +7,6 @@ Desenvolvedor de Software focado em sistemas, plataformas escaláveis e engenhar
 ### 🚀 Projeto Open-Source em Destaque
 - 📦 **[gerar-fluxograma](https://www.npmjs.com/package/gerar-fluxograma)** — Compilador CLI oficial no NPM para geração de fluxogramas BPMN interativos e animados em SVG puro com Tailwind CSS, projetado para desenvolvedores e agentes de IA.
 
-<p align="center">
-  <a href="https://www.npmjs.com/package/gerar-fluxograma">
-    <img src="docs/screenshots/gerar-fluxograma.png" width="700" alt="Demonstração do Compilador BPMN - gerar-fluxograma">
-  </a>
-</p>
-
 ---
 
 ### 💼 Projetos em Produção (Portfólio Corporativo)
