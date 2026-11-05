@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa 3D — README</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <a href="https://github.com/tazzeus" class="voltar">&larr; tazzeus</a>
+  <span class="badge">Somente leitura &middot; código-fonte privado</span>
+</div>
+<main>
+  <header class="cabecalho">
+    <h1>Casa 3D</h1>
+    <p class="subtitulo">Modelagem arquitetônica interativa 3D com Three.js e tour virtual no navegador</p>
+  </header>
+  <article class="conteudo">
+<h1>Casa 3D</h1>
+<p>Modelo 3D da casa a partir da planta baixa do pavimento térreo
+(<a href="docs/planta-baixa-terreo.jpg">docs/planta-baixa-terreo.jpg</a>), feito com Three.js no navegador.</p>
+<h2>Como abrir</h2>
+<pre><code class="language-bash">node serve.mjs
+</code></pre>
+<p>Depois acesse <a href="http://localhost:5173">http://localhost:5173</a>. O Three.js é carregado da CDN jsDelivr, então é preciso estar com internet.</p>
+<h3>Arquivo único</h3>
+<p><a href="casa-3d.html">casa-3d.html</a> é o projeto inteiro num arquivo só (cerca de 2 MB): abre com dois cliques, direto do disco, sem servidor e sem internet, e pode ser enviado para outras pessoas. Ele tem dentro o código de <code>src/</code>, o Three.js e a imagem da planta. Depois de mudar o projeto, gere de novo (precisa de internet só nessa hora, para baixar o Three.js):</p>
+<pre><code class="language-bash">node scripts/gerar-html.mjs
+</code></pre>
+<h2>Onde estão as coisas</h2>
+<ul>
+<li><a href="src/planta.js">src/planta.js</a>: paredes, portas, janelas e cômodos em metros, transcritos da planta. Para corrigir uma medida, é aqui.</li>
+<li><a href="src/moveis.js">src/moveis.js</a>: móveis em formas simples e onde cada um fica.</li>
+<li><a href="src/main.js">src/main.js</a>: monta a cena 3D a partir desses dados.</li>
+<li><a href="scripts/gerar-html.mjs">scripts/gerar-html.mjs</a>: gera o arquivo único <a href="casa-3d.html">casa-3d.html</a>.</li>
+</ul>
+<p>No visualizador, os botões de &quot;Ir para o cômodo&quot; enquadram cada cômodo (e o quintal) e os de 90° giram o modelo para a esquerda ou para a direita; o botão esquerdo do mouse gira, o botão do meio arrasta a vista e a roda aproxima. Um clique numa porta, janela de correr ou cortina abre ou fecha só ela, e cada botão de &quot;Abrir ou fechar todas&quot; (portas, janelas, cortinas e as telhas soltas sobre as caixas d&#39;água) faz o contrário do estado atual: com alguma peça daquele tipo aberta, fecha todas; com todas fechadas, abre todas. O texto do botão diz o que o próximo clique faz. As janelas começam fechadas; aberta, uma folha corre por cima da outra (no vidro da cozinha para a A. vent. e nas janelas do Quarto casal e do W.C. da suíte, a do lado do início do vão). A opção &quot;Teto&quot; mostra o forro, o telhado e as caixas d&#39;água, que começam ocultos para dar para ver dentro dos cômodos. A opção &quot;Nomes&quot; mostra o nome e a área de cada cômodo no chão; ela começa desmarcada.</p>
+<p>O botão &quot;Andar pela casa&quot; põe a vista na altura dos olhos, sempre na calçada, a 3 m do portão da garagem e olhando para a casa, e liga o teto. Para entrar, clique numa folha do portão. W A S D ou as setas andam (as setas para os lados viram), Shift corre, arrastar o mouse olha em volta, a roda do mouse aproxima ou afasta (sem sair do lugar) e um clique numa porta, janela ou cortina abre ou fecha. Enquanto o passeio está ligado, o botão fica em destaque e vira &quot;Sair do passeio&quot;. Paredes, janelas e portas fechadas barram o caminho; os móveis não. Esc ou o mesmo botão voltam à vista de antes.</p>
+<p>Como no Street View, dá para arrastar o bonequinho que fica ao lado de &quot;Andar pela casa&quot; e soltá-lo sobre um cômodo (ou na calçada): o passeio começa ali, olhando na direção da vista atual. Durante o arraste, ele mostra o nome do cômodo sob o cursor; o piso é achado mesmo com o teto à mostra.</p>
+<p>No celular, o menu começa oculto (botão &quot;☰ Menu&quot; no alto) e, aberto, fica preso embaixo, até metade da tela; com o celular deitado, fica do lado esquerdo. Ele se recolhe sozinho ao ir para um cômodo ou começar o passeio. Um dedo gira o modelo, dois dedos arrastam e aproximam, e um toque numa porta, janela ou cortina abre ou fecha; com o menu oculto, o nome do que foi tocado aparece num aviso no alto. No passeio, o joystick no canto de baixo anda (quanto mais longe do centro, mais rápido), arrastar o dedo olha em volta (como com o mouse, a vista vira para o lado do arraste), a pinça aproxima e o botão &quot;Sair do passeio&quot; no alto volta à vista de antes. Em tela em pé, o ângulo de visão abre mais na vertical, para caber de lado quase o mesmo que numa tela deitada.</p>
+<ul>
+<li><a href="docs/">docs/</a>: planta original; fotos e vídeos de cada cômodo em <a href="docs/referencias/">docs/referencias/</a>.</li>
+</ul>
+<h2>Confirmado com o morador</h2>
+<ul>
+<li><p>Entre a cozinha e a sala não há parede: a abertura vai da parede do Quarto casal até a da área de serviço e até o teto, sem viga.</p>
+</li>
+<li><p>Sala de estar/jantar (<a href="docs/referencias/sala/">fotos e vídeo</a>):</p>
+<ul>
+<li>Porta de entrada de madeira escura com almofadas horizontais, que abre para dentro com a dobradiça do lado do Quarto casal e fica aberta até perto do sofá; soleira de granito preto.</li>
+<li>Sofá retrátil de três lugares, azul-marinho com almofadas verde-água, na parede do Quarto casal, junto da porta.</li>
+<li>Rack off-white com painel de TV, faixa de madeira e torre de prateleiras na parede da circulação, a cerca de 0,80 m do canto da porta.</li>
+<li>Piso de porcelanato cinza claro, paredes brancas. O forro rebaixado com fita de LED não foi modelado. As medidas e posições dos móveis são estimadas.</li>
+</ul>
+</li>
+<li><p>Cozinha (<a href="docs/referencias/cozinha/">fotos e vídeo</a>):</p>
+<ul>
+<li>Balcão americano de granito preto que continua a bancada da pia, com uma perna de granito até o chão no meio da abertura e um trecho mais raso do lado da sala, preso na parede, até a parede da circulação. Três pendentes de vidro fosco sobre o balcão.</li>
+<li>Na parede da área de serviço: porta almofadada que abre para dentro da cozinha, com soleira de granito preto; bancada de granito preto com gaveteiro, cuba com torneira preta sob a janela, cooktop e forno embutido; armários bege em cima, com nicho do micro-ondas e depurador preto.</li>
+<li>Na parede da A. vent.: geladeira inox com um puxador só, armário em cima e coluna de nichos abertos ao lado, sem porta.</li>
+<li>Mesa de jantar encostada na parede do Quarto 1, com três cadeiras de capa bege: uma na ponta da sala e duas do lado da bancada. Piso de porcelanato cinza claro.</li>
+<li>No canto do hall, entre a porta do W.C. social e a coluna de nichos: fruteira de ferro preto com tampo de granito e o filtro de barro em cima, e o galão de água no chão.</li>
+<li>As medidas e posições dos móveis são estimadas.</li>
+</ul>
+</li>
+<li><p>Quarto 1 (<a href="docs/referencias/quarto-1/">fotos e vídeo</a>):</p>
+<ul>
+<li>A porta da planta entre o quarto e a cozinha não existe. A entrada é pelo hall, perto da parede da cozinha, com uma porta de correr aparente de madeira clara que desliza por dentro do quarto, rumo ao fundo, e soleira de granito preto.</li>
+<li>Piso de porcelanato cinza claro, paredes brancas; cortina bege de blackout de parede a parede no fundo, aberta no meio da janela.</li>
+<li>Móveis planejados brancos e amadeirados na parede da circulação, do fundo para a frente: torre de canto com criado-mudo e nicho, cama de solteiro sob um aéreo de duas portas, guarda-roupa alto de duas portas, nicho aberto, segunda cama de solteiro sob outro aéreo e torre com gavetas. Os móveis não chegam à parede da cozinha: entre a torre e ela fica um vão livre de cerca de 0,50 m (<a href="docs/referencias/quarto-1/foto-5-vao-junto-da-cozinha.jpg">foto 5</a>). As camas têm a cabeceira nos móveis.</li>
+<li>Na parede do hall: mesa branca no canto da janela, penteadeira branca com espelho iluminado e cadeira preta de pés de madeira, e ventilador de coluna preto ao lado da porta. Espelho de corpo com moldura dourada na parede da cozinha.</li>
+<li>A posição do vão no hall, as medidas e as posições dos móveis são estimadas.</li>
+</ul>
+</li>
+<li><p>Quarto 2 (<a href="docs/referencias/quarto-2/">fotos e vídeo</a>):</p>
+<ul>
+<li>Parede da divisa esquerda pintada de verde; as outras são brancas.</li>
+<li>Piso de porcelanato cinza claro, o mesmo do hall.</li>
+<li>Janela de correr de alumínio branco com duas folhas (a da esquerda com película escura) e peitoril de granito preto, centrada na parede do fundo.</li>
+<li>Porta de madeira clara que abre para dentro e encosta na parede do Quarto 1, com soleira de granito preto.</li>
+<li>Móveis: estante branca no canto da janela, cadeira estofada, mesa suspensa branca ao longo da parede do Quarto 1 (painel de ferramentas em L no canto da janela, gabinete, dois monitores, prateleira), mesa preta com gaveteiro colorido na parede verde com três prateleiras, mesa suspensa branca na parede da porta (gabinete, dois monitores, prateleira), duas cadeiras de escritório e o violão acima da porta. As medidas e posições dos móveis são estimadas.</li>
+</ul>
+</li>
+<li><p>W.C. social (<a href="docs/referencias/wc-social/">fotos e vídeo</a>):</p>
+<ul>
+<li>Porta de madeira clara que abre para dentro e encosta no lado do Quarto 2, com soleira de granito preto.</li>
+<li>Box de vidro de correr de parede a parede junto da janela, com a parede da janela em revestimento cinza de relevo geométrico e nicho com moldura de mármore; as outras paredes são de azulejo branco. Janela de correr de alumínio.</li>
+<li>Bancada suspensa de mármore bege com cuba esculpida e espelho até o forro na parede do Quarto 2, no canto da divisa (posição ao longo da parede estimada, fora do giro da porta).</li>
+<li>Na divisa, do Quarto 2 para o box: toalheiro, vaso sanitário e chuveiro elétrico dentro do box. Toalheiro na parede da porta; piso de porcelanato branco.</li>
+<li>As medidas e posições das peças são estimadas.</li>
+</ul>
+</li>
+<li><p>A. vent. (<a href="docs/referencias/area-ventilacao/">fotos e vídeo</a>):</p>
+<ul>
+<li>Aberta para o céu. As quatro paredes têm o revestimento cinza geométrico até cerca de 2,40 m; acima, parede sem acabamento.</li>
+<li>A janela da cozinha é um vidro de correr transparente com caixilho branco e peitoril de granito preto, nas medidas da planta (1,20 × 1,70, peitoril 0,40).</li>
+<li>Piso de porcelanato branco; vaso grande com planta no canto da divisa com o W.C. social, vaso preto pequeno junto da parede do W.C. e jardineira junto do vidro. As posições são estimadas.</li>
+</ul>
+</li>
+<li><p>Quarto casal (<a href="docs/referencias/quarto-casal/">fotos e vídeo</a>):</p>
+<ul>
+<li>Entrada pela cozinha, com porta de madeira clara que abre para dentro e encosta na parede da sala, e soleira de granito preto.</li>
+<li>Janela pequena e alta de alumínio branco ao lado da porta do W.C., com cortina recolhida no canto. É bem menor que a da planta (1,00 × 1,70, peitoril 0,40).</li>
+<li>Piso de porcelanato cinza claro, paredes brancas.</li>
+<li>Móveis: cama de casal com a cabeceira na divisa esquerda, armário aéreo de quatro portas sobre a cama, duas torres com criado-mudo, nicho e um armário de porta inteiriça até o alto, guarda-roupa de canto com porta em diagonal e guarda-roupa de duas portas na parede da cozinha, guarda-roupa alto junto à porta do W.C., ventilador de coluna. As medidas e posições são estimadas.</li>
+</ul>
+</li>
+<li><p>W.C. da suíte (mesma pasta, fotos <code>wc-*</code>):</p>
+<ul>
+<li>Box de vidro de correr de parede a parede no fundo, com a parede da janela em revestimento cinza de relevo geométrico; as outras paredes são de azulejo branco.</li>
+<li>Bancada suspensa de mármore bege com cuba esculpida e espelho grande na divisa esquerda; vaso na parede da garagem, entre a porta e o box; chuveiro elétrico na divisa; toalheiro na parede da garagem.</li>
+<li>Porta que abre para dentro do W.C. e encosta na parede da garagem, com soleira de granito preto; piso de porcelanato branco.</li>
+</ul>
+</li>
+<li><p>Garagem e área livre (<a href="docs/referencias/garagem/">fotos e vídeo</a>):</p>
+<ul>
+<li>Portão de correr de alumínio branco, fechado (não dá para ver dentro), em duas folhas de três módulos, lisas por fora e com os montantes só por dentro, com faixa de vidro fosco na ponta de fora de cada uma e guia em cima. Cada folha corre para o lado da outra, em trilhos separados (a da direita por trás, do lado de dentro), e para na frente dela: só uma metade do vão fica livre por vez. No modelo, abrir uma folha fecha a outra.</li>
+<li>Porta social do mesmo alumínio fechado, com uma faixa de vidro fosco do lado da divisa, perto do pilar como na planta: entre ela e a divisa há uns 0,55 m de parede, onde ficam o número, o medidor e a caixa de correio (não modelados). Entre ela e o portão há pilar de concreto cinza.</li>
+<li>A garagem é coberta até as vigas marcadas na planta (&quot;Projeção da viga&quot;). A área livre e a faixa junto do portão ficam a céu aberto.</li>
+<li>Piso de porcelanato cinza claro na parte coberta e branco na descoberta, separados por uma faixa de granito preto em L sob as vigas.</li>
+<li>Área livre com a divisa, a parede do W.C. e a frente em concreto cinza, sem pintura. As paredes da garagem são brancas.</li>
+<li>Passagem aberta para a circulação, com verga.</li>
+<li>Casinha de cachorro de plástico preto com telhado azul no canto da parede do W.C. com a da sala, com a porta para a garagem (<a href="docs/referencias/garagem/">fotos 6 e 7</a>); bicicleta preta ao longo da parede do W.C., com a roda da frente junto da casinha, presa no suporte, e uma moto Honda Biz ao lado dela, na mesma direção (cor não informada; ficou vermelha). As medidas e posições são estimadas.</li>
+<li>Comedouro elevado de madeira escura com duas tigelas pretas (água e ração), sobre um tapete em forma de osso, na frente da casinha, encostado na parede da sala, perto da porta de entrada (<a href="docs/referencias/garagem/foto-8-comedouro.png">foto 8</a>).</li>
+</ul>
+</li>
+<li><p>Fachada (<a href="docs/referencias/fachada/">foto</a>):</p>
+<ul>
+<li>Frente da área livre e pilar em concreto cinza; portão e porta social como descritos na garagem.</li>
+<li>Câmera de segurança com giro, branca, com duas antenas, presa na face de dentro do pilar da divisa direita, junto do portão, a cerca de 3,50 m do chão, virada para dentro da garagem (<a href="docs/referencias/fachada/foto-2-camera.jpg">foto</a>).</li>
+<li>Platibanda de concreto cinza sobre a viga da garagem, terminando antes da divisa direita, e continuando, recuada, pela lateral da área livre e pela frente do W.C. As paredes laterais (as divisas, do fundo dos quartos até a frente) sobem até a mesma altura, com a mesma cor de baixo do teto (cinza na área livre, bege na circulação e na área de serviço, branca na garagem). O fundo da casa não aparece na foto e ficou sem platibanda.</li>
+</ul>
+</li>
+<li><p>Circulação, área de serviço e área externa (<a href="docs/referencias/circulacao/">vídeo</a>):</p>
+<ul>
+<li>Piso de cerâmica rústica retangular, em fiadas desencontradas, em tons de bege e cinza, também na área externa do fundo.</li>
+<li>Paredes em textura bege areia, inclusive as divisas. A circulação é descoberta; a área de serviço é coberta.</li>
+<li>Na área de serviço, a parede da cozinha é de azulejo creme. Da frente para o fundo: pia de lavar roupa branca no canto da parede da frente, com o botijão de gás do fogão (azul) embaixo; tanquinho; e máquina de lavar de abrir por cima, branca com tampa preta, antes da porta da cozinha. Em cima, armários aéreos brancos e um com porta de vidro escuro, e mais um aéreo baixo acima da porta da cozinha.</li>
+<li>Não modelados: varal de teto com prendedores, baldes, vasos e objetos soltos. As medidas e posições são estimadas.</li>
+</ul>
+</li>
+<li><p>Telhado (<a href="docs/referencias/telhado/">vídeo</a>):</p>
+<ul>
+<li>Telhas de fibrocimento onduladas, cinza, em duas águas que sobem para as laterais e descem para uma calha no meio, de frente a fundo (em V), escondidas atrás das platibandas. As duas águas não se encostam: fica um vão aberto de cerca de 40 cm sobre a calha. A platibanda contorna todo o telhado: fachada, divisas, fundo, o lado da circulação, as pontas da área de serviço e a volta da A. vent.</li>
+<li>As caixas d&#39;água ficam embutidas no telhado, sobre a laje e sob as telhas. Duas caixas azuis de polietileno ficam num cercado de alvenaria rebocado, encostado na divisa esquerda, da A. vent. rumo ao fundo (sobre o W.C. social, o hall e o Quarto 2), que sobe só um pouco acima das telhas em volta e é coberto por um trecho de telhas soltas. A antena parabólica não foi modelada.</li>
+<li>Mais uma caixa d&#39;água azul, menor (500 L), sob as telhas da área de serviço, encostada na divisa direita, também com um trecho de telhas soltas em cima. Como o trecho tem pouco mais de 1 m de largura, ela ficou com cerca de 1,10 m de diâmetro (estimado).</li>
+<li>No visualizador, com o teto à mostra, um clique nas telhas soltas (ou a linha &quot;Telhas&quot; do menu) abre o trecho como uma tampa, girando pela borda junto da divisa, para ver as caixas.</li>
+</ul>
+</li>
+<li><p>Área externa, o quintal do fundo (<a href="docs/referencias/area-externa/">fotos e vídeo</a>):</p>
+<ul>
+<li>Muro do fundo e divisas da altura da casa (2,80 m). As quatro paredes têm barrado de cerâmica marrom-rosada até cerca de 1 m e textura bege areia acima; piso de cerâmica rústica.</li>
+<li>No canto da divisa esquerda com o muro, chuveiro sobre um painel de cerâmica mais alto. No canto da divisa com a casa, bomba d&#39;água num suporte, com os canos e a caixinha elétrica, sob uma prateleira de tábua, e um botijão de gás no chão, embaixo dela, ao lado da caixa d&#39;água com tampa.</li>
+<li>Duas caixas d&#39;água azuis no fundo (uma com tampa, junto da casa; outra aberta, mais adiante), com uma passagem de cerca de 0,50 m entre elas para chegar à bomba. Junto do muro, rumo à circulação: lixeira preta com tampa, dois baldes azuis e uma torneira. Perto da circulação: lixeira com saco preto, banquinho de madeira, suporte verde de mangueira na parede da casa e, no começo do quintal, perto do canto do muro com a divisa direita, o ralo (caixa de gordura) com grelha branca.</li>
+<li>Não modelados: varal, grade encostada na parede e objetos soltos. As medidas e posições são estimadas.</li>
+</ul>
+</li>
+</ul>
+<h2>Estimado pelas fotos (confirmar com trena)</h2>
+<ul>
+<li>Pé-direito de 2,60 m acima do piso (nível 0,20), aplicado na casa toda.</li>
+<li>Janela do Quarto 2 com 1,00 m de largura × 1,20 m de altura e peitoril a 0,90 m. Ela parece mais alta que larga, ao contrário da planta (1,20 × 1,10, peitoril 1,00).</li>
+<li>Placas de porcelanato de 60 × 60 cm.</li>
+<li>Janela do Quarto casal com 0,60 × 0,60 m e peitoril a 1,50 m. Box do W.C. da suíte a 1,00 m da parede do fundo.</li>
+<li>Janela do Quarto 1: a cortina cobre quase toda; ficou de correr em alumínio branco, com as medidas da planta (1,20 × 1,10, peitoril 1,00).</li>
+<li>Garagem: vigas com 0,25 m de altura, a da frente a 0,40 m do portão; verga da circulação a 2,30 m do piso; porta social com 0,80 × 2,30 m.</li>
+<li>Fachada: platibanda com o topo a 4,10 m do chão; porta social de 0,70 a 1,50 m da divisa esquerda.</li>
+<li>Telhado: calha a 3,15 m do chão, no meio da casa (a 3,00 m da divisa esquerda), e telhas subindo até 3,90 m junto das laterais. Cercado das caixas d&#39;água com 1,90 × 4,30 m, paredes até 3,92 m do chão e telhas soltas a cerca de 4,00 m; as caixas ficam sobre a laje.</li>
+<li>Balcão e bancada da cozinha com tampo a 0,90 m; o balcão tem 0,60 m de fundo e a perna fica a 1,05 m da parede do Quarto casal. Janela sobre a pia com as medidas da planta (1,20 × 0,60, peitoril 1,00).</li>
+</ul>
+<h2>Premissas ainda não confirmadas</h2>
+<ul>
+<li>As divisas laterais sobem inteiras até a altura da fachada, com o mesmo acabamento de baixo do teto.</li>
+<li>O forro é uma laje plana de 0,10 m apoiada nas paredes, sob o telhado. Ficam descobertas a área externa, a A. vent., as circulações laterais, a área livre e a faixa junto do portão; a área de serviço é coberta.</li>
+<li>Ainda não há móveis e esquadrias dos outros cômodos.</li>
+</ul>
+
+
+  </article>
+</main>
+</body>
+</html>

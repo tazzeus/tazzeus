@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otimizar TV Box — README</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <a href="https://github.com/tazzeus" class="voltar">&larr; tazzeus</a>
+  <span class="badge">Somente leitura &middot; código-fonte privado</span>
+</div>
+<main>
+  <header class="cabecalho">
+    <h1>Clean Launcher TV & Otimização de TV Box</h1>
+    <p class="subtitulo">Clean Launcher TV & Suíte de otimização de performance para Smart Box Android TV</p>
+  </header>
+  <article class="conteudo">
+<h1>Clean Launcher TV &amp; Otimização de Performance — Intelbras Izy Play</h1>
+<p>Solução completa de engenharia de software e otimização para a Smart Box <strong>Intelbras Izy Play (IZY01 / SDMC DV8038)</strong>. O projeto combina scripts de tuning de sistema Android via ADB (sem root e sem risco de brick) e o desenvolvimento de um <strong>Launcher Nativo Android TV em Kotlin</strong>, ultraleve, com resposta instantânea e sem anúncios ou recomendações.</p>
+<hr>
+<h2>📺 Visão Geral da Interface</h2>
+<p>A interface foi projetada especificamente para telas de TV (720p/1080p) e navegação confortável por controle remoto (D-Pad):</p>
+<h3>Principais Funcionalidades</h3>
+<ol>
+<li><p><strong>Grade Principal 2x5 (Zero Rolagem):</strong></p>
+<ul>
+<li>10 cards simétricos perfeitamente proporcionados para a tela de TV sem necessidade de rolagem vertical.</li>
+<li><strong>Em repouso:</strong> Fundo 100% transparente e sem bordas, valorizando a elegância do tema escuro.</li>
+<li><strong>Em foco:</strong> Borda branca nítida de 3.5dp (<code>#FFFFFF</code>), fundo translúcido sutil e ampliação suave (1.06x).</li>
+</ul>
+</li>
+<li><p><strong>Top Bar Dinâmica:</strong></p>
+<ul>
+<li><strong>Relógio &amp; Data:</strong> Horário grande (<code>HH:mm</code>) e data completa por extenso em português.</li>
+<li><strong>Previsão do Tempo &amp; Localização:</strong> Integração nativa com Open-Meteo (<code>☀️ 28°C Céu Limpo • Campo do Brito, SE • Máx 33° / Mín 23°</code>).</li>
+<li><strong>Status de RAM &amp; Wi-Fi:</strong><ul>
+<li>Linha 1: <code>RAM Livre XX%</code> em fonte esmeralda de 26sp.</li>
+<li>Linha 2: <code>XXX MB Usados • 📶 Wi-Fi: [Nome da Rede]</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Botão &quot;Liberar Memória&quot; (Otimizador de RAM):</strong></p>
+<ul>
+<li>Pill card com ícone de vassourinha (<code>🧹</code>) e botão <strong>Liberar</strong>.</li>
+<li>Acessível com a <strong>seta para CIMA</strong> a partir de qualquer card da primeira fileira.</li>
+<li>Encerra em lote processos em segundo plano de apps fechados via <code>ActivityManager.killBackgroundProcesses()</code>.</li>
+<li><strong>Navegação com Memória:</strong> Ao pressionar a seta para BAIXO, retorna exatamente para o card de onde o usuário partiu.</li>
+<li>Exibe notificação visual na tela informando os megabytes liberados.</li>
+</ul>
+</li>
+<li><p><strong>Slots Padrão Pré-Configurados:</strong></p>
+<ul>
+<li><strong>Slot 1:</strong> Blessed Player</li>
+<li><strong>Slot 2:</strong> YouTube</li>
+<li><strong>Slot 3:</strong> Globo Play</li>
+<li><strong>Slot 4:</strong> Prime Video</li>
+<li><strong>Slot 5:</strong> NetFlix</li>
+<li><strong>Slot 6:</strong> Cx Explorador</li>
+<li><strong>Slot 7:</strong> Play Store</li>
+<li><strong>Slot 8:</strong> Rede e Wi-fi</li>
+<li><strong>Slot 9:</strong> Configurações</li>
+<li><strong>Slot 10:</strong> Todos os Apps (Gaveta Completa)</li>
+<li><em>(Personalizável: segure OK em qualquer slot para escolher outro app)</em>.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>📊 Comparativo Real de Desempenho (Medições de Kernel)</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Métrica / Parâmetro</th>
+<th align="left">Original (Google TV Home)</th>
+<th align="left">Com Clean Launcher TV</th>
+<th align="left">Ganho Real</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Memória RAM Disponível (<code>MemAvailable</code>)</strong></td>
+<td align="left">419 MB</td>
+<td align="left"><strong>509 MB</strong></td>
+<td align="left"><strong>+21.5% (+90 MB livres)</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Consumo PSS do Launcher</strong></td>
+<td align="left">56.4 MB</td>
+<td align="left"><strong>31.8 MB</strong></td>
+<td align="left"><strong>-43% de RAM ocupada</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Heap Alocado do Launcher</strong></td>
+<td align="left">~22.5 MB</td>
+<td align="left"><strong>~7.1 MB</strong></td>
+<td align="left"><strong>-68% de pressão no GC</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Tamanho do APK</strong></td>
+<td align="left">~35 MB</td>
+<td align="left"><strong>3.5 MB</strong></td>
+<td align="left"><strong>-90% de espaço em disco</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Latência de Animações</strong></td>
+<td align="left">1.0x (travamentos GPU Mali)</td>
+<td align="left"><strong>0.0x (Instantânea)</strong></td>
+<td align="left"><strong>Resposta imediata ao D-Pad</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Autostart de TV ao Vivo no Boot</strong></td>
+<td align="left">Iniciava canais sozinho</td>
+<td align="left"><strong>Bloqueado via appops</strong></td>
+<td align="left"><strong>Home sempre limpa ao ligar</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>🛠️ Especificações Técnicas do Aparelho</h2>
+<ul>
+<li><strong>Modelo:</strong> Intelbras Izy Play (IZY01)</li>
+<li><strong>OEM / Placa:</strong> SDMC DV8038</li>
+<li><strong>Chipset:</strong> Amlogic <code>gxl</code> (S905W / S905X Quad-Core ARM Cortex-A53)</li>
+<li><strong>GPU:</strong> Mali-450 MP</li>
+<li><strong>Memória RAM:</strong> ~1 GB (1.006.540 kB) com perfil <code>low-ram</code> nativo</li>
+<li><strong>Armazenamento / OS:</strong> Android 10 (API Level 29)</li>
+<li><strong>Resolução:</strong> 1280x720 (720p @ 213 tvdpi)</li>
+<li><strong>Conexão ADB:</strong> Wi-Fi / Ethernet (<code>192.168.0.106:5555</code>)</li>
+</ul>
+<hr>
+<h2>📂 Estrutura de Arquivos do Projeto</h2>
+<pre><code class="language-text">smartbox_intelbras/
+├── AGENTS.md                      # Diretrizes universais para agentes de IA
+├── README.md                      # Apresentação e documentação completa
+├── .gitignore                     # Filtros para artefatos Gradle e temporários
+├── bin/
+│   └── CleanLauncherTV.apk        # Binário compilado pronto para instalação
+├── docs/
+│   ├── diagnostico_inicial.md     # Levantamento de hardware, pacotes e memória
+│   ├── prompt_inicial.txt         # Requisitos iniciais
+│   └── video_base.txt             # Referências conceituais
+├── launcher/                      # Código-fonte Kotlin do Launcher TV
+│   ├── app/
+│   │   ├── build.gradle           # Configuração de build (minSdk 21, targetSdk 34)
+│   │   └── src/main/
+│   │       ├── AndroidManifest.xml
+│   │       ├── java/com/cleanlauncher/tv/
+│   │       │   ├── AppAdapter.kt        # Modelo de dados dos apps
+│   │       │   ├── AppManager.kt        # Gerenciamento de pacotes, RAM e Wi-Fi
+│   │       │   ├── AppPickerAdapter.kt  # Gaveta e diálogo de seleção de apps
+│   │       │   ├── GridAdapter.kt       # Grade 2x5 sem rolagem e foco D-Pad
+│   │       │   ├── MainActivity.kt      # Tela principal, top bar e navegação
+│   │       │   └── WeatherManager.kt    # Clima Open-Meteo com IP fallback
+│   │       └── res/
+│   │           ├── drawable/            # Vetores, seletores e shapes de foco
+│   │           ├── layout/              # Telas (activity_main, dialog, card)
+│   │           └── values/              # Cores, strings e temas Leanback
+│   ├── build.gradle
+│   └── settings.gradle
+├── reports/
+│   ├── relatorio_otimizacao_e_launcher.md  # Relatório completo de testes e métricas
+│   ├── screenshots/                        # Capturas de tela reais tiradas na TV
+│   │   ├── 01_launcher_completo_op3.png    # Layout 2x5 sem rolagem
+│   │   ├── 02_foco_card_dpad.png           # Destaque de seleção no controle
+│   │   ├── 03_botao_liberar_memoria.png    # Botão &#39;Liberar&#39; na Top Bar
+│   │   ├── 04_botao_liberar_focado.png     # Foco D-Pad no botão de limpeza
+│   │   ├── 05_memoria_liberada_sucesso.png # Feedback na tela de memória liberada
+│   │   ├── 06_gaveta_todos_os_apps.png     # Gaveta com todos os apps instalados
+│   │   ├── 07_launcher_original_google.png # Interface antiga com anúncios
+│   │   └── historico/                      # Capturas de testes intermediários
+│   └── mockups/                            # Protótipos de layouts avaliados
+└── scripts/
+    ├── adb_connect.ps1                 # Conexão automática ao IP do smartbox
+    ├── compilar_e_instalar.ps1         # Compilação e deploy em 1 comando
+    ├── otimizar.ps1                    # Desativa telemetrias, anúncios e animações
+    ├── reverter.ps1                    # Restaura todas as configurações de fábrica
+    ├── ativar_launcher_padrao.ps1      # Define Clean Launcher no botão HOME
+    └── restaurar_launcher_original.ps1 # Reativa o Google TV Home padrão
+</code></pre>
+<hr>
+<h2>🚀 Como Executar os Scripts (PowerShell)</h2>
+<h3>1. Compilar e Instalar o Launcher Atualizado</h3>
+<p>Compila o código-fonte Kotlin via Gradle, atualiza o binário em <code>bin/CleanLauncherTV.apk</code> e instala no aparelho via ADB com as devidas permissões:</p>
+<pre><code class="language-powershell">.\scripts\compilar_e_instalar.ps1
+</code></pre>
+<h3>2. Definir o Clean Launcher TV como Padrão na Tecla HOME</h3>
+<p>Desativa o launcher antigo com anúncios, fazendo com que qualquer clique no botão HOME do controle abra o Clean Launcher:</p>
+<pre><code class="language-powershell">.\scripts\ativar_launcher_padrao.ps1
+</code></pre>
+<h3>3. Restaurar o Launcher Original do Google</h3>
+<p>Reativa o launcher oficial da TV com um clique:</p>
+<pre><code class="language-powershell">.\scripts\restaurar_launcher_original.ps1
+</code></pre>
+<h3>4. Desfazer 100% de Todas as Otimizações</h3>
+<p>Restaura animações, serviços de telemetria e o estado original do aparelho:</p>
+<pre><code class="language-powershell">.\scripts\reverter.ps1
+</code></pre>
+<hr>
+<h2>🔄 Diretrizes de Versionamento Git (Multi-IA)</h2>
+<ul>
+<li><strong>Branch <code>dev</code></strong>: Branch ativa de trabalho para desenvolvimento, novos recursos e documentação.</li>
+<li><strong>Branch <code>main</code></strong>: Branch estável de lançamento. O merge de <code>dev</code> para <code>main</code> é realizado <strong>exclusivamente mediante solicitação explícita do usuário</strong>.</li>
+</ul>
+
+
+  </article>
+</main>
+</body>
+</html>

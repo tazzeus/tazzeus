@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estilingue Esportivo — README</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <a href="https://github.com/tazzeus" class="voltar">&larr; tazzeus</a>
+  <span class="badge">Somente leitura &middot; código-fonte privado</span>
+</div>
+<main>
+  <header class="cabecalho">
+    <h1>Estilingue Esportivo</h1>
+    <p class="subtitulo">Curso interativo em 3D de tiro esportivo com estilingue do zero à precisão</p>
+  </header>
+  <article class="conteudo">
+<h1>🎯 Estilingue Esportivo — Do Zero à Precisão</h1>
+<p><strong>Aprenda tiro esportivo com estilingue com segurança, num curso interativo em 3D que abre direto no navegador.</strong></p>
+<p><strong>Versão atual: v2.7.0</strong> (23/10/2026, tag <code>v2.7.0</code>).</p>
+<p>O <strong>Estilingue Esportivo</strong> é um curso prático de <em>slingshot shooting</em> em página única: <strong>16 sessões</strong> em ordem didática (segurança, armação, bandas, munição, pega da malha, oficina de montagem, postura, pegadas, ancoragem, olho de mira, linha de visada, sistemas de pontaria, soltura, estilo Butterfly, campo/correção e modalidades de competição), com <strong>53 animações interativas</strong> — boa parte em <strong>3D com órbita por arrasto</strong> (40 cenas 3D) e <strong>personagens de verdade</strong> (Homem e Mulher), para você girar ao redor do atirador, da forquilha e da mira.</p>
+<blockquote>
+<p>🌐 <strong>Sem instalar nada:</strong> abra <a href="src/index.html"><code>src/index.html</code></a> em qualquer navegador. Um único arquivo (~3,4 MB, com o Three.js e os modelos 3D <strong>embutidos</strong>), <strong>sem CDN, sem rede e sem etapa de build para usar</strong>; funciona offline, no desktop e no celular (barra inferior), com tema escuro e claro. Sem WebGL, as cenas 3D voltam sozinhas ao motor Canvas. A única parte fora do arquivo é o modelo da análise de postura (experimental, ~15 MB em <code>src/pose/</code>), baixado só por quem abre essa função.</p>
+</blockquote>
+<blockquote>
+<p>🌎 <strong>Português (BR) e English no mesmo arquivo:</strong> use o botão <strong>PT-BR | EN</strong> no topo; a escolha fica salva e, sem escolha, o curso segue o idioma do navegador. <a href="#-english-summary">English summary ↓</a></p>
+</blockquote>
+<blockquote>
+<p>⚠️ <strong>Segurança vem primeiro.</strong> Óculos de proteção, inspeção de fitas e uma catch box com panos soltos não são opcionais. Os vídeos da playlist “Dangerous Shooting” (acrobacias de risco) estão catalogados só como <strong>“não imitar”</strong>. O curso abre com um <strong>aviso de risco</strong> (uso por conta e risco, 18+ ou com adulto responsável) e <strong>não substitui um instrutor</strong>.</p>
+</blockquote>
+<blockquote>
+<p>📚 <strong>O conteúdo vem das suas referências, não de achismo.</strong> Tudo o que o curso afirma vem de vídeos e materiais listados em <a href="docs/04-referencias.md"><code>docs/04-referencias.md</code></a>. O que não vem de vídeo (tabelas de fabricante, teste do olho dominante) aparece marcado como <strong>“leitura externa”</strong>; os vídeos sem fala aparecem como <strong>“diagramas (sem fala)”</strong>.</p>
+</blockquote>
+<p align="center"><p>  &nbsp;</p>
+<p>  &nbsp;</p>
+</p><blockquote>
+<p>📖 <strong>A fonte de verdade do projeto é a spec, não este README.</strong> Antes de mudar qualquer comportamento, consulte <a href="specs/"><code>specs/</code></a> (<code>001-tutorial-animado</code> a <code>009-analise-do-treino</code>) na branch <code>dev</code>. O método é <strong>Spec-Driven Development (SDD)</strong>: spec → plano → tarefas → código.</p>
+</blockquote>
+<hr>
+<h2>📑 Sumário</h2>
+<ul>
+<li><a href="#-novidades-recentes">🆕 Novidades Recentes</a></li>
+<li><a href="#-o-roteiro-de-treinamento">🧭 O Roteiro de Treinamento</a></li>
+<li><a href="#-arquitetura--tecnologias">🚀 Arquitetura &amp; Tecnologias</a></li>
+<li><a href="#-tipos-de-anima%C3%A7%C3%A3o">🎬 Tipos de Animação</a></li>
+<li><a href="#-como-usar">📦 Como Usar</a></li>
+<li><a href="#-estrutura-de-diret%C3%B3rios">📂 Estrutura de Diretórios</a></li>
+<li><a href="#-metodologia--branches">📐 Metodologia &amp; Branches</a></li>
+<li><a href="#-fontes--cr%C3%A9ditos">🎓 Fontes &amp; Créditos</a></li>
+<li><a href="#-estado-atual-e-pend%C3%AAncias">🚦 Estado Atual e Pendências</a></li>
+<li><a href="#-english-summary">🇬🇧 English summary</a></li>
+<li><a href="#-licen%C3%A7a">📜 Licença</a></li>
+</ul>
+<hr>
+<h2>🆕 Novidades Recentes</h2>
+<ul>
+<li><p><strong>28/10/2026 — materiais de apresentação e branch padrão</strong> (pasta <code>relatorios/</code>, só na <code>dev</code>).</p>
+<ul>
+<li>Em <code>relatorios/apresentacoes/</code>: uma <strong>landing</strong> para devs e parceiros, uma <strong>apresentação para escolas</strong> (atividade complementar em duas trilhas) e uma <strong>apresentação para parceiros</strong> (pontos fortes do projeto). Cada apresentação é um único HTML que abre no navegador, com cenas 3D animadas, controles discretos, barra de progresso e notas do apresentador (tecla <strong>N</strong>).</li>
+<li>A <strong><code>dev</code> passou a ser a branch padrão</strong> do repositório no GitHub. A <code>main</code> continua com a versão estável e só recebe merge sob pedido explícito.</li>
+</ul>
+</li>
+<li><p><strong>23/10/2026 — v2.7.0: Analise seu treino (experimental)</strong> (spec 009, fase 3).</p>
+<ul>
+<li>No Treino, um bloco em destaque, &quot;Acompanhe sua evolução&quot;, reúne <strong>Registrar série</strong>, <strong>Gravar o treino</strong> e <strong>Analise seu treino</strong>.</li>
+<li><strong>Analise seu treino:</strong> um modelo de pose (MediaPipe, Apache 2.0) roda no aparelho sobre as imagens da gravação. Ele compara a postura de cada erro com a dos seus acertos (ancoragem, braço da forquilha, cabeça, ombros, puxada, tranco na soltura) e diz o que mais mudou, com a sessão para rever.</li>
+<li>O modelo (~15 MB) fica em arquivos separados e só é baixado por quem usa a análise; depois funciona offline. Só as medidas ficam salvas. <strong>Experimental:</strong> ainda não validado com atiradores reais.</li>
+</ul>
+</li>
+<li><p><strong>23/10/2026 — v2.6.0: gravação do treino com câmera</strong> (spec 009, fase 2).</p>
+<ul>
+<li><strong>Gravar o treino:</strong> uma cena 3D com órbita mostra onde pôr o celular (com a vista de dentro do próprio celular); o tripé fica em 3/4 por trás (a mesma vista 3/4 da Sessão 1), do lado da mão que puxa e atrás da linha de tiro, o app grava a sessão, percebe cada disparo (pelo estalo da fita e pelo movimento, ou só pelo movimento) e guarda três imagens de cada tiro: puxada completa, soltura e acompanhamento.</li>
+<li><strong>Revisão:</strong> linha do tempo para marcar um tiro que o app não percebeu, comparação lado a lado, linhas-guia arrastáveis (a ciano vai do olho à ponta da forquilha), autoavaliação por tiro e ligação com a série marcada no alvo, que dá acerto ou erro a cada imagem.</li>
+<li><strong>Privacidade e segurança:</strong> a câmera só é pedida ao tocar em “Ligar a câmera”, depois de um checklist de segurança; o microfone não grava som; tudo fica no aparelho e só é guardado se você salvar. Ainda falta o teste em celulares reais.</li>
+</ul>
+</li>
+<li><p><strong>23/10/2026 — v2.5.0: registro de séries no Treino</strong> (spec 009, fase 1).</p>
+<ul>
+<li><strong>Registrar série:</strong> depois de 3 a 10 tiros, marque no alvo de papel onde cada um bateu (toque, arraste ou teclado), ou marque acerto/erro no alvo de derrubar. O app mostra os acertos, o tamanho e o centro do grupo e <strong>uma correção por vez</strong>, pela regra do curso (1 mm de ancoragem ≈ 5 cm a 10 m), com o link para a sessão que ensina aquilo. Canhotos recebem a correção lateral espelhada.</li>
+<li><strong>Meus treinos:</strong> histórico no próprio aparelho, gráfico do tamanho do grupo por distância, exportação no formato do <a href="docs/diario-de-treino.md">diário de treino</a> e apagar uma série ou tudo. Nada é enviado.</li>
+</ul>
+</li>
+<li><p><strong>22/10/2026 — v2.4.0: Expansão da ementa para 16 sessões (53 animações, 40 em 3D), Estilo Butterfly, regras oficiais WSA e resiliência WebGL.</strong> <em>(tag <code>v2.4.0</code>)</em>.</p>
+<ul>
+<li><strong>3 novas sessões completas:</strong> <strong>Sessão 6 — Oficina de montagem</strong> (corte com cortador rotativo, amarração na malha 3D com nó constritor e <em>Wrap &amp; Tuck</em> 3D nas hastes), <strong>Sessão 12 — Sistemas de pontaria</strong> (Mira de Referência × <em>Gap Shooting</em> × Instintivo e foco visual alvo × forquilha em 3D com atirador realista) e <strong>Sessão 16 — Modalidades e competição</strong> (pista oficial 10 m e 15 m padrão WSA, pontuação oficial de 2 a 10 pontos por placa e simulador de torneio com 5 alvos basculantes de 80 a 40 mm em 3D).</li>
+<li><strong>Novas cenas e upgrades 3D nas sessões existentes:</strong> <em>Impacto na forquilha 3D (fork hit)</em> na Sessão 1, <em>Empunhadura na forquilha 3D (Pinch, Thumb-Braced, Hammer)</em> na Sessão 2, <em>Gabarito visual taper + Fita plana × Tubo &amp; Hand Slap</em> na Sessão 3, <em>Ciclo respiratório e regra dos 7 s</em> na Sessão 7 e <em>Curva balística 3D + Escada de distâncias (holdover) 3D com tiro inclinado</em> na Sessão 11.</li>
+<li><strong>Sessão 14 — Estilo Butterfly (reposicionada no Módulo 4 após Soltura limpa):</strong> passo a passo 3D das 6 fases (com correção de IK do braço direito nas fases iniciais), comparativo 3D de puxadas e calculadora de corte, com enquadramento 3D, cota de distância e suporte ao botão <strong>👁 POV</strong>.</li>
+<li><strong>Página de Treino enriquecida:</strong> cartão rápido <strong>“Posso atirar aqui?” (5 perguntas)</strong> e tabela do <strong>Plano progressivo de 8 semanas</strong>.</li>
+<li><strong>Refinamento técnico e balística:</strong> cálculo de energia cinética ($E_k$), balística de Joules, efeito térmico no látex (&lt; 15°C e &gt; 32°C), aquecimento articular e prevenção de lesões, segurança contra ricochete em alvos metálicos e regra trigonométrica detalhada da ancoragem facial.</li>
+<li><strong>Resiliência 3D (Three.js / WebGL):</strong> recuperação automática de contexto WebGL (<code>webglcontextrestored</code>), pré-carregamento dos avatares Homem/Mulher e correção da regra da gangorra no simulador <em>Ler o grupo</em> e em <code>docs/06</code>.</li>
+<li><strong>Mais cenas em 3D com o atirador realista:</strong> <em>Visão de mira</em> (Sessão 2, OTT × TTF, curta × longa, com POV no olho de mira), <em>Empunhadura na forquilha 3D</em> (Sessão 2: a mão do avatar muda para Pinça, Polegar apoiado e Martelo), <em>Fita plana × Tubo</em> (Sessão 3: soltura, retorno da malha e Hand Slap no avatar) e o <strong>nó constritor animado</strong> passo a passo na <em>Amarração na malha 3D</em> (Sessão 6: 1ª volta, diagonal em X, 2ª volta, ponta por baixo do X e aperto).</li>
+</ul>
+</li>
+<li><p><strong>18/10/2026 — proteção de direitos.</strong> O código passou de MIT para <strong>PolyForm Noncommercial 1.0.0</strong> (uso comercial só com autorização). O curso ganhou rodapé com © e licenças, aviso de copyright no topo do HTML, <code>meta copyright</code>, links para os textos das licenças em “Créditos e licenças” e uma cláusula de uso do conteúdo nos termos (que pede novo aceite).</p>
+</li>
+<li><p><strong>18/10/2026 — publicação como PWA na Vercel.</strong> O arquivo do curso é <code>src/index.html</code>; o personagem <strong>Boneco</strong> (manequim, licença que não permitia redistribuir) e o controle “Acabamento do boneco” foram removidos — ficam Homem e Mulher (CC0). Adicionados <code>src/vercel.json</code> (raiz e cabeçalhos), ícones PNG 192/512 e <code>apple-touch-icon</code> para instalar no celular. Passos de deploy em <a href="docs/10-publicar-na-vercel.md"><code>docs/10-publicar-na-vercel.md</code></a>.</p>
+</li>
+<li><p><strong>18/10/2026 — v2.3.0: camada de proteção, portão de segurança e licenças</strong> <em>(tag <code>v2.3.0</code>)</em>.</p>
+<ul>
+<li><strong>Primeira abertura:</strong> tela de <strong>aviso de risco e termos</strong> (uso por conta e risco, não substitui instrutor, leia a Sessão 1 antes de atirar, 18+ ou com adulto responsável), com aceite lembrado no aparelho e link permanente no rodapé.</li>
+<li><strong>Páginas novas</strong> (rodapé e módulo 1): <strong>Menores de idade</strong> (LGPD art. 14), <strong>Se algo der errado</strong> (SAMU 192, lesão ocular, corte e sangramento, modelo de relato de incidente), <strong>Equipamento com norma</strong> (óculos ANSI Z87.1 / EN 166 / CA, o que descartar, catch box mínima), <strong>Regras de comunicação</strong> e <strong>Créditos e licenças</strong>.</li>
+<li><strong>Portão de segurança</strong> (spec 006): quiz de 5 perguntas (óculos, puxada, catch box, fita e zona livre); é preciso acertar todas, cada erro vem com a explicação e a aprovação fica no aparelho. Sem aprovação, o Treino e a home mostram um lembrete e nenhuma sessão conta como concluída; a leitura nunca é bloqueada.</li>
+<li><strong>Licenças</strong> (spec 007): código MIT, conteúdo CC BY-NC 4.0, marca reservada; <code>LICENSE</code>, <code>LICENSE-CONTENT.md</code> e <code>NOTICE</code>; a MIT do three.js vai dentro do arquivo do curso. <em>(Em 18/10/2026 o código passou a PolyForm Noncommercial 1.0.0; veja a primeira entrada desta lista.)</em></li>
+<li><strong>Mudanças de interface:</strong> no celular os ajustes da cena ficam sempre expostos (sem o botão “Ajustar”); a página <strong>Fontes</strong> e os nomes de autores saíram do curso (as referências ficam em <a href="docs/04-referencias.md"><code>docs/04-referencias.md</code></a>; os créditos de modelos 3D, na página Créditos e licenças).</li>
+<li><strong>Ainda pendente:</strong> as revisões externas (saúde, revisor técnico, advogado) — as telas mostram o selo “Revisão pendente”. Guia: <a href="docs/09-avisos-e-socorro.md"><code>docs/09-avisos-e-socorro.md</code></a>.</li>
+</ul>
+</li>
+<li><p><strong>17/10/2026 — v2.2.0: curso bilíngue, PT-BR e inglês</strong> <em>(tag <code>v2.2.0</code>)</em>. Botão <strong>PT-BR | EN</strong> no topo: interface, as 12 sessões, os controles e os textos desenhados dentro das animações existem nos dois idiomas, no mesmo arquivo e sem recarregar a página. Números seguem o idioma (vírgula ou ponto decimal), títulos de vídeos em português ficam no original com uma tradução curta, e a lei brasileira aparece como exemplo, com aviso para conferir a legislação do seu local. O <code>npm test</code> agora falha se faltar tradução.</p>
+</li>
+<li><p><strong>17/10/2026</strong> — README e capturas de tela renovados para o layout v2.1 (home em tema escuro e claro, aulas no celular e no computador).</p>
+</li>
+<li><p><strong>17/10/2026 — v2.1.3</strong> <em>(tag <code>v2.1.3</code>)</em>. Ícone na aba do navegador (favicon SVG embutido no próprio arquivo).</p>
+</li>
+<li><p><strong>17/10/2026 — v2.1.2</strong> <em>(tag <code>v2.1.2</code>)</em>. Créditos no rodapé com links e ícones: TadeuReinaldo abre o WhatsApp e tazzeus abre o Instagram.</p>
+</li>
+<li><p><strong>17/10/2026 — v2.1.1</strong> <em>(tag <code>v2.1.1</code>)</em>. O arquivo do curso passou a se chamar <code>src/Curso_Estilingue.html</code> (voltou a <strong><code>src/index.html</code></strong> em 18/10/2026) e o rodapé traz o crédito &quot;Develop by TadeuReinaldo - tazzeus&quot;.</p>
+</li>
+<li><p><strong>17/10/2026 — v2.1.0: novo layout, celular primeiro</strong> <em>(tag <code>v2.1.0</code>)</em>. Home de trilha em cinco módulos, player de aula com painel de estudo (Entenda, Pontos, Erros, Treino, Fontes), barra inferior e folha de ajustes no celular, página de Treino, <strong>tema escuro e claro</strong>, ocultar legendas, um olho fechado no atirador, fitas planas OTT/TTF, cenas refeitas (gangorra, correção no papel, curva balística, soltura, vento, ler o grupo) e sem áudio.</p>
+</li>
+<li><p><strong>16/10/2026 — v2.0.0: 3D com personagens de verdade</strong> <em>(tag <code>v2.0.0</code>)</em>. Todas as cenas 3D passam a usar <strong>Three.js embutido</strong> (WebGL, luz e sombra suave) com <strong>personagens glTF com esqueleto</strong> (Homem e Mulher; o Boneco em madeira/branco/preto existiu até 18/10/2026), pose por IK, <strong>óculos de atirador</strong>, forquilha e malha em modelo 3D e <strong>linha tracejada do olho até a forquilha</strong>. A ancoragem fica no canto da boca, sem a puxada atravessar a cabeça, e a mão fecha em volta do cabo. Sem WebGL, as cenas voltam sozinhas ao motor Canvas.</p>
+</li>
+<li><p><strong>15/10/2026</strong> — <strong>Diagramas no estilo YUUI.</strong> UP/DOWN (a altura da malha muda a linha de mira), TTF × OTT (alinhamento esquerda–direita), esfera centralizada na malha e placa de fixação a 90°: reproduções 2D fiéis aos quadros da playlist “Slingshot Shooting PRI”, com “THE GOOD / NO GOOD” em vermelho.</p>
+</li>
+<li><p><strong>15/10/2026</strong> — <strong>Corpo e mãos detalhados.</strong> Atirador com membros cônicos, cabeça com óculos, mão que empunha o cabo (palma, quatro dedos e polegar) e pinça que segura a esfera.</p>
+</li>
+<li><p><strong>15/10/2026</strong> — <strong>3D com órbita em tudo que tem forma no espaço.</strong> Catch box, óculos, direção da puxada, montagem OTT/TTF, corte da fita, malha, postura, mão em diagonal, pegadas, ancoragem, olho de mira, linha de visada, fita sobre fita e soltura.</p>
+</li>
+<li><p><strong>15/10/2026</strong> — <strong>Munições lado a lado.</strong> Esferas de 6 a 19 mm em escala real sobre grade de 1 cm, com massa por material (aço, chumbo, argila, vidro) e quais cabem em cada malha.</p>
+</li>
+<li><p><strong>15/10/2026</strong> — <strong>Novas sessões:</strong> Bandas (espessura × finalidade, corte, vida útil), Munições, Olho de mira (paralaxe 3D e teste do triângulo) e <strong>Pegadas 45° / 90° / 180° em pé</strong>.</p>
+</li>
+<li><p><strong>15/10/2026</strong> — <strong>Menu lateral por sessão</strong>, com hambúrguer no celular, progresso salvo no navegador e distância atirador→alvo (em metros) em toda animação. <em>Curta = 5–10 m; longa = 20–50 m.</em></p>
+</li>
+</ul>
+<hr>
+<h2>🧭 O Roteiro de Treinamento</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Sessão</th>
+<th>O que você aprende</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>Segurança &amp; Catch Box</strong></td>
+<td>Óculos, direção da puxada, contenção sem ricochete e prevenção de <em>fork hit</em></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>OTT vs TTF</strong></td>
+<td>Armações, ponto de mira, alinhamento e estilos de empunhadura (<em>Pinch</em>, <em>Thumb-Braced</em>, <em>Hammer</em>)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Bandas (faixas)</strong></td>
+<td>Espessuras 0,4–1,0 mm, gabarito <em>taper</em>, vida útil, fita plana × tubo e <em>Hand Slap</em></td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Munições</strong></td>
+<td>Materiais, tamanhos e peso comparados lado a lado</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Pega da malha</strong></td>
+<td>Tipos de malha, centralização, pegada junto à esfera</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Oficina de montagem</strong></td>
+<td>Corte com cortador rotativo, nó constritor na malha e <em>Wrap &amp; Tuck</em> nas hastes</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Postura &amp; alinhamento</strong></td>
+<td>Posição de tiro de lado em 3D, mão em diagonal, ciclo respiratório e janela de 7 s</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Pegadas 45°, 90° e 180°</strong></td>
+<td>Inclinação da forquilha e referência de mira em cada uma</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Ancoragem facial</strong></td>
+<td>Boca × orelha, gangorra (altura da malha × impacto), posição da cabeça</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Olho de mira</strong></td>
+<td>Dominância ocular, paralaxe e como o outro olho “escapa”</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Linha de visada (mira)</strong></td>
+<td>POV 3D, fita sobre fita, correção no papel, agrupamento, curva balística e escada de distâncias</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Sistemas de pontaria</strong></td>
+<td>Mira de Referência × <em>Gap Shooting</em> × Instintivo e foco visual (alvo nítido × forquilha)</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Soltura limpa</strong></td>
+<td>Follow-through de 2 s, abertura dos dedos e saída limpa da malha</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>Estilo Butterfly</strong></td>
+<td>Puxada longa atrás da cabeça (6 fases em 3D), comparativo de puxadas e calculadora de corte</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>Campo e correção</strong></td>
+<td>Ler o grupo, inspeção da fita, vento e onde atirar</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>Modalidades e competição</strong></td>
+<td>Pista oficial 10 m / 15 m (WSA), alvos basculantes de 4 a 8 cm (2 a 10 pts) e simulador de torneio</td>
+</tr>
+</tbody></table>
+<p>Cada sessão tem <strong>pontos-chave</strong>, <strong>erros comuns</strong> e <strong>treino prático</strong> (checklist salvo no navegador). As referências de cada tema ficam em <a href="docs/04-referencias.md"><code>docs/04-referencias.md</code></a>.</p>
+<p>Sob o módulo 1 há ainda as páginas <strong>Regras de comunicação</strong>, <strong>Equipamento com norma</strong> e o <strong>Quiz de segurança</strong>.</p>
+<hr>
+<h2>🚀 Arquitetura &amp; Tecnologias</h2>
+<p>Projeto 100% estático, em <strong>um único <code>index.html</code></strong>:</p>
+<ol>
+<li>🎨 <strong>UI</strong> — HTML + CSS puros, <strong>temas escuro e claro</strong>, home de trilha por módulos e player de aula; no celular, barra inferior e ajustes da cena sempre expostos (layout aprovado na spec 003).</li>
+<li>🧊 <strong>3D com Three.js embutido</strong> — as cenas 3D rodam em <strong>WebGL</strong> (Three.js r186 enxuto, sem CDN, dentro do próprio arquivo): luz e sombra suave, <strong>personagens glTF com esqueleto</strong> (pose por IK a partir da posição do tiro), forquilha e malha em modelo 3D, óculos de atirador e cabelo/roupa por máscara de cor. O personagem (Homem ou Mulher) é escolhido na própria cena. O <strong>motor 3D próprio</strong> em <code>&lt;canvas&gt;</code> (projeção em software, sem bibliotecas) ficou como <strong>reserva automática</strong> para aparelhos sem WebGL.</li>
+<li>🖼️ <strong>Gráficos e simuladores 2D</strong> — Canvas 2D (a área da animação é escura nos dois temas: agrupamento, correção no papel, vento, curva balística), com controles interativos e opção de <strong>ocultar legendas</strong>.</li>
+<li>💾 <strong>Persistência</strong> — <code>localStorage</code> para progresso, preferências e treinos marcados; <strong>IndexedDB</strong> (<code>estilingue-treino</code>) para as séries registradas e as gravações do Treino. Sem IndexedDB, os dados ficam só na memória da página, com aviso. Nada é enviado.</li>
+<li>📷 <strong>Treino com câmera</strong> — a câmera só é pedida ao tocar em “Ligar a câmera”, depois do checklist de segurança. A análise de postura (experimental) usa o MediaPipe Pose (Apache 2.0) no próprio aparelho e guarda só as medidas.</li>
+</ol>
+<p>Nada de rede: o curso funciona offline. A exceção é a análise de postura, que baixa o modelo (<code>src/pose/</code>) do mesmo endereço do curso, só para quem abre essa função; depois também funciona offline.</p>
+<hr>
+<h2>🎬 Tipos de Animação</h2>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Quando é usado</th>
+<th>Interação</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>3D com órbita</strong></td>
+<td>Tudo que tem forma no espaço (corpo, mãos, forquilha, malha, fitas, POV)</td>
+<td>Arrastar para girar, slider de câmera, vistas prontas, <strong>escolha do personagem</strong> (Homem, Mulher)</td>
+</tr>
+<tr>
+<td><strong>POV do atirador</strong></td>
+<td>Ancoragem, olho de mira e linha de visada</td>
+<td>Troca de pegada, paralaxe de dois olhos, distância 5–50 m</td>
+</tr>
+<tr>
+<td><strong>Gráficos e simuladores (2D)</strong></td>
+<td>Espessura, massa, correção no papel, agrupamento, vento, curva balística</td>
+<td>Sliders, botões de padrões e de correção</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>📦 Como Usar</h2>
+<p><strong>Abrir direto:</strong></p>
+<pre><code class="language-bash"># duplo clique em src/index.html, ou:
+start src/index.html          # Windows
+open src/index.html           # macOS
+xdg-open src/index.html       # Linux
+</code></pre>
+<p><strong>Ou servir localmente</strong> (útil para testar no celular na mesma rede):</p>
+<pre><code class="language-bash">cd src
+python -m http.server 8000    # http://localhost:8000
+</code></pre>
+<p><strong>Navegação:</strong> Trilha · Aula · Treino (barra inferior no celular) · setas ← → trocam de sessão · espaço pausa a animação · rodapé: termos, menores, “Se algo der errado” e créditos.</p>
+<p><strong>Acessibilidade:</strong> navegação 100% por teclado (abas com setas; nas cenas 3D, setas giram, <code>+</code>/<code>−</code> aproximam e <code>Home</code> volta), leitor de tela com descrição de cada animação, foco visível e respeito a <em>reduzir movimento</em>.</p>
+<p><strong>Personagem:</strong> nas cenas com pessoa há os controles <strong>Personagem</strong> (Homem, Mulher); a escolha vale para as outras cenas. Em toda cena com corpo há uma <strong>linha tracejada ciano do olho até a ponta da forquilha</strong> (“olhar”), e o atirador usa óculos de proteção.</p>
+<p><strong>No celular:</strong> o toque rola a página; toque em <strong>“☝️ Girar com o dedo”</strong> para girar as cenas 3D (um dedo gira, dois dedos fazem pinça de zoom).</p>
+<hr>
+<h2>📂 Estrutura de Diretórios</h2>
+<pre><code class="language-text">estilingue/
+├── README.md                    # Este arquivo
+├── LICENSE                      # Código: PolyForm Noncommercial 1.0.0
+├── LICENSE-CONTENT.md           # Conteúdo: CC BY-NC 4.0
+├── NOTICE                       # Escopo das licenças e terceiros
+├── src/                         # Raiz do site na Vercel
+│   ├── index.html               # O curso interativo (arquivo único: Three.js e modelos 3D embutidos)
+│   ├── pose/                    # Modelo de pose (MediaPipe), baixado só pela análise de postura
+│   ├── manifest.webmanifest     # PWA
+│   ├── sw.js                    # Service worker (offline)
+│   ├── vercel.json              # Cabeçalhos do site (câmera e microfone só na própria página)
+│   └── icon.svg, icon-*.png, apple-touch-icon.png
+├── docs/
+│   ├── 01-seguranca.md          # Protocolos de segurança e EPIs
+│   ├── 02-equipamento.md        # Armações, fitas, malhas e projéteis
+│   ├── 03-tecnica-e-tiro.md     # Postura, ancoragem, visada e soltura
+│   ├── 04-referencias.md        # Vídeos/playlists de referência e o que cada um ensina
+│   ├── 05…08-*.md               # Fitas, leitura do grupo/vento, campo e legislação, plano de treino
+│   ├── 09-avisos-e-socorro.md   # Aviso de risco, menores, socorro, equipamento com norma e regras de comunicação
+│   ├── 10-publicar-na-vercel.md # Deploy na Vercel como PWA
+│   ├── diario-de-treino.md      # Registro de sessões, evolução e agrupamentos
+│   ├── licencas/                # Capturas das licenças dos modelos 3D e avaliação do que falta
+│   ├── img/                     # Foto de referência da pegada 180° (em pé)
+│   └── prints/                  # Capturas de tela usadas neste README (layout v2.1)
+├── specs/                       # (branch dev) Spec-Driven: spec, plan, tasks
+├── relatorios/                  # (branch dev) Análise de negócio e materiais de apresentação
+│   └── apresentacoes/           # landing/, deck-escolas/ e deck-investidores/ (apresentações em HTML único)
+├── prototipos/                  # (branch dev) Ferramentas descartáveis fora do curso
+├── i18n/                        # (branch dev) Dicionário EN (en.json) e ferramentas: `npm run build:i18n`, `i18n:collect`, `i18n:audit`
+├── tests/                       # (branch dev) Smoke test: `npm test`
+├── vendor/                      # (branch dev) Three.js enxuto, avatares e forquilha: scripts, créditos e README
+├── modelos-origem/              # (local, fora do git) Pacotes originais dos modelos 3D
+└── AGENTS.md                    # (branch dev) Regras e memória para qualquer IA
+</code></pre>
+<hr>
+<h2>📐 Metodologia &amp; Branches</h2>
+<ul>
+<li><strong>Spec-Driven Development (SDD):</strong> toda mudança relevante nasce numa spec em <code>specs/NNN-nome/</code> antes do código.</li>
+<li><strong><code>dev</code></strong> — branch de trabalho e <strong>branch padrão do repositório</strong> (desde 28/10/2026): tudo é commitado aqui (inclui <code>specs/</code>, <code>relatorios/</code> e <code>AGENTS.md</code>).</li>
+<li><strong><code>main</code></strong> — versão estável e mais funcional, <strong>somente com o necessário para o projeto</strong>: <code>README.md</code>, <code>src/</code>, <code>docs/</code>, os arquivos de licença (<code>LICENSE</code>, <code>LICENSE-CONTENT.md</code>, <code>NOTICE</code>) e <code>.gitignore</code>/<code>.gitattributes</code>. Nada vai para a <code>main</code> sem pedido explícito do mantenedor, e cada versão estável recebe uma <strong>tag</strong> (<code>v2.0.0</code>, …).</li>
+<li><strong>Qualidade:</strong> antes de cada commit que mexe no curso roda o <code>npm test</code> (cenas, tradução, ARIA, recursos externos).</li>
+</ul>
+<hr>
+<h2>🎓 Fontes &amp; Créditos</h2>
+<p>O curso foi construído a partir de vídeos de atiradores e instrutores — todos os créditos aos autores:</p>
+<table>
+<thead>
+<tr>
+<th>Fonte</th>
+<th>Autor</th>
+<th>Uso no curso</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Videoaulas de mira</td>
+<td><strong>Anderson</strong> — ESTILINGUE 4A</td>
+<td>Ponto de mira, papel com cruz, alinhamento a 45° com marca de fita</td>
+</tr>
+<tr>
+<td>“Mira e dispara”</td>
+<td><strong>Coelho</strong></td>
+<td>Postura de tiro de lado, OTT × TTF, gangorra da ancoragem</td>
+</tr>
+<tr>
+<td>Portal do Estilingue</td>
+<td><strong>Ailton Bonassa</strong></td>
+<td>Bandas, munição, malha, ancoragem na orelha, soltura, 2 s de follow-through</td>
+</tr>
+<tr>
+<td>Playlists “45°”, “Distance shot”</td>
+<td><strong>SlingshotSniper</strong></td>
+<td>Mira a 45° (só títulos/descrições)</td>
+</tr>
+<tr>
+<td>“Ponto de mira a 45°”</td>
+<td><strong>Na Mira do Gancho</strong></td>
+<td>Ancoragem na altura do olho a 45°</td>
+</tr>
+<tr>
+<td><strong>Slingshot Shooting PRI</strong></td>
+<td><strong>YUUI</strong></td>
+<td>Referência visual de alinhamento (diagramas sem fala): TTF × OTT, soltura, curva balística</td>
+</tr>
+<tr>
+<td>Tabelas e guias</td>
+<td><strong>Simple Shot</strong>, AllAboutVision, Super Rádio Tupi</td>
+<td>Espessuras × esferas e teste do olho dominante (<em>leitura externa</em>)</td>
+</tr>
+</tbody></table>
+<p>Detalhes, links e o que foi transcrito de cada vídeo: <a href="docs/04-referencias.md"><code>docs/04-referencias.md</code></a>.</p>
+<h3>🧊 Créditos de modelos 3D e bibliotecas</h3>
+<ul>
+<li>Personagens e cabelos: <em>Universal Base Characters [Standard]</em>, de <a href="https://quaternius.com">Quaternius</a> — CC0 1.0.</li>
+<li>Forquilha e malha: <em>Lowpoly slingshot</em>, de <a href="https://sketchfab.com/seqw0">seqw0</a> (<a href="https://sketchfab.com/3d-models/lowpoly-slingshot-666cf7c88a114eaa8479adaf33deee51">Sketchfab</a>) — <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; modificado (só a armação e a malha de couro; texturas reduzidas).</li>
+<li>Renderização 3D: <a href="https://threejs.org">three.js</a> (MIT), embutido no arquivo.</li>
+<li>A página <strong>Créditos e licenças</strong> do curso (link no rodapé) repete esses créditos. As capturas das licenças e o que ainda falta documentar estão em <a href="docs/licencas/README.md"><code>docs/licencas/</code></a>.</li>
+<li>A página “Fontes” do curso foi removida em 18/10/2026; a lista de vídeos continua em <a href="docs/04-referencias.md"><code>docs/04-referencias.md</code></a>.</li>
+</ul>
+<hr>
+<h2>🚦 Estado Atual e Pendências</h2>
+<ul>
+<li>✅ <strong>16 sessões, 53 animações (40 em 3D com órbita)</strong>, home de trilha por módulos, barra inferior no celular e progresso salvo (que só conta após o quiz de segurança).</li>
+<li>✅ <strong>v2.7.0:</strong> &quot;Analise seu treino&quot; (experimental), com o modelo de pose no aparelho; os três cartões do Treino em destaque. Pendente: validação com atiradores reais e revisão LGPD/técnica.</li>
+<li>✅ <strong>v2.6.0:</strong> gravação do treino com câmera, quadros-chave por tiro, linhas-guia e ligação com a série (spec 009, fase 2). Pendente: teste em Android e iPhone com câmera e estalo reais.</li>
+<li>✅ <strong>v2.5.0:</strong> registro de séries com leitura do grupo, correção sugerida e histórico no aparelho (spec 009, fase 1).</li>
+<li>✅ <strong>v2.4.0:</strong> Expansão para 16 sessões com Oficina de montagem (nó constritor e Wrap &amp; Tuck 3D), Sistemas de pontaria (Referência, Gap, Instintivo), Estilo Butterfly 3D, pista oficial WSA (10 m / 15 m) com simulador de 5 alvos (2 a 10 pts), balística/Joules e cotas 3D em metros (spec 008).</li>
+<li>✅ <strong>Estilo Butterfly (Módulo 4 · Mira e Disparo):</strong> passo a passo 3D das 6 fases, comparativo 3D de puxadas (curta, Semi-Butterfly e Full Butterfly) e calculadora interativa de corte de fita em centímetros.</li>
+<li>✅ <strong>v2.3.0:</strong> aviso de risco e termos, menores, socorro, equipamento com norma, regras de comunicação, quiz de segurança, créditos e licenças (specs 005 a 007).</li>
+<li>✅ Guias novos: <a href="docs/05-manutencao-das-fitas.md">manutenção das fitas</a>, <a href="docs/06-leitura-do-grupo-vento-alvos-moveis.md">leitura do grupo, vento e alvos móveis</a>, <a href="docs/07-campo-e-legislacao.md">onde atirar e legislação</a> e <a href="docs/08-plano-de-treino.md">plano de treino de 8 semanas</a>.</li>
+<li>✅ PWA: instalável e offline quando servido por http(s) (<code>manifest.webmanifest</code>, <code>sw.js</code>).</li>
+<li>✅ <strong>v2.2.0:</strong> curso em PT-BR e inglês (spec 004), com teste que garante 100% de cobertura nos dois idiomas.</li>
+<li>✅ Acessibilidade (teclado, ARIA, leitor de tela) e uso no celular (barra inferior, ajustes expostos, “girar com o dedo”, pinça), com tema claro e escuro.</li>
+<li>✅ Smoke test automático (<code>npm test</code>) cobrindo todas as cenas; código sem funções mortas.</li>
+<li>✅ Pegadas 45° / 90° / 180° em pé; olho de mira com paralaxe.</li>
+<li>✅ <strong>v2.0.0:</strong> 3D em Three.js com personagens glTF (Homem e Mulher; o Boneco saiu em 18/10/2026), óculos de atirador, forquilha e malha em 3D, ancoragem no canto da boca e linha do olhar; o <code>npm test</code> valida todos os quadros 3D, a pose por IK.</li>
+<li>✅ <strong>Materiais de apresentação</strong> (na <code>dev</code>): landing para devs e parceiros, apresentação para escolas e apresentação para parceiros, em HTML único.</li>
+<li>⏳ <strong>Pendentes (dependem de pessoas):</strong> revisão da página “Se algo der errado” por profissional de saúde; revisão técnica do quiz, da lista de equipamento e da catch box mínima; revisão jurídica de termos, menores e licenças; criação do canal de relato de incidentes; revisão por atiradores experientes; teste com iniciantes; revisão do inglês por falante nativo.</li>
+<li>⏳ <strong>Negócio (relatório interno, na <code>dev</code>):</strong> casa digital (domínio, página pública, versão e hash no rodapé), parcerias com os autores dos vídeos, marca e domínios, vídeos curtos, pesquisa com público, CSP e aviso de nova versão do PWA. O relatório <code>relatorios/2026-10-17-analise-de-negocio.html</code> lista tudo o que falta.</li>
+<li>🔄 <strong>180° em pé:</strong> definido pelo autor com foto de referência; os vídeos transcritos não detalham essa pegada.</li>
+<li>🔄 <strong>Vídeos sem fala</strong> (SlingshotSniper, YUUI): conteúdo extraído de descrições e quadros; pode haver detalhes não capturados.</li>
+<li>🔄 <strong>Valores didáticos:</strong> a cena de curva balística e as massas são ilustrativas (física simples, sem arrasto).</li>
+<li>🗺️ <strong>Ideias futuras:</strong> personagem infantil com modelo próprio (o pacote usado não tem), mais poses e roupas, diário de treino interativo (agrupamento por série), alvos extras e exportação do progresso.</li>
+</ul>
+<hr>
+<h2>🇬🇧 English summary</h2>
+<p><strong>Estilingue Esportivo</strong> (“Sporting Slingshot”) is a free, interactive course on <strong>slingshot target shooting</strong>, built as a <strong>single HTML file</strong> that opens in any browser — no install, no account, no network. It has <strong>16 sessions</strong> (safety, frame and grips, bands, ammo, pouch grip, rigging workshop, stance and breathing, cant angles, anchor point, aiming eye, sight line, aiming systems, release, Butterfly style, field correction, and competition formats) and <strong>53 interactive animations</strong> (40 in <strong>3D with drag-to-orbit</strong> and real characters — Man and Woman), so you can walk around the shooter, the fork and the sight line.</p>
+<ul>
+<li><strong>Language:</strong> switch between <strong>PT-BR and EN</strong> with the button at the top. Everything is translated, including the labels drawn inside the animations. Video titles in Portuguese keep the original with a short English gloss.</li>
+<li><strong>Open it:</strong> double-click <a href="src/index.html"><code>src/index.html</code></a> (≈3.4 MB, three.js and the 3D models are embedded, no CDN). It works offline, on desktop and phone, with dark and light themes. Without WebGL the 3D scenes fall back to a Canvas engine.</li>
+<li><strong>Safety comes first.</strong> Safety glasses, band inspection and a catch box with loose cloths are not optional. Risky stunt videos are listed only as “do not imitate”. The course is about target shooting: never shoot at animals or people.</li>
+<li><strong>Law:</strong> the legal notes in the course use <strong>Brazilian law as an example</strong> (Law 5,197/1967 lists slingshots among methods prohibited for hunting wild fauna). Rules differ by country and by city, so check the laws where you live. Nothing here is legal advice.</li>
+<li><strong>First open and safety gate:</strong> the course opens with a <strong>risk notice</strong> (use at your own risk, it does not replace an instructor, read Session 1 before shooting; 18+ or with a responsible adult). A <strong>5-question safety quiz</strong> must be passed (all correct) before your session progress counts; reading is never blocked. Pages for minors, “If something goes wrong” (basic first aid; Brazil’s SAMU 192, adapt to your local number), certified equipment and communication rules are linked from the footer and module 1. These pages still await review by a health professional, a technical reviewer and a lawyer.</li>
+<li><strong>Training page:</strong> log a series on a paper target and get one correction at a time, record a session with the phone camera (three key frames per shot) and, as an <em>experimental</em> feature, compare your posture across hits and misses with an on-device pose model. Everything stays on your device.</li>
+<li><strong>Sources:</strong> the course no longer shows sources or authors on screen; references are listed in <a href="docs/04-referencias.md"><code>docs/04-referencias.md</code></a> (Portuguese). Content that does not come from videos is marked as <em>external reading</em>.</li>
+<li><strong>Credits:</strong> characters and hair by <a href="https://quaternius.com">Quaternius</a> (CC0); fork and pouch <em>Lowpoly slingshot</em> by <a href="https://sketchfab.com/seqw0">seqw0</a> (<a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, modified); rendering by <a href="https://threejs.org">three.js</a> (MIT).</li>
+<li><strong>License:</strong> code under PolyForm Noncommercial 1.0.0 (non-commercial use only), course texts under CC BY-NC 4.0 (non-commercial, with credit), name and icon reserved; see <a href="LICENSE"><code>LICENSE</code></a>, <a href="LICENSE-CONTENT.md"><code>LICENSE-CONTENT.md</code></a> and <a href="NOTICE"><code>NOTICE</code></a>.</li>
+<li><strong>Status:</strong> the English text was produced with AI assistance and has not yet been reviewed by a native speaker; corrections are welcome.</li>
+</ul>
+<hr>
+<h2>📜 Licença</h2>
+<p>Desde 18/10/2026 (spec 007):</p>
+<ul>
+<li><strong>Código:</strong> <a href="LICENSE">PolyForm Noncommercial 1.0.0</a> — uso não comercial; uso comercial só com autorização por escrito. (Até 17/10/2026 o código era MIT; cópias anteriores seguem na licença com que foram recebidas.)</li>
+<li><strong>Conteúdo</strong> (textos do curso, traduções, guias em <code>docs/</code>): <a href="LICENSE-CONTENT.md">CC BY-NC 4.0</a> — pode copiar e adaptar com crédito, <strong>sem fins comerciais</strong>; uso comercial só com autorização.</li>
+<li><strong>Marca:</strong> o nome “Estilingue Esportivo” e o ícone são reservados.</li>
+<li><strong>Terceiros:</strong> three.js (MIT), Quaternius (CC0), seqw0 (CC BY 4.0) (o Boneco, <em>Low Poly Mannequin</em>, foi removido em 18/10/2026). Tudo em <a href="NOTICE"><code>NOTICE</code></a>.</li>
+<li><strong>Repositório:</strong> o Boneco, que impedia a publicação, foi removido em 18/10/2026; a decisão de tornar o repositório público continua do mantenedor.</li>
+</ul>
+<p>Os vídeos e materiais de referência pertencem aos respectivos autores e estão citados com link; o curso apenas os <strong>referencia e parafraseia</strong>.</p>
+<p><strong>Develop by TadeuReinaldo - tazzeus</strong> — <a href="https://github.com/tazzeus">@tazzeus</a></p>
+
+
+  </article>
+</main>
+</body>
+</html>
