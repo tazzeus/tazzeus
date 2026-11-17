@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>screen_charging — README</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <a href="https://github.com/tazzeus" class="voltar">&larr; tazzeus</a>
+  <span class="badge">Somente leitura &middot; código-fonte privado</span>
+</div>
+<main>
+  <header class="cabecalho">
+    <h1>screen_charging</h1>
+    <p class="subtitulo">A tela de descanso inteligente para o seu Android carregando</p>
+  </header>
+  <article class="conteudo">
+<h1>screen_charging — Relógio de Cabeceira para Android</h1>
+<p>App Android nativo em <strong>Kotlin</strong> que transforma o celular em um <strong>relógio de cabeceira em tela cheia</strong>, no estilo do modo de espera do iPhone: relógio analógico, calendário do mês, clima com previsão das próximas horas e nível da bateria. Abre <strong>sozinho 10 segundos depois de conectar o carregador</strong>, até com o celular bloqueado, ou na hora pelo app, para ficar na cabeceira <strong>a noite toda mesmo sem carregador</strong>, gastando o mínimo de bateria.</p>
+<hr>
+<h2>🌙 Visão Geral da Interface</h2>
+<section class="vitrine">
+  <div class="vitrine-destaque">
+    <img src="screenshots/screen-charging.png" alt="Tela de descanso do screen_charging de dia">
+    <div class="vitrine-info">
+      <span class="vitrine-tag">Tela de Descanso em Tela Cheia</span>
+      <h4>🕰️ Relógio, Clima, Previsão, Calendário e Bateria numa Olhada Só</h4>
+      <p>Relógio analógico com ponteiro de segundos suave à esquerda; à direita, clima atual, previsão das próximas 5 horas (formato 24 h), calendário do mês e dia da semana com a bateria.</p>
+    </div>
+  </div>
+  <div class="vitrine-grid">
+    <div class="vitrine-card">
+      <img src="screenshots/screen-charging-noturno.png" alt="Modo noturno em vermelho">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Sensor de Luz</span>
+        <h4>🔴 Modo Noturno Automático</h4>
+        <p>No quarto escuro, tudo fica vermelho e o brilho vai ao mínimo, para não ofuscar nem atrapalhar o sono.</p>
+      </div>
+    </div>
+    <div class="vitrine-card">
+      <img src="screenshots/screen-charging-app.png" alt="Tela do app com miniatura ao vivo">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Abrir na Hora ou Automático</span>
+        <h4>⚡ Abre 10 s Após Conectar o Carregador</h4>
+        <p>Serviço em primeiro plano detecta o carregador e abre a tela por cima do bloqueio. Ou toque em “Abrir a tela de descanso” para usar na cabeceira sem carregador.</p>
+      </div>
+    </div>
+    <div class="vitrine-card">
+      <img src="screenshots/screen-charging-opcoes.png" alt="Opções do que aparece na tela">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Personalizável</span>
+        <h4>🎛️ Cada Elemento Liga e Desliga</h4>
+        <p>Ponteiro dos segundos, sigla do país, dia da semana, bateria, calendário, clima, cidade e previsão por hora, com miniatura ao vivo no app.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<h3>Principais Funcionalidades</h3>
+<ol>
+<li><p><strong>Abertura automática ao carregar:</strong></p>
+<ul>
+<li><code>ChargingMonitorService</code> (serviço em primeiro plano, tipo <code>specialUse</code>) escuta <code>ACTION_POWER_CONNECTED</code>, espera <strong>10 segundos</strong> e, se o carregador continuar conectado, abre a tela de descanso por cima da tela de bloqueio, acendendo o display.</li>
+<li>Fecha sozinha ao desconectar. Um toque também fecha.</li>
+<li>Religado automaticamente após reiniciar o celular ou atualizar o app (<code>BootReceiver</code>).</li>
+</ul>
+</li>
+<li><p><strong>Cabeceira a noite toda, até sem carregador:</strong></p>
+<ul>
+<li>Botão “Abrir a tela de descanso” no topo do app; a tela fica ligada a noite inteira com a mesma aparência.</li>
+</ul>
+</li>
+<li><p><strong>Clima e previsão por hora:</strong></p>
+<ul>
+<li>Integração com a API gratuita do <strong>Open-Meteo</strong> (clima atual, máx./mín. do dia e as próximas 5 horas) e nome da cidade pelo <code>Geocoder</code> do Android.</li>
+<li>Localização apenas aproximada, arredondada para cerca de 1 km; atualização a cada 30 minutos com cache local.</li>
+<li>Ícones do tempo vetoriais desenhados em <code>Canvas</code>, que também ficam vermelhos no modo noturno.</li>
+</ul>
+</li>
+<li><p><strong>Cuidados com a tela OLED:</strong> o desenho se desloca alguns pixels a cada minuto, evitando marcas permanentes.</p></li>
+<li><p><strong>Alternativa sem permissões extras:</strong> também funciona como Protetor de tela do Android (<code>DreamService</code>).</p></li>
+</ol>
+<hr>
+<h2>📊 Consumo Medido: Desenhando Só o Que Muda</h2>
+<p>A parte parada da tela (números, calendário, clima, bateria) fica guardada num <code>Bitmap</code>, refeito só quando algo muda; a cada quadro o app desenha apenas os ponteiros. Na bateria, 20 quadros por segundo em vez de 60, com o ponteiro dos segundos ainda deslizando.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Uso do processador para desenhar a tela</th>
+<th align="left">Versão 1.0.0</th>
+<th align="left">Versão 1.1.0</th>
+<th align="left">Ganho Real</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>No carregador (60 quadros/s)</strong></td>
+<td align="left">39% de um núcleo</td>
+<td align="left"><strong>20% de um núcleo</strong></td>
+<td align="left"><strong>-49%</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Na bateria (20 quadros/s)</strong></td>
+<td align="left">39% de um núcleo</td>
+<td align="left"><strong>4% de um núcleo</strong></td>
+<td align="left"><strong>-90%</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Tamanho do APK</strong></td>
+<td align="left">687 KB</td>
+<td align="left"><strong>688 KB</strong></td>
+<td align="left"><strong>Sem bibliotecas externas</strong></td>
+</tr>
+</tbody></table>
+<p><em>Medições no emulador do Android. Estimativa para uma noite de 8 h sem carregador: 10–25% da bateria em tela OLED com o modo noturno; 30–50% em tela LCD.</em></p>
+<hr>
+<h2>🛠️ Especificações Técnicas</h2>
+<ul>
+<li><strong>Linguagem:</strong> Kotlin 2.1, somente o framework Android (sem bibliotecas externas)</li>
+<li><strong>Compatibilidade:</strong> Android 8 ou mais novo (<code>minSdk 26</code>, <code>targetSdk 36</code>)</li>
+<li><strong>Desenho:</strong> <code>View</code> própria com <code>Canvas</code> e camada estática em <code>Bitmap</code></li>
+<li><strong>Segundo plano:</strong> serviço em primeiro plano <code>specialUse</code> + permissão “Sobrepor a outros apps”</li>
+<li><strong>Clima:</strong> Open-Meteo (CC BY 4.0), sem chave de API</li>
+<li><strong>Distribuição:</strong> APK assinado com chave de release, publicado nas Releases do repositório</li>
+</ul>
+<hr>
+<h2>📂 Estrutura de Arquivos do Projeto</h2>
+<pre><code class="language-text">tela_carregamento_android/
+├── README.md                      # Apresentação e documentação completa
+├── LICENSE                        # Licença comercial proprietária
+├── app/src/main/
+│   ├── AndroidManifest.xml
+│   └── java/com/tazzeus/telacarregamento/
+│       ├── StandbyView.kt             # Relógio, calendário, clima e bateria em Canvas
+│       ├── StandbyActivity.kt         # Tela cheia por cima do bloqueio
+│       ├── ChargingMonitorService.kt  # Detecta o carregador e abre após 10 s
+│       ├── StandbyDreamService.kt     # Protetor de tela do Android
+│       ├── WeatherRepository.kt       # Localização, Open-Meteo e Geocoder
+│       ├── WeatherIconPainter.kt      # Ícones do tempo vetoriais
+│       ├── AmbientNightMode.kt        # Modo noturno pelo sensor de luz
+│       ├── Prefs.kt                   # Opções liga/desliga
+│       └── MainActivity.kt            # Miniatura ao vivo e configurações
+├── docs/screenshots/              # Prints reais do app
+└── marketing/
+    └── screen_charging-Apresentacao.html  # Apresentação interativa em página única
+</code></pre>
+<hr>
+<h2>🚀 Como Instalar</h2>
+<ol>
+<li>Baixe o <code>screen_charging-v1.1.0.apk</code> nas Releases e toque nele para instalar.</li>
+<li>Permita a localização (para o clima) e “Sobrepor a outros apps” (para abrir sozinho ao carregar).</li>
+<li>Conecte o carregador: em 10 segundos a tela de descanso aparece. Sem carregador, toque em “Abrir a tela de descanso”.</li>
+</ol>
+<hr>
+<h2>🔄 Diretrizes de Versionamento Git (Multi-IA)</h2>
+<ul>
+<li><strong>Branch <code>dev</code></strong>: Branch ativa de trabalho para desenvolvimento, novos recursos e documentação.</li>
+<li><strong>Branch <code>main</code></strong>: Branch estável de lançamento. O merge de <code>dev</code> para <code>main</code> é realizado <strong>exclusivamente mediante solicitação explícita do usuário</strong>.</li>
+</ul>
+
+
+  </article>
+</main>
+</body>
+</html>
