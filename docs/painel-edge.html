@@ -15,6 +15,12 @@
   <header class="cabecalho">
     <h1>Painel Edge</h1>
     <p class="subtitulo">Os painéis laterais dos celulares Galaxy, agora no Windows</p>
+    <a href="https://github.com/tazzeus/painel_edge-releases/releases/latest" class="botao-demo" target="_blank" rel="noopener noreferrer">
+      ⬇️ Baixar a versão mais recente
+    </a>
+    <p class="nota-demo">
+      Instalador para Windows 10 e 11 (64 bits), sem pedir administrador. Depois de instalado, o app se atualiza sozinho.
+    </p>
   </header>
   <article class="conteudo">
 <h1>Painel Edge — Painéis Laterais Deslizantes para o Windows</h1>
@@ -68,7 +74,7 @@
       <div class="vitrine-info">
         <span class="vitrine-tag">Primeiro Uso</span>
         <h4>🔐 Com Conta ou Sem Conta</h4>
-        <p>Entre com a conta Google para ver as agendas e guardar o backup no próprio Drive, ou use como convidado, com tudo só neste computador.</p>
+        <p>Entre com a conta Google ou Microsoft para ver as agendas e guardar o backup na nuvem da própria conta, ou use como convidado, com tudo só neste computador.</p>
       </div>
     </div>
   </div>
@@ -79,13 +85,14 @@
 <li><p><strong>Alça na borda de cada monitor:</strong></p>
 <ul>
 <li>Abre ao clicar, ao arrastar para dentro ou ao passar o mouse (configurável). Segurar e arrastar muda a posição da alça.</li>
+<li>Pelo teclado, <strong>Win + Shift + E</strong> abre e fecha o painel no monitor onde está o mouse; a combinação pode ser trocada.</li>
 <li>Some sozinha quando um jogo ou vídeo está em tela cheia; pode ser ocultada por 1 hora pelo botão direito.</li>
 </ul>
 </li>
 <li><p><strong>Notas e agenda:</strong></p>
 <ul>
 <li>Nota adesiva sempre aberta, com salvamento automático e lista de notas guardadas.</li>
-<li>Compromissos dos próximos 7 dias com a cor de cada agenda: Google Agenda pela conta ou qualquer link iCal (<code>.ics</code>), com eventos recorrentes.</li>
+<li>Compromissos dos próximos 7 dias com a cor de cada agenda: Google Agenda ou Outlook pela conta, ou qualquer link iCal (<code>.ics</code>), com eventos recorrentes.</li>
 </ul>
 </li>
 <li><p><strong>Apps e ferramentas:</strong></p>
@@ -96,7 +103,8 @@
 </ul>
 </li>
 <li><p><strong>Clima completo:</strong> API gratuita do <strong>Open-Meteo</strong> (previsão e qualidade do ar), localização automática pelo Windows ou cidade escolhida.</p></li>
-<li><p><strong>Contas e backup:</strong> login com Google por OAuth 2.0 com PKCE; o backup de apps, notas e configurações vai para a pasta oculta do app no <strong>próprio Google Drive</strong> do usuário. Ao sair da conta, o acesso é revogado na hora. Microsoft e iCloud já estão no código e serão liberados em breve.</p></li>
+<li><p><strong>Contas e backup:</strong> login com Google ou Microsoft (Hotmail, Outlook.com e contas de trabalho) por OAuth 2.0 com PKCE; o backup de apps, notas e configurações vai para a pasta do app no <strong>próprio Google Drive ou OneDrive</strong> do usuário. Ao sair da conta do Google, o acesso é revogado na hora. O iCloud já está no código e será liberado em breve.</p></li>
+<li><p><strong>Atualização automática:</strong> o app procura versões novas e se atualiza com um clique, conferindo o SHA-256 do instalador antes de instalar.</p></li>
 <li><p><strong>Comportamento de serviço:</strong> inicia com o Windows, instância única e reaberto pelo próprio Windows se fechar por erro.</p></li>
 </ol>
 <hr>
@@ -105,10 +113,10 @@
 <li><strong>Linguagem:</strong> C# no .NET 10, interface em WPF, DPI por monitor (PerMonitorV2)</li>
 <li><strong>Compatibilidade:</strong> Windows 10 (1809) ou mais novo, 64 bits</li>
 <li><strong>Integração com o Windows:</strong> Win32 API (janelas sem foco, <code>SetWindowPos</code>, detecção de tela cheia) e Shell (<code>IShellItemImageFactory</code>, <code>shell:AppsFolder</code>)</li>
-<li><strong>Contas:</strong> OAuth 2.0 com PKCE e retorno local, tokens protegidos com DPAPI; Google Calendar API e Google Drive (<code>appDataFolder</code>)</li>
+<li><strong>Contas:</strong> OAuth 2.0 com PKCE e retorno local, tokens protegidos com DPAPI; Google Calendar e Drive (<code>appDataFolder</code>), Microsoft Graph (Outlook e OneDrive)</li>
 <li><strong>Agenda iCal:</strong> Ical.Net</li>
 <li><strong>Clima:</strong> Open-Meteo (CC BY 4.0), sem chave de API</li>
-<li><strong>Distribuição:</strong> instalador Inno Setup por usuário, sem administrador, com o app autocontido; publicado nas Releases do repositório</li>
+<li><strong>Distribuição:</strong> instalador Inno Setup por usuário, sem administrador, com o app autocontido; publicado nas <a href="https://github.com/tazzeus/painel_edge-releases/releases/latest" target="_blank" rel="noopener">Releases públicas</a>, de onde o próprio app se atualiza</li>
 </ul>
 <hr>
 <h2>📂 Estrutura de Arquivos do Projeto</h2>
@@ -131,9 +139,10 @@
 <hr>
 <h2>🚀 Como Instalar</h2>
 <ol>
-<li>Baixe o <code>PainelEdge-Setup-0.2.0.exe</code> nas Releases e dê dois cliques. Instala só para o seu usuário, sem pedir administrador.</li>
-<li>Escolha entrar com a conta Google ou usar sem conta.</li>
-<li>Clique ou arraste a alça azul na borda direita da tela.</li>
+<li>Baixe o <code>PainelEdge-Setup-0.3.0.exe</code> na <a href="https://github.com/tazzeus/painel_edge-releases/releases/latest" target="_blank" rel="noopener">página de versões</a> e dê dois cliques. Instala só para o seu usuário, sem pedir administrador.</li>
+<li>Escolha entrar com a conta Google ou Microsoft, ou usar sem conta.</li>
+<li>Clique ou arraste a alça azul na borda direita da tela, ou pressione <strong>Win + Shift + E</strong>.</li>
+<li>Versões novas chegam sozinhas: o app avisa perto do relógio e atualiza com um clique.</li>
 </ol>
 <hr>
 <h2>🔄 Diretrizes de Versionamento Git (Multi-IA)</h2>
