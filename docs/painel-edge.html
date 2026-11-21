@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Edge — README</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <a href="https://github.com/tazzeus" class="voltar">&larr; tazzeus</a>
+  <span class="badge">Somente leitura &middot; código-fonte privado</span>
+</div>
+<main>
+  <header class="cabecalho">
+    <h1>Painel Edge</h1>
+    <p class="subtitulo">Os painéis laterais dos celulares Galaxy, agora no Windows</p>
+  </header>
+  <article class="conteudo">
+<h1>Painel Edge — Painéis Laterais Deslizantes para o Windows</h1>
+<p>App de desktop em <strong>C# com WPF (.NET 10)</strong> que traz para o Windows a ideia dos <strong>Painéis Edge</strong> dos celulares Galaxy: uma <strong>alça fina na borda de cada monitor</strong> abre, com um clique, um arraste ou só passando o mouse, um painel deslizante com <strong>nota adesiva, agenda, apps favoritos, ferramentas rápidas, cronômetro com Pomodoro e clima completo</strong>. Troca de painel com um arraste para o lado e se recolhe sozinho ao clicar fora. Roda em segundo plano, inicia com o Windows e segue o tema claro ou escuro do sistema.</p>
+<hr>
+<h2>🧩 Visão Geral da Interface</h2>
+<section class="vitrine">
+  <div class="vitrine-destaque">
+    <img src="screenshots/painel-edge.png" alt="Os três painéis do Painel Edge lado a lado">
+    <div class="vitrine-info">
+      <span class="vitrine-tag">Três Painéis, Um Arraste</span>
+      <h4>📝 Notas e Agenda · 🚀 Apps e Ferramentas · 🌦️ Clima</h4>
+      <p>O painel desliza da borda da tela e mostra um painel por vez; arraste para o lado, use as setas, os pontos ou a roda do mouse para trocar. Clique fora, aperte Esc ou abra um app e ele se recolhe.</p>
+    </div>
+  </div>
+  <div class="vitrine-grid">
+    <div class="vitrine-card">
+      <img src="screenshots/painel-edge-notas-agenda.png" alt="Painel de notas e agenda">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Notas e Agenda</span>
+        <h4>📝 Nota Sempre Pronta e o Dia na Mão</h4>
+        <p>Nota adesiva aberta para digitar, salva sozinha, com lista de notas guardadas. Embaixo, os compromissos dos próximos 7 dias das agendas do Google ou de links iCal.</p>
+      </div>
+    </div>
+    <div class="vitrine-card">
+      <img src="screenshots/painel-edge-apps-ferramentas.png" alt="Painel de apps e ferramentas">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Apps e Ferramentas</span>
+        <h4>🚀 Favoritos, Atalhos e Pomodoro</h4>
+        <p>Programas, apps da Store, pastas, sites e pares de apps que abrem lado a lado. Ferramentas como recorte de tela e conta-gotas de cor, e um cartão de cronômetro ou Pomodoro.</p>
+      </div>
+    </div>
+    <div class="vitrine-card">
+      <img src="screenshots/painel-edge-clima.png" alt="Painel de clima">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Clima Completo</span>
+        <h4>🌦️ Agora, Próximas Horas e a Semana</h4>
+        <p>Aviso de chuva provável, chance de chuva por hora, UV com recomendação de protetor, vento, umidade, qualidade do ar, sol e os próximos 7 dias.</p>
+      </div>
+    </div>
+    <div class="vitrine-card">
+      <img src="screenshots/painel-edge-configuracoes.png" alt="Janela de configurações">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Personalizável</span>
+        <h4>🎛️ Alça, Tamanho, Painéis e Contas</h4>
+        <p>Lado, posição, cor e espessura da alça; modo de abertura; largura e altura do painel; quais painéis aparecem e em que ordem; durações do Pomodoro e localização do clima.</p>
+      </div>
+    </div>
+    <div class="vitrine-card">
+      <img src="screenshots/painel-edge-boas-vindas.png" alt="Tela de boas-vindas">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Primeiro Uso</span>
+        <h4>🔐 Com Conta ou Sem Conta</h4>
+        <p>Entre com a conta Google para ver as agendas e guardar o backup no próprio Drive, ou use como convidado, com tudo só neste computador.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<p><em>Prints com dados de exemplo (cidade de São Paulo, agenda e notas fictícias).</em></p>
+<h3>Principais Funcionalidades</h3>
+<ol>
+<li><p><strong>Alça na borda de cada monitor:</strong></p>
+<ul>
+<li>Abre ao clicar, ao arrastar para dentro ou ao passar o mouse (configurável). Segurar e arrastar muda a posição da alça.</li>
+<li>Some sozinha quando um jogo ou vídeo está em tela cheia; pode ser ocultada por 1 hora pelo botão direito.</li>
+</ul>
+</li>
+<li><p><strong>Notas e agenda:</strong></p>
+<ul>
+<li>Nota adesiva sempre aberta, com salvamento automático e lista de notas guardadas.</li>
+<li>Compromissos dos próximos 7 dias com a cor de cada agenda: Google Agenda pela conta ou qualquer link iCal (<code>.ics</code>), com eventos recorrentes.</li>
+</ul>
+</li>
+<li><p><strong>Apps e ferramentas:</strong></p>
+<ul>
+<li>Apps favoritos de qualquer tipo, inclusive da Microsoft Store e pares de apps que abrem lado a lado na tela.</li>
+<li>24 ferramentas no catálogo (12 visíveis por padrão): calculadora, recorte de tela, conta-gotas de cor, emojis, lupa, terminal, bloquear tela, Wi-Fi, Bluetooth e outras. Tudo pode ser adicionado, removido e reorganizado arrastando.</li>
+<li>Cartão de cronômetro (<code>00:00:000</code>) ou Pomodoro com foco, pausas curtas e longas e aviso no fim de cada etapa; com pouca altura, o cartão se compacta.</li>
+</ul>
+</li>
+<li><p><strong>Clima completo:</strong> API gratuita do <strong>Open-Meteo</strong> (previsão e qualidade do ar), localização automática pelo Windows ou cidade escolhida.</p></li>
+<li><p><strong>Contas e backup:</strong> login com Google por OAuth 2.0 com PKCE; o backup de apps, notas e configurações vai para a pasta oculta do app no <strong>próprio Google Drive</strong> do usuário. Ao sair da conta, o acesso é revogado na hora. Microsoft e iCloud já estão no código e serão liberados em breve.</p></li>
+<li><p><strong>Comportamento de serviço:</strong> inicia com o Windows, instância única e reaberto pelo próprio Windows se fechar por erro.</p></li>
+</ol>
+<hr>
+<h2>🛠️ Especificações Técnicas</h2>
+<ul>
+<li><strong>Linguagem:</strong> C# no .NET 10, interface em WPF, DPI por monitor (PerMonitorV2)</li>
+<li><strong>Compatibilidade:</strong> Windows 10 (1809) ou mais novo, 64 bits</li>
+<li><strong>Integração com o Windows:</strong> Win32 API (janelas sem foco, <code>SetWindowPos</code>, detecção de tela cheia) e Shell (<code>IShellItemImageFactory</code>, <code>shell:AppsFolder</code>)</li>
+<li><strong>Contas:</strong> OAuth 2.0 com PKCE e retorno local, tokens protegidos com DPAPI; Google Calendar API e Google Drive (<code>appDataFolder</code>)</li>
+<li><strong>Agenda iCal:</strong> Ical.Net</li>
+<li><strong>Clima:</strong> Open-Meteo (CC BY 4.0), sem chave de API</li>
+<li><strong>Distribuição:</strong> instalador Inno Setup por usuário, sem administrador, com o app autocontido; publicado nas Releases do repositório</li>
+</ul>
+<hr>
+<h2>📂 Estrutura de Arquivos do Projeto</h2>
+<pre><code class="language-text">painel_edge/
+├── README.md              # Apresentação e documentação
+├── LICENSE                # Licença comercial proprietária
+├── PainelEdge.slnx
+├── config/                # Configuração local (só o modelo vai para o git)
+├── docs/                  # Guias de login e instalador; prints do app
+├── installer/             # Inno Setup, geração do instalador e do ícone
+└── src/PainelEdge/
+    ├── Accounts/          # Contas, login OAuth, backup e boas-vindas
+    ├── Edge/              # Alça da borda e janela do painel
+    ├── Native/            # Win32 e Shell
+    ├── Panels/            # Notas, agenda, apps, ferramentas, timer e clima
+    ├── Services/          # Clima, localização, agenda e Pomodoro
+    ├── Settings/          # Configurações e notas
+    └── Ui/                # Tema claro/escuro e ícone da bandeja
+</code></pre>
+<hr>
+<h2>🚀 Como Instalar</h2>
+<ol>
+<li>Baixe o <code>PainelEdge-Setup-0.2.0.exe</code> nas Releases e dê dois cliques. Instala só para o seu usuário, sem pedir administrador.</li>
+<li>Escolha entrar com a conta Google ou usar sem conta.</li>
+<li>Clique ou arraste a alça azul na borda direita da tela.</li>
+</ol>
+<hr>
+<h2>🔄 Diretrizes de Versionamento Git (Multi-IA)</h2>
+<ul>
+<li><strong>Branch <code>dev</code></strong>: Branch ativa de trabalho para desenvolvimento, novos recursos e documentação.</li>
+<li><strong>Branch <code>main</code></strong>: Branch estável de lançamento, sem as ferramentas de desenvolvimento. O merge de <code>dev</code> para <code>main</code> é realizado <strong>exclusivamente mediante solicitação explícita do usuário</strong>.</li>
+</ul>
+
+
+  </article>
+</main>
+</body>
+</html>
