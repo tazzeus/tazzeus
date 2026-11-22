@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>screen_charging para Windows — README</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <a href="https://github.com/tazzeus" class="voltar">&larr; tazzeus</a>
+  <span class="badge">Somente leitura &middot; código-fonte privado</span>
+</div>
+<main>
+  <header class="cabecalho">
+    <h1>screen_charging para Windows</h1>
+    <p class="subtitulo">O relógio de cabeceira do Android, agora como protetor de tela do Windows</p>
+  </header>
+  <article class="conteudo">
+<h1>screen_charging para Windows — Protetor de Tela e Relógio de Mesa</h1>
+<p>Versão para Windows do <a href="screen-charging.html">screen_charging do Android</a>, com <strong>a mesma tela e o mesmo visual</strong>: relógio analógico ou <strong>digital no estilo flip</strong>, calendário do mês com os <strong>feriados nacionais</strong>, clima com <strong>previsão das próximas 5 horas</strong> e bateria do notebook. Funciona como <strong>protetor de tela do Windows</strong> (com miniatura ao vivo e botão de configurações na janela do próprio Windows), abre na hora pelo app para deixar o monitor <strong>na cabeceira a noite toda</strong> e, no notebook, abre <strong>sozinho 10 segundos depois de conectar o carregador</strong>. Tudo num único executável de cerca de 150 KB, sem bibliotecas externas.</p>
+<hr>
+<h2>🖥️ Visão Geral da Interface</h2>
+<section class="vitrine">
+  <div class="vitrine-destaque">
+    <img src="screenshots/screen-charging-windows.png" alt="Tela de descanso do screen_charging para Windows">
+    <div class="vitrine-info">
+      <span class="vitrine-tag">Protetor de Tela em Todos os Monitores</span>
+      <h4>🕰️ Relógio, Clima, Previsão, Calendário e Bateria numa Olhada Só</h4>
+      <p>Relógio analógico com ponteiro de segundos suave à esquerda; à direita, clima atual com máxima e mínima, previsão das próximas 5 horas com chance de chuva, calendário do mês com os feriados marcados e o dia da semana com a bateria.</p>
+    </div>
+  </div>
+  <div class="vitrine-grid">
+    <div class="vitrine-card">
+      <img src="screenshots/screen-charging-windows-flip.png" alt="Relógio digital no estilo flip com o clima embaixo">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Relógio Digital Flip</span>
+        <h4>🔢 Cartões que Viram a Cada Minuto</h4>
+        <p>Horas e minutos em cartões grandes, como nos relógios flip antigos, com o clima e a previsão embaixo e o calendário ao lado.</p>
+      </div>
+    </div>
+    <div class="vitrine-card">
+      <img src="screenshots/screen-charging-windows-virando.png" alt="Cartão dos minutos no meio da virada em 3D">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Perspectiva 3D em GDI+</span>
+        <h4>🎞️ Virada com Profundidade</h4>
+        <p>O GDI+ não tem perspectiva: a aba que vira é desenhada em faixas, cada uma na escala da sua distância, com sombra conforme se inclina.</p>
+      </div>
+    </div>
+    <div class="vitrine-card">
+      <img src="screenshots/screen-charging-windows-noturno.png" alt="Modo noturno em vermelho">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Por Horário</span>
+        <h4>🔴 Modo Noturno Automático</h4>
+        <p>No horário escolhido (padrão das 22:00 às 06:00), tudo fica vermelho e escuro, para não ofuscar nem atrapalhar o sono.</p>
+      </div>
+    </div>
+    <div class="vitrine-card">
+      <img src="screenshots/screen-charging-windows-configuracoes.png" alt="Janela de configurações com miniatura ao vivo">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Configurações</span>
+        <h4>🎛️ Miniatura ao Vivo e Cada Elemento Liga e Desliga</h4>
+        <p>Abre pelo botão “Configurações” da janela de proteção de tela do Windows, como num protetor nativo. Estilo do relógio, segundos, sigla do país, bateria, calendário, clima, cidade e previsão.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<h3>Principais Funcionalidades</h3>
+<ol>
+<li><p><strong>Protetor de tela nativo do Windows:</strong></p>
+<ul>
+<li>Aparece sempre na lista da janela “Proteção de tela”, com <strong>miniatura ao vivo</strong> no monitorzinho, botão <strong>Configurações</strong> e <strong>Visualizar</strong>.</li>
+<li>Cobre todos os monitores e fecha ao mexer o mouse ou apertar uma tecla.</li>
+</ul>
+</li>
+<li><p><strong>Na cabeceira a noite toda:</strong> botão “Abrir a tela de descanso”, que mantém a tela ligada e impede o computador de dormir. Um clique fecha.</p></li>
+<li><p><strong>Abertura automática no notebook:</strong> um monitor em segundo plano (ícone perto do relógio do Windows) detecta o carregador, espera <strong>10 segundos</strong> e abre a tela; fecha ao desconectar. Opção de só abrir com o computador sem uso.</p></li>
+<li><p><strong>Clima automático:</strong></p>
+<ul>
+<li>Localização do Windows, arredondada para cerca de 1 km; clima do <strong>Open-Meteo</strong> e nome da cidade pela <strong>BigDataCloud</strong>, ambos gratuitos e sem chave.</li>
+<li>Ou a cidade escolhida pelo nome, sem usar a localização.</li>
+</ul>
+</li>
+<li><p><strong>Calendário com feriados nacionais:</strong> datas fixas e móveis (Carnaval, Sexta-feira Santa e Corpus Christi a partir da Páscoa), com o nome do feriado do mês ao lado do título.</p></li>
+<li><p><strong>Cuidados com a tela:</strong> o desenho se desloca alguns pixels a cada minuto, evitando marcas em monitores OLED.</p></li>
+</ol>
+<hr>
+<h2>⚡ Desenhando Só o Que Muda</h2>
+<p>Como no Android, a parte parada da tela (números, calendário, clima, bateria) fica numa imagem refeita no máximo uma vez por minuto; a cada quadro o app redesenha apenas a área do relógio. Na tomada, cerca de 60 quadros por segundo; na bateria, 20, com o ponteiro dos segundos ainda deslizando. No relógio flip, a tela só é redesenhada enquanto um cartão vira.</p>
+<hr>
+<h2>🛠️ Especificações Técnicas</h2>
+<ul>
+<li><strong>Linguagem:</strong> C# com Windows Forms e GDI+ no <strong>.NET Framework 4.8</strong> (já incluso no Windows 10 e 11), sem bibliotecas externas</li>
+<li><strong>Um executável, vários modos:</strong> configurações, protetor de tela (<code>/s</code>), miniatura (<code>/p</code>), tela de descanso, monitor do carregador, instalação e desinstalação</li>
+<li><strong>Integração com o Windows:</strong> Win32 API (janela filha na miniatura do painel, DPI por monitor, <code>SetThreadExecutionState</code>, ociosidade do mouse e teclado), localização do Windows e recursos nativos gerados no build para o nome na lista de protetores</li>
+<li><strong>Clima:</strong> Open-Meteo (CC BY 4.0) e BigDataCloud, sem chave de API</li>
+<li><strong>Instalador:</strong> próprio, por usuário e sem administrador, com atalho no Menu Iniciar e desinstalação em “Aplicativos instalados”; testado com o Controle Inteligente de Aplicativos do Windows 11 ligado</li>
+<li><strong>Qualidade:</strong> testes automáticos (feriados, horários, clima e 128 combinações de desenho da tela) e guia de manutenção <code>AGENTS.md</code> para qualquer assistente de IA</li>
+</ul>
+<hr>
+<h2>📂 Estrutura de Arquivos do Projeto</h2>
+<pre><code class="language-text">protetor_tela/
+├── README.md                    # Apresentação e documentação completa
+├── AGENTS.md                    # Guia de manutenção para pessoas e assistentes de IA
+├── LICENSE                      # Licença comercial proprietária
+├── screen_charging.sln
+├── src/
+│   ├── Directory.Build.props    # Versão única do app e do instalador
+│   ├── ScreenCharging/
+│   │   ├── StandbyRenderer.cs   # Relógio, flip, calendário, clima e bateria em GDI+
+│   │   ├── StandbyForm.cs       # Tela cheia, protetor de tela e miniatura do Windows
+│   │   ├── SettingsForm.cs      # Configurações com miniatura ao vivo
+│   │   ├── ChargingMonitor.cs   # Abre 10 s após conectar o carregador
+│   │   ├── WeatherRepository.cs # Open-Meteo e busca de cidades
+│   │   ├── AutoLocation.cs      # Localização do Windows e nome da cidade
+│   │   ├── Holidays.cs          # Feriados nacionais a partir da Páscoa
+│   │   └── Installer.cs         # Instalar, desinstalar e registrar o protetor
+│   └── Setup/                   # Instalador com o app embutido
+├── tests/                       # Testes automáticos
+├── tools/                       # Build, testes, prints e release
+├── installer/                   # Instalador da versão atual
+└── docs/                        # Histórico de versões e prints
+</code></pre>
+<hr>
+<h2>🚀 Como Instalar</h2>
+<ol>
+<li>Rode o <code>screen_charging-setup.exe</code>. Instala só para o seu usuário, sem pedir administrador (a opção de aparecer sempre na lista de protetores do Windows pede permissão uma vez).</li>
+<li>O clima aparece sozinho pela localização do Windows; se preferir, escolha a cidade pelo nome.</li>
+<li>Pronto: o screen_charging já é o protetor de tela. Para a cabeceira, abra o app e clique em “Abrir a tela de descanso”.</li>
+</ol>
+<p><em>Em fase de testes, ainda sem distribuição pública.</em></p>
+<hr>
+<h2>🔄 Diretrizes de Versionamento Git (Multi-IA)</h2>
+<ul>
+<li><strong>Branch <code>dev</code></strong>: Branch ativa de trabalho para desenvolvimento, novos recursos e documentação.</li>
+<li><strong>Branch <code>main</code></strong>: Branch estável de lançamento. O merge de <code>dev</code> para <code>main</code> é realizado <strong>exclusivamente mediante solicitação explícita do usuário</strong>.</li>
+</ul>
+
+
+  </article>
+</main>
+</body>
+</html>
