@@ -14,7 +14,7 @@
 <main>
   <header class="cabecalho">
     <h1>VIG-LAN</h1>
-    <p class="subtitulo">Monitor da rede doméstica (descoberta, inventário, mapa e status) estilo Nagios/Zabbix</p>
+    <p class="subtitulo">Monitor da rede doméstica (descoberta, inventário, mapa e status) estilo Nagios/Zabbix, com energia e temperatura dos PCs da casa · versão 1.13.1</p>
   </header>
   <article class="conteudo">
 <h1>VIG-LAN</h1>
@@ -71,6 +71,22 @@
         <p>Gráficos de vazão e consumo de dados por interface para diagnosticar gargalos e aparelhos sobrecarregando a conexão.</p>
       </div>
     </div>
+    <div class="vitrine-card">
+      <img src="screenshots/vig-lan-energia.jpg" alt="Painel de Energia do VIG-LAN">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Energia &amp; Custo</span>
+        <h4>🔌 Painel de Energia dos PCs da Casa</h4>
+        <p>Potência agora, gasto do dia e do ciclo da conta de luz em reais, programas que mais pesam e tempo ligado, deste PC e dos outros PCs da casa com um agente leve.</p>
+      </div>
+    </div>
+    <div class="vitrine-card">
+      <img src="screenshots/vig-lan-temperatura.jpg" alt="Aba Temperatura do VIG-LAN">
+      <div class="vitrine-info">
+        <span class="vitrine-tag">Saúde do Hardware</span>
+        <h4>🌡️ Temperatura do Processador, de Cada Núcleo, da GPU e dos Discos</h4>
+        <p>Leitura a cada minuto com histórico, limites por sensor e avisos no celular; processador AMD Ryzen pelo kit oficial da AMD, com a temperatura de cada núcleo ao vivo.</p>
+      </div>
+    </div>
   </div>
 </section>
 <hr>
@@ -88,30 +104,47 @@
 <p>Essa é uma excelente pergunta e é natural ter essa dúvida! A resposta curta e direta é: <strong>o sistema não invade o seu roteador, não entra dentro de nenhum celular e não tem acesso a nada pessoal seu.</strong></p>
 <p>Para você entender de forma simples como ele funciona, imagine a sua casa como uma <strong>sala de reuniões</strong>:</p>
 <ol>
-<li><p><strong>Ele se conecta ou invade o roteador?</strong><br><strong>Não!</strong> O VIG-LAN <strong>não pede a senha do seu roteador</strong> e não altera nenhuma configuração dele. Ele se comporta na sua rede exatamente igual à sua Smart TV ou ao seu videogame: apenas como mais um aparelho comum conectado ao Wi-Fi.</p>
+<li>
+<p><strong>Ele se conecta ou invade o roteador?</strong><br>
+<strong>Não!</strong> O VIG-LAN <strong>não pede a senha do seu roteador</strong> e não altera nenhuma configuração dele. Ele se comporta na sua rede exatamente igual à sua Smart TV ou ao seu videogame: apenas como mais um aparelho comum conectado ao Wi-Fi.</p>
 </li>
-<li><p><strong>Ele se conecta ou invade os celulares e computadores da casa?</strong><br><strong>Não!</strong> Ele não tem nenhum acesso ao conteúdo dos aparelhos. Ele <strong>não vê conversas de WhatsApp, não vê fotos, não vê senhas nem sites que você acessa</strong>. Cada celular continua totalmente protegido e blindado.</p>
+<li>
+<p><strong>Ele se conecta ou invade os celulares e computadores da casa?</strong><br>
+<strong>Não!</strong> Ele não tem nenhum acesso ao conteúdo dos aparelhos. Ele <strong>não vê conversas de WhatsApp, não vê fotos, não vê senhas nem sites que você acessa</strong>. Cada celular continua totalmente protegido e blindado.</p>
 </li>
-<li><p><strong>Então, como ele consegue monitorar tudo?</strong><br>Todo aparelho conectado a uma rede Wi-Fi (seja uma lâmpada inteligente, uma TV ou um celular) precisa anunciar que está ali para a internet funcionar.<br>O VIG-LAN funciona como um <strong>vigia educado na sala</strong>: de tempos em tempos, ele manda uma mensagem pelo ar dizendo: <em>&quot;Aparelho X, você ainda está aí?&quot;</em>. O celular ou a TV respondem automaticamente: <em>&quot;Sim, estou aqui!&quot;</em>.</p>
+<li>
+<p><strong>Então, como ele consegue monitorar tudo?</strong><br>
+Todo aparelho conectado a uma rede Wi-Fi (seja uma lâmpada inteligente, uma TV ou um celular) precisa anunciar que está ali para a internet funcionar.<br>
+O VIG-LAN funciona como um <strong>vigia educado na sala</strong>: de tempos em tempos, ele manda uma mensagem pelo ar dizendo: <em>"Aparelho X, você ainda está aí?"</em>. O celular ou a TV respondem automaticamente: <em>"Sim, estou aqui!"</em>.</p>
 </li>
 </ol>
 <ul>
-<li>Se o aparelho responder: o sistema marca uma bolinha verde na tela.  </li>
-<li>Se o aparelho não responder por alguns minutos: ele avisa que aquele aparelho desligou ou saiu de casa.  </li>
+<li>Se o aparelho responder: o sistema marca uma bolinha verde na tela.</li>
+<li>Se o aparelho não responder por alguns minutos: ele avisa que aquele aparelho desligou ou saiu de casa.</li>
 <li>Se um aparelho que ele nunca viu responder: ele te avisa que alguém novo conectou na sua rede.</li>
 </ul>
 <ol start="4">
-<li><strong>E para onde vão os meus dados?</strong><br><strong>Para lugar nenhum.</strong> O programa roda 100% gravado no seu próprio computador. Ele não manda suas informações para empresas na nuvem, não vende seus dados e não precisa de cadastro na internet. Tudo fica na sua própria máquina.</li>
+<li><strong>E para onde vão os meus dados?</strong><br>
+<strong>Para lugar nenhum.</strong> O programa roda 100% gravado no seu próprio computador. Ele não manda suas informações para empresas na nuvem, não vende seus dados e não precisa de cadastro na internet. Tudo fica na sua própria máquina.</li>
 </ol>
 </blockquote>
 <hr>
 <h2>🎯 Quais Problemas o VIG-LAN Resolve Para Você?</h2>
 <ul>
-<li><strong>Alguém está usando seu Wi-Fi escondido?</strong><br>O VIG-LAN identifica na hora qualquer aparelho novo ou desconhecido que se conectar à sua rede e emite um alerta para você saber quem é.</li>
-<li><strong>A internet está lenta do nada?</strong><br>Veja exatamente qual computador, TV ou celular está consumindo toda a velocidade com vídeos pesados, downloads ou jogos.</li>
-<li><strong>A internet caiu de verdade ou é o roteador que travou?</strong><br>O sistema diferencia quedas do seu provedor (Claro, Vivo, Starlink, etc.) de travamentos do seu roteador, registrando a data e a hora exata de cada queda para você cobrar desconto na sua fatura.</li>
-<li><strong>Quem está em casa ou no escritório agora?</strong><br>Um sensor de presença simples mostra quais familiares ou funcionários estão no local e há quanto tempo chegaram, apenas pelo sinal do Wi-Fi.</li>
-<li><strong>Câmeras ou aparelhos importantes pararam de funcionar?</strong><br>Receba avisos imediatos no seu WhatsApp ou Telegram se uma câmera de segurança, impressora ou computador importante perder a conexão.</li>
+<li><strong>Alguém está usando seu Wi-Fi escondido?</strong><br>
+O VIG-LAN identifica na hora qualquer aparelho novo ou desconhecido que se conectar à sua rede e emite um alerta para você saber quem é.</li>
+<li><strong>A internet está lenta do nada?</strong><br>
+Veja exatamente qual computador, TV ou celular está consumindo toda a velocidade com vídeos pesados, downloads ou jogos.</li>
+<li><strong>A internet caiu de verdade ou é o roteador que travou?</strong><br>
+O sistema diferencia quedas do seu provedor (Claro, Vivo, Starlink, etc.) de travamentos do seu roteador, registrando a data e a hora exata de cada queda para você cobrar desconto na sua fatura.</li>
+<li><strong>Quem está em casa ou no escritório agora?</strong><br>
+Um sensor de presença simples mostra quais familiares ou funcionários estão no local e há quanto tempo chegaram, apenas pelo sinal do Wi-Fi.</li>
+<li><strong>Quanto custa deixar o PC servidor ligado 24 horas?</strong><br>
+O painel de Energia mede o processador, estima o resto do PC e mostra a potência agora, o gasto do dia e do ciclo da sua conta de luz em reais, os programas que mais pesam, há quanto tempo o PC está ligado e as quedas de energia. Outros PCs da casa entram com um agente pequeno instalado neles (<code class="notranslate">tools/agente-energia</code>).</li>
+<li><strong>O PC está esquentando demais?</strong><br>
+A aba Temperatura mostra o processador (AMD Ryzen, com cada núcleo), a placa de vídeo e os discos de cada PC (agora, últimas 24 h, por dia e por hora), guarda as vezes em que passaram do limite e avisa pelos mesmos canais quando esquentam.</li>
+<li><strong>Câmeras ou aparelhos importantes pararam de funcionar?</strong><br>
+Receba avisos imediatos no seu WhatsApp ou Telegram se uma câmera de segurança, impressora ou computador importante perder a conexão.</li>
 </ul>
 <hr>
 <h2>🎁 Bônus &amp; Diferencial Exclusivo: Alertas no Celular via Telegram (Sem Instalar Apps Extras)</h2>
@@ -134,36 +167,41 @@
 <h3>📲 Tutorial Passo a Passo: Como Configurar em 3 Minutos</h3>
 <h4>Passo 1: Criar seu Bot no Telegram</h4>
 <ol>
-<li>Abra o Telegram (no celular ou computador), pesquise por <strong><code>@BotFather</code></strong> (verifique o selo oficial de verificado) e clique em <strong>Começar</strong> (ou envie <code>/start</code>).</li>
-<li>Envie o comando:<pre><code class="language-text">/newbot
+<li>Abra o Telegram (no celular ou computador), pesquise por <strong><code class="notranslate">@BotFather</code></strong> (verifique o selo oficial de verificado) e clique em <strong>Começar</strong> (ou envie <code class="notranslate">/start</code>).</li>
+<li>Envie o comando:
+<pre lang="text" class="notranslate"><code class="notranslate">/newbot
 </code></pre>
 </li>
-<li>O BotFather pedirá:<ul>
-<li>Um <strong>nome de exibição</strong> para o bot (ex: <code>VIG-LAN Alertas</code>).</li>
-<li>Um <strong>nome de usuário</strong> que termine obrigatoriamente com <code>bot</code> (ex: <code>viglan_casa_bot</code>).</li>
+<li>O BotFather pedirá:
+<ul>
+<li>Um <strong>nome de exibição</strong> para o bot (ex: <code class="notranslate">VIG-LAN Alertas</code>).</li>
+<li>Um <strong>nome de usuário</strong> que termine obrigatoriamente com <code class="notranslate">bot</code> (ex: <code class="notranslate">viglan_casa_bot</code>).</li>
 </ul>
 </li>
-<li>Ao concluir, ele fornecerá o seu <strong>HTTP API Token</strong> (formato: <code>1234567890:ABCdefGhIJKlmNoPQRsTUVwxyZ</code>). Copie esse código.</li>
+<li>Ao concluir, ele fornecerá o seu <strong>HTTP API Token</strong> (formato: <code class="notranslate">1234567890:ABCdefGhIJKlmNoPQRsTUVwxyZ</code>). Copie esse código.</li>
 </ol>
 <h4>Passo 2: Iniciar Conversa com o Bot e Pegar seu Chat ID</h4>
 <ol>
-<li><strong>Importante:</strong> Abra a conversa com o bot que você acabou de criar (clique no link fornecido pelo BotFather) e clique em <strong>Começar</strong> (ou envie <code>/start</code>).<br><em>(Sem esse primeiro contato, o Telegram bloqueia o envio de mensagens do bot por proteção contra spam).</em></li>
-<li>Para descobrir seu número de <strong>Chat ID</strong>:<ul>
-<li>Pesquise pelo bot <strong><code>@userinfobot</code></strong> no Telegram e envie <code>/start</code>.</li>
-<li>Ele responderá na hora com os seus dados, incluindo o seu <code>Id:</code> (número de 9 ou 10 dígitos, ex.: <code>987654321</code>). Copie esse número.</li>
+<li><strong>Importante:</strong> Abra a conversa com o bot que você acabou de criar (clique no link fornecido pelo BotFather) e clique em <strong>Começar</strong> (ou envie <code class="notranslate">/start</code>).<br>
+<em>(Sem esse primeiro contato, o Telegram bloqueia o envio de mensagens do bot por proteção contra spam).</em></li>
+<li>Para descobrir seu número de <strong>Chat ID</strong>:
+<ul>
+<li>Pesquise pelo bot <strong><code class="notranslate">@userinfobot</code></strong> no Telegram e envie <code class="notranslate">/start</code>.</li>
+<li>Ele responderá na hora com os seus dados, incluindo o seu <code class="notranslate">Id:</code> (número de 9 ou 10 dígitos, ex.: <code class="notranslate">987654321</code>). Copie esse número.</li>
 </ul>
 </li>
 </ol>
 <h4>Passo 3: Cadastrar o Canal no VIG-LAN</h4>
 <ol>
-<li>Abra o painel do VIG-LAN no navegador (<code>http://localhost:5173</code> ou <code>http://localhost:8080</code>).</li>
+<li>Abra o painel do VIG-LAN no navegador (<code class="notranslate">http://localhost:5173</code> ou <code class="notranslate">http://localhost:8080</code>).</li>
 <li>No menu lateral, acesse a aba <strong>Notificações</strong>.</li>
-<li>Clique em <strong>Novo canal</strong> (ou no botão <code>+</code>).</li>
-<li>Preencha os campos:<ul>
-<li><strong>Serviço:</strong> Selecione <code>Telegram</code>.</li>
-<li><strong>Nome:</strong> Dê um nome amigável (ex.: <code>Telegram Pessoal</code>).</li>
-<li><strong>Token do bot:</strong> Cole o token recebido do <code>@BotFather</code>.</li>
-<li><strong>Chat id:</strong> Cole o número recebido do <code>@userinfobot</code>.</li>
+<li>Clique em <strong>Novo canal</strong> (ou no botão <code class="notranslate">+</code>).</li>
+<li>Preencha os campos:
+<ul>
+<li><strong>Serviço:</strong> Selecione <code class="notranslate">Telegram</code>.</li>
+<li><strong>Nome:</strong> Dê um nome amigável (ex.: <code class="notranslate">Telegram Pessoal</code>).</li>
+<li><strong>Token do bot:</strong> Cole o token recebido do <code class="notranslate">@BotFather</code>.</li>
+<li><strong>Chat id:</strong> Cole o número recebido do <code class="notranslate">@userinfobot</code>.</li>
 </ul>
 </li>
 <li>Clique em <strong>Salvar canal</strong>.</li>
@@ -171,7 +209,8 @@
 <h4>Passo 4: Testar e Personalizar Alertas</h4>
 <ol>
 <li>No card do canal cadastrado, clique em <strong>Enviar teste</strong>. Em segundos você receberá uma notificação no Telegram!</li>
-<li>Marque ou desmarque o que você deseja receber:<ul>
+<li>Marque ou desmarque o que você deseja receber:
+<ul>
 <li><strong>Problemas:</strong> quando a internet cair ou um aparelho crítico falhar.</li>
 <li><strong>Recuperações:</strong> quando o sinal voltar ao normal.</li>
 <li><strong>Dispositivos novos:</strong> assim que um visitante ou vizinho conectar na rede.</li>
@@ -179,63 +218,136 @@
 </li>
 </ol>
 <hr>
+<h2>⚡ Painel de Energia (PC ligado 24 horas)</h2>
+<p>A página <strong>Energia</strong> mostra quanto o PC servidor gasta e quanto isso custa na sua conta de luz:</p>
+<ul>
+<li><strong>Potência agora</strong>, gasto de hoje e do <strong>ciclo de leitura da sua conta</strong> em reais, com projeção do mês;</li>
+<li><strong>Peso na conta da casa</strong>, comparando com as suas faturas (tarifa real, bandeira e composição da conta);</li>
+<li><strong>Programas que mais gastam</strong>, horários de maior consumo e consumo por dia;</li>
+<li><strong>Ligado, desligado e quedas de energia</strong> (inclusive desligamentos sem aviso e a inicialização rápida do Windows).</li>
+</ul>
+<p>O processador é <strong>medido</strong> pelo próprio Windows; placa de vídeo, placa-mãe, discos e fonte são <strong>estimados</strong> (ajustáveis na página). <strong>Outros PCs da casa</strong> entram com um agente pequeno instalado neles (<code class="notranslate">tools/agente-energia</code>): o VIG-LAN busca as medições a cada minuto, e este PC continua sem abrir portas na rede.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-energia.jpg"><img src="screenshots/vig-lan-energia.jpg" alt="Painel de Energia: potência agora, gasto do dia e do ciclo, peso na conta, tempo ligado e seletor dos PCs" style="max-width: 100%;"></a></p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">Consumo por dia, horários e conta da casa</th>
+<th align="center">Programas que mais gastam e tempo ligado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-energia-consumo.jpg"><img src="screenshots/vig-lan-energia-consumo.jpg" alt="Consumo por dia, mapa de calor, conta da casa e composição do custo" style="max-width: 100%;"></a></td>
+<td align="center"><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-energia-programas.jpg"><img src="screenshots/vig-lan-energia-programas.jpg" alt="Programas que mais gastam, dicas de economia e linha do tempo de ligado e desligado" style="max-width: 100%;"></a></td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h2>🌡️ Temperatura dos PCs</h2>
+<p>A página <strong>Temperatura</strong> acompanha o processador (AMD Ryzen), a placa de vídeo e os discos deste PC e dos outros PCs da casa que têm o agente:</p>
+<ul>
+<li><strong>Agora</strong> (atualiza a cada 10 s), mínima e máxima das últimas 24 h, gráfico das 24 h com o limite de cada sensor e mínima/máxima de cada dia;</li>
+<li><strong>Limite por sensor</strong>, editável na própria página: 85 °C no processador e na placa de vídeo e 70 °C nos discos, ou o alerta do próprio disco quando ele avisa antes (comum em HD, que costuma avisar a 55 °C);</li>
+<li><strong>Aviso</strong> na lista de Problemas e nos canais de notificação (Telegram, ntfy, e-mail…) quando um sensor passa do limite em <strong>duas leituras seguidas</strong>, e outro quando volta ao normal;</li>
+<li><strong>Histórico</strong> das vezes em que passou do limite (com o pico) e o horário em que cada sensor costuma esquentar mais.</li>
+</ul>
+<p><strong>De onde vem cada temperatura:</strong></p>
+<ul>
+<li><strong>Processador (AMD Ryzen):</strong> pelo kit oficial da AMD. Instale os dois programas gratuitos da AMD, o <a href="https://www.amd.com/en/products/software/ryzen-master.html" rel="nofollow">AMD Ryzen Master</a> e o <a href="https://www.amd.com/en/developer/ryzen-master-monitoring-sdk.html" rel="nofollow">AMD Ryzen Master Monitoring SDK</a> (passo a passo em instalacao/PASSO-A-PASSO.md, Passo 6). Clicar no card da CPU abre a <strong>temperatura de cada núcleo</strong>, ao vivo. O kit da AMD pede administrador: a leitura funciona com o VIG-LAN rodando como serviço (o instalador já faz assim).</li>
+<li><strong>Processador Intel:</strong> ainda não é lido. A Intel não oferece um kit equivalente; para ver a temperatura no próprio PC, o guia sugere o programa de medição da Intel, o <a href="https://www.intel.com/content/www/us/en/download/17881/intel-extreme-tuning-utility-intel-xtu.html" rel="nofollow">Intel XTU</a>.</li>
+<li><strong>Placa de vídeo:</strong> a mesma leitura do Gerenciador de Tarefas do Windows (vale também para a GPU integrada do processador), sem administrador e sem driver.</li>
+<li><strong>Discos:</strong> a consulta de temperatura do Windows, sem administrador e sem driver.</li>
+</ul>
+<p>O fim da instalação avisa se a CPU deste PC vai ser lida ou o que falta instalar. O que não dá para ler aparece em <strong>"O que não é medido"</strong>, com o motivo, para não sumir em silêncio: o processador sem os programas da AMD (ou Intel) e os discos que não respondem à consulta (alguns SATA; para eles, só o SMART).</p>
+<p><strong>Outros PCs:</strong> usam o mesmo agente da Energia (<code class="notranslate">tools/agente-energia</code>): placa de vídeo e discos a partir da <strong>v4</strong>, processador a partir da <strong>v5</strong> e os núcleos a partir da <strong>v6</strong> (pacote 1.13.1). Quem já tem o agente instalado só precisa atualizar: parar o serviço, copiar o pacote novo por cima da pasta e rodar <code class="notranslate">instalar.ps1</code> de novo (o token continua o mesmo; o passo a passo está no <code class="notranslate">LEIA-ME.txt</code> do pacote).</p>
+<p><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-temperatura.jpg"><img src="screenshots/vig-lan-temperatura.jpg" alt="Aba Temperatura: processador com a temperatura de cada núcleo, placa de vídeo e SSDs deste PC agora" style="max-width: 100%;"></a></p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">Outro PC da casa (processador, GPU integrada e HD)</th>
+<th align="center">Por dia, horários e o que não é medido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-temperatura-outro-pc.jpg"><img src="screenshots/vig-lan-temperatura-outro-pc.jpg" alt="Temperatura do TadeuzinhoPC: Ryzen 5 5600GT com os núcleos, GPU integrada e HD SATA com o limite de 55 °C informado pelo próprio disco" style="max-width: 100%;"></a></td>
+<td align="center"><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-temperatura-historico.jpg"><img src="screenshots/vig-lan-temperatura-historico.jpg" alt="Mínima e máxima por dia, mapa de horários, vezes acima do limite, dicas e o que não é medido" style="max-width: 100%;"></a></td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
 <h2>🌐 Apresentação Interativa (Para Clientes e Parceiros)</h2>
 <p>Você pode visualizar ou enviar a nossa <strong>Apresentação Comercial em página única (auto contida)</strong> para parceiros, clientes ou amigos:</p>
 <ul>
-<li>📄 <strong>Abrir no navegador:</strong> <a href="marketing/VIG-LAN-Apresentacao.html"><strong><code>marketing/VIG-LAN-Apresentacao.html</code></strong></a> (ou <a href="marketing/index.html"><code>marketing/index.html</code></a>)</li>
+<li>📄 <strong>Abrir no navegador:</strong> <strong><code class="notranslate">marketing/VIG-LAN-Apresentacao.html</code></strong></li>
 <li>Funciona direto no navegador (Chrome, Edge, Firefox), sem precisar de internet, e inclui simulação do sistema, imagens reais e tabela comparativa.</li>
 </ul>
 <hr>
 <h2>🖼️ Veja Como é a Tela do Sistema</h2>
-<table>
+<markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
 <th align="center">Mapa Visual da sua Rede (Topologia)</th>
 <th align="center">Detalhes de Cada Aparelho Conectado</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"></td>
-<td align="center"></td>
+<tbody>
+<tr>
+<td align="center"><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan.png"><img src="screenshots/vig-lan.png" alt="Topologia da Rede" style="max-width: 100%;"></a></td>
+<td align="center"><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-dispositivo.png"><img src="screenshots/vig-lan-dispositivo.png" alt="Detalhes do Dispositivo" style="max-width: 100%;"></a></td>
 </tr>
-</tbody></table>
-<table>
+</tbody>
+</table></markdown-accessiblity-table>
+<markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
 <th align="center">Consumo de Velocidade (Quem gasta mais)</th>
 <th align="center">Teste de Velocidade da Internet (Speedtest)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"></td>
-<td align="center"></td>
+<tbody>
+<tr>
+<td align="center"><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-trafego.png"><img src="screenshots/vig-lan-trafego.png" alt="Painel de Tráfego da Rede" style="max-width: 100%;"></a></td>
+<td align="center"><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-speedtest.png"><img src="screenshots/vig-lan-speedtest.png" alt="Painel de Velocidade Speedtest" style="max-width: 100%;"></a></td>
 </tr>
-</tbody></table>
-<table>
+</tbody>
+</table></markdown-accessiblity-table>
+<markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
 <th align="center">Central de Alertas e Problemas</th>
 <th align="center">Qualidade e Sinal das Redes Wi-Fi</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"></td>
-<td align="center"></td>
+<tbody>
+<tr>
+<td align="center"><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-problemas.png"><img src="screenshots/vig-lan-problemas.png" alt="Central de Problemas" style="max-width: 100%;"></a></td>
+<td align="center"><a target="_blank" rel="noopener noreferrer" href="screenshots/vig-lan-wifi.png"><img src="screenshots/vig-lan-wifi.png" alt="Seletor de Conexão Wi-Fi" style="max-width: 100%;"></a></td>
 </tr>
-</tbody></table>
+</tbody>
+</table></markdown-accessiblity-table>
 <hr>
 <h2>🚀 Como Começar (Instalação Super Simples)</h2>
 <p>Você não precisa ser técnico de informática para usar o VIG-LAN:</p>
 <ol>
-<li><strong>Baixe o pacote do sistema:</strong> você receberá o arquivo compactado <code>VIG-LAN-v1.2.1-windows-x64.zip</code>.</li>
-<li><strong>Extraia a pasta</strong> no seu computador (por exemplo, na pasta <code>C:\VIG-LAN</code> ou na sua área de trabalho).</li>
-<li><strong>Execute o instalador:</strong> clique com o botão direito em <code>instalar.bat</code> e escolha <strong>&quot;Executar como Administrador&quot;</strong>.</li>
-<li>Pronto! O sistema configura tudo sozinho em menos de 1 minuto e abre o painel no seu navegador em <code>http://localhost:8080</code>.</li>
+<li><strong>Baixe o pacote do sistema:</strong> você receberá o arquivo compactado <code class="notranslate">VIG-LAN-v1.13.1-windows-x64.zip</code>.</li>
+<li><strong>Extraia a pasta</strong> no seu computador (por exemplo, na pasta <code class="notranslate">C:\VIG-LAN</code> ou na sua área de trabalho).</li>
+<li><strong>Execute o instalador:</strong> clique com o botão direito em <code class="notranslate">instalar.bat</code> e escolha <strong>"Executar como Administrador"</strong>.</li>
+<li>Pronto! O sistema configura tudo sozinho em menos de 1 minuto e abre o painel no seu navegador em <code class="notranslate">http://localhost:8080</code>.</li>
 <li>Você poderá copiar o código do seu computador na tela e nos enviar pelo WhatsApp para receber sua <strong>Chave de Ativação do Trial Grátis de 15 dias</strong>.</li>
 </ol>
+<p><strong>Já usa o VIG-LAN?</strong> Para atualizar, rode <code class="notranslate">service\atualizar.ps1</code> como administrador: ele faz backup do banco antes de aplicar as mudanças. Se você tem o agente de energia em outro PC, atualize-o também para a versão do mesmo pacote (veja o <code class="notranslate">LEIA-ME.txt</code> do agente) para ter a temperatura daquele PC.</p>
+<h3>📱 Acessar de fora de casa (Tailscale)</h3>
+<p>O painel só abre no próprio PC (<code class="notranslate">127.0.0.1:8080</code>). Para vê-lo do celular em qualquer lugar sem expor nada na internet:</p>
+<ol>
+<li>Instale o <a href="https://tailscale.com/download" rel="nofollow">Tailscale</a> no PC do VIG-LAN e no celular, entrando com a mesma conta.</li>
+<li>No PC, rode <code class="notranslate">tailscale serve --bg 8080</code>. Na primeira vez, ele mostra um link para ativar o recurso Serve na conta.</li>
+<li>No celular, com o Tailscale ligado, abra o endereço <code class="notranslate">https://&lt;nome-do-pc&gt;.&lt;sua-rede&gt;.ts.net</code> mostrado pelo comando.</li>
+</ol>
+<p>Só os aparelhos da sua conta do Tailscale enxergam o endereço, com HTTPS, e o login do VIG-LAN continua valendo. Para desligar: <code class="notranslate">tailscale serve --https=443 off</code>. <strong>Não</strong> abra portas no roteador.</p>
 <hr>
 <h2>💳 Planos e Licenciamento</h2>
-<table>
+<markdown-accessiblity-table><table role="table">
 <thead>
 <tr>
 <th>Plano</th>
@@ -244,7 +356,8 @@
 <th>Ideal Para</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>Trial de Avaliação</strong></td>
 <td>15 Dias</td>
 <td><strong>Grátis</strong></td>
@@ -274,62 +387,72 @@
 <td>Negociável</td>
 <td>Pacotes com múltiplas licenças para prestadores de serviços.</td>
 </tr>
-</tbody></table>
-<p>Para solicitar um teste grátis ou tirar dúvidas:<br>📲 <strong>Fale direto pelo WhatsApp:</strong> <a href="https://wa.me/5579981072266?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20VIG-LAN">Clique aqui para conversar com TadeuReinaldo</a></p>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>Para solicitar um teste grátis ou tirar dúvidas:<br>
+📲 <strong>Fale direto pelo WhatsApp:</strong> <a href="https://wa.me/5579981072266?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20VIG-LAN" rel="nofollow">Clique aqui para conversar com TadeuReinaldo</a></p>
 <hr>
 <h2>👨‍💻 Área Técnica e de Desenvolvedores</h2>
 <p>Esta seção é destinada a engenheiros de software, administradores de rede e desenvolvedores que desejam executar o código-fonte, contribuir ou auditar a arquitetura do sistema.</p>
 <h3>🏗️ Arquitetura Tecnológica</h3>
 <ul>
 <li><strong>Backend:</strong> Python 3.12 + FastAPI de alta performance e baixa latência.</li>
-<li><strong>Descoberta Nativa Windows:</strong> Chamadas diretas à API <code>iphlpapi</code> via <code>ctypes</code> (sem necessidade de Npcap/WinPcap e sem portas fixas abertas, evitando alertas de firewall).</li>
+<li><strong>Descoberta Nativa Windows:</strong> Chamadas diretas à API <code class="notranslate">iphlpapi</code> via <code class="notranslate">ctypes</code> (sem necessidade de Npcap/WinPcap e sem portas fixas abertas, evitando alertas de firewall).</li>
 <li><strong>Escuta Passiva e SSDP/mDNS:</strong> Unicast efêmero para mapeamento de aparelhos inteligentes (Smart TVs, Tuya, Chromecast, impressoras).</li>
 <li><strong>Banco de Dados:</strong> SQLite com modo WAL (<em>Write-Ahead Logging</em>) e rotina de backup consistente a quente.</li>
 <li><strong>Frontend:</strong> React 19 + TypeScript + Vite, motor gráfico XYFlow para renderização dinâmica de topologia e WebSockets para atualização instantânea em tempo real.</li>
-<li><strong>Serviço 24/7:</strong> Gerenciado via WinSW v2 na porta padrão <code>8080</code>.</li>
+<li><strong>Energia do PC:</strong> contadores do Windows (PDH e log de eventos) via <code class="notranslate">ctypes</code>, sem administrador: medidor RAPL do processador e uso de CPU/GPU por programa.</li>
+<li><strong>Temperatura:</strong> GPU pela D3DKMT (a mesma leitura do Gerenciador de Tarefas) e SSDs pelo <code class="notranslate">IOCTL_STORAGE_QUERY_PROPERTY</code>, via <code class="notranslate">ctypes</code>, sem administrador; CPU Ryzen pelo AMD Ryzen Master Monitoring SDK (<code class="notranslate">ctypes</code>, com administrador).</li>
+<li><strong>Serviço 24/7:</strong> Gerenciado via WinSW v2 na porta padrão <code class="notranslate">8080</code>.</li>
 </ul>
 <h3>🛠️ Instalação a Partir do Código-Fonte</h3>
 <p>Para rodar o ambiente de desenvolvimento local:</p>
 <ol>
-<li>Execute o script automatizado na pasta <code>INSTALAÇÃO/INSTALAR.bat</code> ou inicie via terminal:</li>
+<li>Execute o script automatizado na pasta <code class="notranslate">instalacao/INSTALAR.bat</code> ou inicie via terminal:</li>
 </ol>
-<pre><code class="language-powershell"># Modo de desenvolvimento local (Frontend em 5173 e Backend em 8000 com Hot Reload)
-.\dev.ps1
-</code></pre>
+<div class="highlight highlight-source-powershell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> Modo de desenvolvimento local (Frontend em 5173 e Backend em 8000 com Hot Reload)</span>
+.\dev.ps1</pre></div>
 <ol start="2">
-<li><strong>Endpoints principais:</strong><ul>
-<li>Painel de Desenvolvimento: <code>http://localhost:5173</code></li>
-<li>Documentação Swagger Interativa: <code>http://127.0.0.1:8000/docs</code></li>
-<li>Painel do Serviço em Produção: <code>http://localhost:8080</code></li>
+<li><strong>Endpoints principais:</strong>
+<ul>
+<li>Painel de Desenvolvimento: <code class="notranslate">http://localhost:5173</code></li>
+<li>Documentação Swagger Interativa: <code class="notranslate">http://127.0.0.1:8000/docs</code></li>
+<li>Painel do Serviço em Produção: <code class="notranslate">http://localhost:8080</code></li>
 </ul>
 </li>
 </ol>
+<h3>🐧 Rodar no Linux com Docker (Raspberry Pi ou servidor ligado 24 h)</h3>
+<p>Num <strong>host Linux</strong> na mesma rede (no Docker Desktop do Windows/macOS a "rede do host" é a da VM do Docker, não a sua LAN):</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">docker compose up -d</pre></div>
+<ul>
+<li>Interface em <code class="notranslate">http://IP-DO-HOST:8080</code>. Os dados ficam em <code class="notranslate">./data</code> (banco, backups e <code class="notranslate">secret.key</code>, a chave que cifra os segredos dos canais).</li>
+<li>O <code class="notranslate">compose.yaml</code> usa <code class="notranslate">network_mode: host</code> (para varrer a LAN) e monta o <code class="notranslate">/etc/machine-id</code> do host (a licença é presa à máquina).</li>
+<li>No Linux não há: bloqueio neste PC (é o Firewall do Windows), redes Wi-Fi do PC e escuta de DHCP (usa o Npcap do Windows).</li>
+</ul>
 <h3>🧪 Verificações de Qualidade e Testes Automatizados</h3>
-<pre><code class="language-powershell"># Bateria de testes unitários do Backend (85 testes)
-backend\.venv\Scripts\python.exe -m pytest backend/tests
+<div class="highlight highlight-source-powershell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> Bateria de testes unitários do Backend</span>
+backend\.venv\Scripts\<span class="pl-c1">python.exe</span> <span class="pl-k">-</span>m pytest backend<span class="pl-k">/</span>tests
 
-# Validação e formatação de código Python (Ruff)
-backend\.venv\Scripts\python.exe -m ruff check backend
-backend\.venv\Scripts\python.exe -m ruff format --check backend
+<span class="pl-c"><span class="pl-c">#</span> Validação e formatação de código Python (Ruff)</span>
+backend\.venv\Scripts\<span class="pl-c1">python.exe</span> <span class="pl-k">-</span>m ruff check backend
+backend\.venv\Scripts\<span class="pl-c1">python.exe</span> <span class="pl-k">-</span>m ruff format <span class="pl-k">--</span>check backend
 
-# Linters, formatação e build do Frontend React
-npm --prefix frontend run lint
-npm --prefix frontend run format:check
-npm --prefix frontend run build
-</code></pre>
+<span class="pl-c"><span class="pl-c">#</span> Linters, formatação e build do Frontend React</span>
+npm <span class="pl-k">--</span>prefix frontend run lint
+npm <span class="pl-k">--</span>prefix frontend run format:check
+npm <span class="pl-k">--</span>prefix frontend run build</pre></div>
 <hr>
 <h2>📜 Propriedade Intelectual &amp; Direitos Autorais</h2>
 <p>O <strong>VIG-LAN</strong> é um produto de software comercial com código proprietário e fechado, de titularidade e desenvolvimento exclusivo de <strong>TadeuReinaldo (tazzeus)</strong>:</p>
 <ul>
 <li><strong>Direitos Reservados:</strong> Todos os direitos patrimoniais, autorais e industriais são estritamente reservados ao autor (Lei nº 9.609/1998 e Lei nº 9.610/1998). O software não é de código aberto e não é de domínio público.</li>
 <li><strong>Termos de Uso:</strong> O uso, execução ou distribuição são permitidos exclusivamente mediante emissão de licença comercial válida. Proibida qualquer revenda não autorizada ou engenharia reversa.</li>
-<li><strong>Contato Oficial:</strong> <a href="https://wa.me/5579981072266">WhatsApp (79) 98107-2266</a> • GitHub: <a href="https://github.com/tazzeus">@tazzeus</a> • Instagram: <a href="https://www.instagram.com/tazzeus/">@tazzeus</a></li>
+<li><strong>Contato Oficial:</strong> <a href="https://wa.me/5579981072266" rel="nofollow">WhatsApp (79) 98107-2266</a> • GitHub: <a href="https://github.com/tazzeus">@tazzeus</a> • Instagram: <a href="https://www.instagram.com/tazzeus/" rel="nofollow">@tazzeus</a></li>
 </ul>
 <p align="center">
   <strong>Develop by TadeuReinaldo - tazzeus</strong> — <a href="https://github.com/tazzeus">@tazzeus</a><br>
   <em>VIG-LAN: Segurança, Clareza e Controle da sua Rede sem Complicações.</em>
 </p>
-
 
   </article>
 </main>

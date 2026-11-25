@@ -104,6 +104,15 @@
 </li>
 </ol>
 <hr>
+<h2>🆕 Novidades: Launcher Padrão 1.8 e TV Boxes Genéricas (Novembro de 2026)</h2>
+<p>O projeto passou a atender também <strong>TV boxes genéricas vendidas com especificações falsas</strong> (modelos "MXQ" e "MXQ PRO" com chips Rockchip RK3229 e Allwinner H313/H616, que dizem ter Android 11 a 14 e até 512 GB, mas rodam Android 6 a 10 com cerca de 1 GB de RAM). A tela inicial própria virou o <strong>Launcher Padrão</strong>:</p>
+<ul>
+<li><strong>Memória real:</strong> quando o sistema mente o total de RAM (para mais ou para menos), o launcher lê a memória verdadeira direto do kernel (<code>/proc/zoneinfo</code>).</li>
+<li><strong>Liberar memória que funciona:</strong> onde o sistema ignora o pedido de fechar apps, o launcher fecha cada um pelo serviço de acessibilidade, tocando em "Forçar parada" nas Configurações da TV, inclusive apps de fábrica atualizados.</li>
+<li><strong>Limpeza de malware sem root:</strong> em aparelhos que chegaram infectados (proxy residencial, instaladores automáticos, fraude de anúncios e até o launcher de fábrica instalando apps sozinho), os apps maliciosos são desativados pelo ADB, sem desinstalar, e ao fim só sobram conexões do Google e do clima.</li>
+<li><strong>Do Android 6 ao Google TV:</strong> a versão 1.8.3 instala a partir do Android 6, e dá para instalar o launcher pelo navegador do próprio aparelho e defini-lo como tela inicial pelo controle, quando não há ADB.</li>
+<li><strong>Relatório por aparelho:</strong> cada TV box tem diagnóstico, medições de antes e depois, a lista do que foi alterado e o roteiro para desfazer tudo.</li>
+</ul>
 <h2>📊 Comparativo Real de Desempenho (Medições de Kernel)</h2>
 <table>
 <thead>
